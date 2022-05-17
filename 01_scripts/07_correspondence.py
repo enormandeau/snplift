@@ -7,7 +7,6 @@ Usage:
 
 Where window_size is the number of neighbor SNPs to consider on each side.
 """
-#TODO Describe how SNPs with lower scores are salvaged
 
 # Modules
 from scipy.stats import pearsonr
@@ -63,7 +62,7 @@ with open(input_scores, "rt") as infile:
             keep = False
 
             # Score of current locus
-            if float(now[0]) > 0.0:
+            if float(now[0]) > 0.5:
                 keep = True
 
             else:
@@ -92,11 +91,6 @@ with open(input_scores, "rt") as infile:
 
                 if pearson >= 0.99:
                     keep = True
-
-                #if pearson > 0.98:
-                #    name = "p" + str(pearson)[:6] + "_" + now[3]
-                #    data = infos_df[["Pos1", "Pos2"]]
-                #    data.to_csv(name + ".csv", header=False, index=False, sep=" ")
 
             # Locus is good and should be kept
             if keep:

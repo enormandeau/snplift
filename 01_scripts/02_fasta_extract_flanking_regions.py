@@ -111,7 +111,9 @@ with open(output_fasta, "w") as outfile:
                     right = len(scaffold.sequence)
 
                 
-                region = Fasta(scaffold_id + "_" + str(pos) + "_" + scaffold.sequence[pos-1] + "_" + str(left) + "-" + str(right),
+                region = Fasta(scaffold_id + "_" + str(pos) + "_" +
+                        scaffold.sequence[pos-1] +
+                        "_" + str(left) + "-" + str(right),
                         seq[left: right].upper())
 
                 region.write_to_file(outfile)

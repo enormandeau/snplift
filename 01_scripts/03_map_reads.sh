@@ -1,4 +1,8 @@
 #!/bin/bash
 # Map flanking regions to new genome
 
-time bwa mem -t 20 genome.fasta positions.fasta > positions.sam
+# Global variables
+GENOME="$1"
+POSITIONS="$2"
+
+bwa mem -t 20 "$GENOME" "$POSITIONS" > positions.sam

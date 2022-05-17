@@ -17,7 +17,7 @@ Criteria and quality penalty (as a fraction of 1):
 # Modules
 import sys
 
-# TODO Add to parameters if needed
+# Add to parameters if needed
 expected_length = 200
 
 # Parse user input
@@ -42,7 +42,10 @@ with open(input_features, "rt") as infile:
                 outfile.write("\t".join(header) + "\n")
                 continue
 
-            QueryName, QueryPos, MappingFlag, TargetChrom, TargetPos, MappingQuality, Cigar, Deletion, Hardclip, Insertion, Match, Softclip, Sequence, Complexity, NumNs, NumDiff, AlignmentScore, SuboptimalScore, NumSuppAlign, SuppAlignMinDiff = l
+            QueryName, QueryPos, MappingFlag, TargetChrom, TargetPos, MappingQuality,
+            Cigar, Deletion, Hardclip, Insertion, Match, Softclip, Sequence,
+            SequenceLength, Complexity, NumNs, NumDiff, AlignmentScore, SuboptimalScore,
+            NumSuppAlign, SuppAlignMinDiff = l
 
             # Apply penalties
             score = 1.0
@@ -54,8 +57,10 @@ with open(input_features, "rt") as infile:
                 score -= 1.0
 
             if int(MappingFlag) > 2000:
-                penalties.append("F")
-                score -= 1.0 
+                # Remove these altogether
+                #penalties.append("F")
+                #score -= 1.1 
+                continue
 
             if int(MappingQuality) < 10:
                 penalties.append("Q")
@@ -88,7 +93,6 @@ with open(input_features, "rt") as infile:
 
             if not penalties:
                 penalties.append(".")
-            #print(round(score, 2), "".join(sorted(penalties)), sep="\t")
-            #outfile.write("\t".join([str(round(score, 2)) + "_" + "".join(penalties)] + l) + "\n")
-            #outfile.write("\t".join([str(round(score, 2)) + "_" + "".join(penalties)] + [query_scaffold, QueryName, QueryPos, TargetChrom, TargetPos]) + "\n")
-            outfile.write("\t".join([str(round(score, 2)), "".join(penalties)] + [query_scaffold, QueryName, QueryPos, TargetChrom, TargetPos]) + "\n")
+
+            outfile.write("\t".join([str(round(score, 2)), "".join(penalties)] +
+                [query_scaffold, QueryName, QueryPos, TargetChrom, TargetPos]) + "\n")

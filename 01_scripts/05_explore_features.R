@@ -1,3 +1,7 @@
+# Explore extracted features to help score the alignments
+# Facultative:
+#   The default values used by the pipeline should transfer well to different projects
+
 # Cleanup
 rm(list=ls())
 
@@ -6,7 +10,7 @@ library(data.table)
 library(scales)
 
 # Load data
-d = fread("positions.features")
+d = fread("../positions.features")
 
 # Subset columns
 dd = d[, c("QueryName", "MappingFlag", "MappingQuality", "Deletion", "Hardclip", "Insertion", "Match", "Softclip", "Complexity", "NumNs", "NumDiff", "AlignmentScore", "SuboptimalScore", "NumSuppAlign", "SuppAlignMinDiff")]
@@ -17,7 +21,7 @@ subset = dd[dd$MappingFlag < 2000,
 
 
 subset = dd[dd$MappingFlag < 2000 &
-              dd$MappingQuality >= 30 &
+              dd$MappingQuality >= 10 &
               (dd$Match + dd$Softclip) >= 180 & # Accept 10% de moins que la longueur de la séquence
               dd$NumDiff <= 10 &
               (dd$Softclip - 10) / (dd$NumNs + 1) <= 1.5 &
@@ -27,5 +31,5 @@ subset = dd[dd$MappingFlag < 2000 &
 
 # Plot variables of interest
 set.seed(123)
-subset.random = subset[sample(nrow(subset), 1000)]
+subset.random = subset[sample(nrow(subset), 2000)]
 plot(subset.random, col="#00000011", pch=19)

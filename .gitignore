@@ -1,3 +1,4 @@
+*.Rhistory
 *.fasta
 *.fasta.gz
 *.vcf

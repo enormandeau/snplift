@@ -1,9 +1,9 @@
 #!/bin/bash
-# Extract two first columns from VCF
+# From VCF, extract two first columns with chromosomes and positions
 
-# Input
-VCF=$1
-OUTPUT=$2
+# Global variables
+VCF="$1"
+OUTPUT="$2"
 
 # Extract
 grep -v "^#" "$VCF" | cut -f -2 > "$OUTPUT"
