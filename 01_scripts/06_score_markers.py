@@ -42,10 +42,7 @@ with open(input_features, "rt") as infile:
                 outfile.write("\t".join(header) + "\n")
                 continue
 
-            QueryName, QueryPos, MappingFlag, TargetChrom, TargetPos, MappingQuality,
-            Cigar, Deletion, Hardclip, Insertion, Match, Softclip, Sequence,
-            SequenceLength, Complexity, NumNs, NumDiff, AlignmentScore, SuboptimalScore,
-            NumSuppAlign, SuppAlignMinDiff = l
+            QueryName, QueryPos, MappingFlag, TargetChrom, TargetPos, MappingQuality, Cigar, Deletion, Hardclip, Insertion, Match, Softclip, Sequence, SequenceLength, Complexity, NumNs, NumDiff, AlignmentScore, SuboptimalScore, NumSuppAlign, SuppAlignMinDiff = l
 
             # Apply penalties
             score = 1.0
