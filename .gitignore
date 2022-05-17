@@ -6,4 +6,5 @@
 00_archive/*
 02_collinearity/*
 03_genomes/*
+04_input_vcf/*
 positions.*
