@@ -3,3 +3,7 @@
 *.vcf
 *.vcf.gz
 *~
+00_archive/*
+02_collinearity/*
+03_genomes/*
+positions.*
