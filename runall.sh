@@ -51,6 +51,7 @@ time ./01_scripts/07_correspondence.py positions.scores "$NUM_NEIGHBOURS" positi
 echo -e "\nSNPTransfer: Writing new VCF with updated coordinates"
 time ./01_scripts/08_replace_coordinates_in_vcf.py "$OLD_VCF" positions.corr "$NEW_VCF"
 
-echo -e "\nSNPTransfer: Number of SNPs at each step -"; ls "$OLD_VCF" -1tr positions.* new.vcf | grep -v fasta | parallel -k wc -l
+echo -e "\nSNPTransfer: Number of SNPs at each step -"
+ls "$OLD_VCF" -1tr positions.* new.vcf | grep -v fasta | parallel -k wc -l
 
 echo -e "\nSNPTransfer: Run completed"
