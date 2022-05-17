@@ -11,18 +11,17 @@ NEW_VCF="new.vcf"
 WINDOW_LENGTH=100 # If you modify this value, also modify 06_score_markers.py
 NUM_NEIGHBOURS=10
 
-# Check collinearity
-
-## copy genomes to 02_collinearity
-## keep only long sequences
+# TODO
 ## rename chromosomes to remove anything after a space
-## run 02_collinearity/01_collinearity.sh
+
+# Check collinearity
+echo "SNPTransfer: Assessing collinearity of the two genomes"
+time ./02_collinearity/01_collinearity.sh "$NEW_GENOME" "$OLD_GENOME"
 
 # SNPTransfer
-
 ## Index new genome if needed
-echo "SNPTransfer: Indexing new genome"
-time bwa index "$NEW_GENOME"
+echo -e "\nSNPTransfer: Indexing new genome"
+#time bwa index "$NEW_GENOME"
 
 ## Get original coordinates
 echo -e "\nSNPTransfer: Extracting positions from old VCF"

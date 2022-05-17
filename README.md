@@ -1,9 +1,13 @@
 # SNPTransfer
+SNPLift
 
 Transfer SNP postions in a VCF to match a new reference genome, without alignment
 
+# TODO
+- Modify sequence names to replace spaces ` ` and underscores `_` by dashes `-`
+
 # Method
-## Preparation
+## Optional
 - Validate genome collinearity with global alignment (minimap)
 
 ## SNPTranfer
