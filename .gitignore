@@ -1,0 +1,5 @@
+*.fasta
+*.fasta.gz
+*.vcf
+*.vcf.gz
+*~
