@@ -51,7 +51,11 @@ time ./01_scripts/07_correspondence.py positions.scores "$NUM_NEIGHBOURS" positi
 echo -e "\nSNPTransfer: Writing new VCF with updated coordinates"
 time ./01_scripts/08_replace_coordinates_in_vcf.py "$OLD_VCF" positions.corr "$NEW_VCF"
 
+## Run stats
 echo -e "\nSNPTransfer: Number of SNPs at each step -"
 ls "$OLD_VCF" -1tr positions.* new.vcf | grep -v fasta | parallel -k wc -l
+echo
+echo "Percentage of SNPs transfered:"
+echo '100 *' $(wc -l positions.corr | awk '{print $1}') / $(wc -l positions.ids | awk '{print $1}') | bc -ql | cut -c -5
 
 echo -e "\nSNPTransfer: Run completed"
