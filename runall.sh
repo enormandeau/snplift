@@ -12,8 +12,9 @@ WINDOW_LENGTH=100 # If you modify this value, also modify 06_score_markers.py
 NUM_NEIGHBOURS=10
 
 # TODO Rename chromosomes to remove anything after a space
-# TODO Validate that all scaffolds have unique names in each genomes
-# TODO Check nucleotide distance of first chromosome
+#      - Names of the old genome must be the same as those in the VCF
+#      - Validate that all scaffolds have unique names in each genomes
+#      Check nucleotide distance of genomes using first chromosome
 
 # Check collinearity
 echo "SNPTransfer: Assessing collinearity of the two genomes"
