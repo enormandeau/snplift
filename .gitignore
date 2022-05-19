@@ -1,6 +1,7 @@
 *.Rhistory
 *.fasta
 *.fasta.gz
+*.out
 *.vcf
 *.vcf.gz
 *~
