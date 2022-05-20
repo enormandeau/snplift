@@ -47,7 +47,7 @@ with open(input_features, "rt") as infile:
             # Apply penalties
             score = 1.0
             penalties = []
-            query_scaffold = QueryName.split("_")[0]
+            query_scaffold = QueryName.split(";")[0]
 
             if len(Sequence) < (expected_length / 2):
                 penalties.append("L")

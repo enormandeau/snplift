@@ -48,7 +48,7 @@ with open(output_file, "wt") as outfile:
 
             # Interesting features
             query_name = l[0]
-            query_pos = int(query_name.split("_")[1])
+            query_pos = int(query_name.split(";")[1])
 
             flag = int(l[1])
             if flag == 4:
