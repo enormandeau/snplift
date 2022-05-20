@@ -4,6 +4,7 @@
 *.out
 *.vcf
 *.vcf.gz
+*data
 *~
 00_archive/*
 02_collinearity/*
