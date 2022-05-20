@@ -66,7 +66,12 @@ During the analyses, the following steps are performed:
 - Update coordinates
 - Update VCF
 
-## Test dataset
+## Running
+### Prepare genomes
+### Validate scaffold names
+### Run
+
+## Results
 
 ## License
 
