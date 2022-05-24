@@ -8,6 +8,10 @@ laboratory.
 
 Please see the licence information at the end of this file.
 
+# TODO Run SNPLift on its result to try to get back the original
+- See if you still lose some alignments
+- Check that you recover the original positions
+
 ## Description
 
 **SNPLift** takes a VCF with locus positions matching a genome and lifts over
