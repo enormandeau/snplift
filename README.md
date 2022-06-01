@@ -8,9 +8,14 @@ laboratory.
 
 Please see the licence information at the end of this file.
 
-# TODO Run SNPLift on its result to try to get back the original
-- See if you still lose some alignments
-- Check that you recover the original positions
+# TODO
+- Config file
+- Test dataset
+  - Sister repo on github with 1st chromosomes from Davoud's 2 genmes
+- Doc
+- Run SNPLift on its result to try to get back the original
+  - See if you still lose some alignments
+  - Check that you recover the original positions
 
 ## Description
 
