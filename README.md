@@ -16,8 +16,8 @@ is to rapidly be able to leverage the new genome without having to re-align all
 the sample reads and then call and filter the loci. In the process, a
 proportion of the loci are inevitably lost.
 
-**/!\ WARNING /!\** Ultimately, the only way to guaranty that all the positions
-on the new genome are correct is to re-align.
+**WARNING** Ultimately, the only way to guaranty that all the positions on the
+new genome are correct is to re-align the reads and call the genotypes again.
 
 ## Installation
 

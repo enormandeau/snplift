@@ -30,9 +30,13 @@ time ./01_scripts/02_fasta_extract_flanking_regions.py "$OLD_GENOME" positions.i
 echo -e "\nSNPLift: Mapping flanking sequences on new genome"
 time ./01_scripts/03_map_reads.sh "$NEW_GENOME" positions.fasta
 
-## Get new coordinates
+## Extract features from alignments
 echo -e "\nSNPLift: Extract useful features from alignments"
 time ./01_scripts/04_extract_features_from_alignments.py positions.sam positions.features
+
+## Create features visualisation
+echo -e "\nSNPLift: Create features visualisation"
+time R -q -e 'source("./01_scripts/05_explore_features.R")'
 
 ## Score markers based on alignments (detail them)
 echo -e "\nSNPLift: Score markers based on extracted features"
