@@ -8,37 +8,16 @@ laboratory.
 
 Please see the licence information at the end of this file.
 
-# *TODO*
-- Config file
-  - Add parameters for the filters
-- Validation script
-  - Input files can be found
-  - Scaffold names in old genome are the same as those in the VCF
-  - Scaffolds have unique names in each genomes
-- Doc
-  - Compare with barque, gawn and stacks workflow for sections
-  - Add species name for the test dataset
-  - List all the dependencies
-
-## Testing before publication
-- Give time estimate based on the genome size, number of SNPs, and number of samples
-- Run SNPLift on its result to try to get back the original
-  - Use test dataset
-  - See if you still lose some alignments
-  - Check that you recover the original positions
-
-## Maybe
-- Check nucleotide distance of genomes using first chromosome
-
 ## Description
 
 **SNPLift** takes a VCF with locus positions matching a genome and lifts over
 these positions so they match a new reference genome. The goal of the procedure
 is to rapidly be able to leverage the new genome without having to re-align all
 the sample reads and then call and filter the loci. In the process, a
-proportion of the loci are inevitably lost. Ideally, the proper way of
-getting the good positions for the loci would be to proceed to the
-re-alignment.
+proportion of the loci are inevitably lost.
+
+**/!\ WARNING /!\** Ultimately, the only way to guaranty that all the positions
+on the new genome are correct is to re-align.
 
 ## Installation
 
