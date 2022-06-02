@@ -16,6 +16,10 @@ Please see the licence information at the end of this file.
 - Run SNPLift on its result to try to get back the original
   - See if you still lose some alignments
   - Check that you recover the original positions
+- Names of the old genome must be the same as those in the VCF
+- Validate that all scaffolds have unique names in each genomes
+- Check nucleotide distance of genomes using first chromosome
+
 
 ## Description
 
