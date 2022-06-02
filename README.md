@@ -8,19 +8,22 @@ laboratory.
 
 Please see the licence information at the end of this file.
 
-# TODO
+# *TODO*
 - Config file
   - Add parameters for the filters
-- Test dataset
-  - Sister repo on github with 1st chromosomes from Davoud's 2 genmes
 - Validation script
   - Input files can be found
   - Scaffold names in old genome are the same as those in the VCF
   - Scaffolds have unique names in each genomes
 - Doc
+  - Compare with barque, gawn and stacks workflow for sections
+  - Add species name for the test dataset
+  - List all the dependencies
 
 ## Testing before publication
+- Give time estimate based on the genome size, number of SNPs, and number of samples
 - Run SNPLift on its result to try to get back the original
+  - Use test dataset
   - See if you still lose some alignments
   - Check that you recover the original positions
 
@@ -87,9 +90,37 @@ During the analyses, the following steps are performed:
 - Update coordinates
 - Update VCF
 
+## Running on test dataset
+The test dataset consists of two #### genome assembly versions and a VCF with
+SNPs found in the first chromosome of the reference genome. The VCF contains
+the genotypes of 10 samples for 190,443 SNPs. It runs in 10 minutes using 20
+Xeon processors from 2020. About 7 minutes is spent aligning the two genomes
+with minimap2 to visualize the collinearity of the two genomes and 1 minute to
+index the old genome for alignment with bwa. The rest of the steps take the
+remaining two minutes.
+
+For this test run, based on real data, the percentage of transfered SNPs is 99.58%.
+
+Get and prepare test dataset with:
+```
+./01_scripts/util/get_test_dataset.sh
+```
+
+Run snplift with:
+```
+time ./snplift 02_infos/snplift_config.sh
+```
+
 ## Running
 ### Prepare genomes
 ### Validate scaffold names
+### Estimation of run time
+Based on:
+- Genome size
+- Number of SNPs
+- Number of samples (prob not necessary)
+- Time factor compared to the 10min needed for the test run
+
 ### Run
 
 ## Results
