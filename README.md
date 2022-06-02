@@ -10,16 +10,22 @@ Please see the licence information at the end of this file.
 
 # TODO
 - Config file
+  - Add parameters for the filters
 - Test dataset
   - Sister repo on github with 1st chromosomes from Davoud's 2 genmes
+- Validation script
+  - Input files can be found
+  - Scaffold names in old genome are the same as those in the VCF
+  - Scaffolds have unique names in each genomes
 - Doc
+
+## Testing before publication
 - Run SNPLift on its result to try to get back the original
   - See if you still lose some alignments
   - Check that you recover the original positions
-- Names of the old genome must be the same as those in the VCF
-- Validate that all scaffolds have unique names in each genomes
-- Check nucleotide distance of genomes using first chromosome
 
+## Maybe
+- Check nucleotide distance of genomes using first chromosome
 
 ## Description
 
@@ -50,8 +56,10 @@ on your computer.
 
 - **SNPLift** will only work on GNU Linux or OSX
 - bash 4+
+- git (to clone test dataset)
 - bwa
 - samtools
+- minimap2 (to visualize the collinearity of the two genomes)
 - python 3.5+ (you can use miniconda3 to install python)
 - R 3+ (ubuntu/mint: `sudo apt-get install r-base-core`)
 - [gnu parallel](https://www.gnu.org/software/parallel/)
