@@ -4,7 +4,6 @@
 
 - Config file
   - Add parameters for the filters
-- Discuss `05_explore_features.R`
 - Validation script
   - Input files can be found
   - Scaffold names in old genome are the same as those in the VCF
@@ -13,6 +12,7 @@
   - Compare with barque, gawn and stacks workflow for sections
   - Add species name for the test dataset
   - List all the dependencies
+  - Explicitely describe VCF format (3 first columns)
 
 ## Testing before publication
 - Run a real test

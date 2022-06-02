@@ -4,7 +4,7 @@ Lift over SNP postions from a VCF to match a new reference genome.
 
 ## Description
 
-**SNPLift** takes a VCF with locus positions matching a genome and lifts over
+SNPLift takes a VCF with locus positions matching a genome and lifts over
 these positions so they match a new reference genome. The goal of the procedure
 is to rapidly be able to leverage the new genome without having to re-align all
 the sample reads and then call and filter the loci. In the process, a
@@ -17,7 +17,7 @@ See licence information at the end of this file.
 
 ## Installation
 
-To use **SNPLift**, you will need a local copy of its repository. Different
+To use SNPLift, you will need a local copy of its repository. Different
 releases can be [found here](https://github.com/enormandeau/SNPLift/releases).
 It is recommended to always use the latest release or even the developpment
 version. You can either download an archive of the latest release at the above
@@ -29,9 +29,9 @@ git clone https://github.com/enormandeau/snplift
 
 ## Dependencies
 
-To run **SNPLift**, you will need to have the following programs installed.
+To run SNPLift, you will need to have the following programs installed.
 
-- **SNPLift** will only work on GNU Linux or OSX
+- SNPLift will only work on GNU Linux or OSX
 - bash 4+
 - git (to clone the test dataset)
 - bwa
@@ -69,8 +69,9 @@ time ./snplift 02_infos/snplift_config.sh
 ## Preparation
 
 - Install dependencies
-- Download a copy of the **SNPLift** repository (see **Installation** above)
-- *TODO* etc.
+- Download a copy of the SNPLift repository (see **Installation** above)
+- *TODO* Prepare genomes
+- *TODO* Validate scaffold names
 
 ## Overview of SNPLift steps
 
@@ -80,17 +81,16 @@ During the analyses, the following steps are performed:
 - Index new genome
 - Get original coordinates
 - Extract flanking sequences around SNPs (100bp on each side)
-- Map reads with bwa (keep best hit)
-- Get new coordinates
-- Filters based on alignment
+- Map reads with bwa
+- Extract features from alignments
+- Visualize alignment features
+- Filters based on features
   - *TODO* Detail filters
-- Save some bad alignments if they are locally collinear
+- Recuperate some bad alignments if they are locally collinear with good ones
 - Update coordinates
 - Update VCF
 
 ## Running
-### Prepare genomes
-### Validate scaffold names
 ### Estimation of run time
 Based on:
 - Genome size
@@ -99,6 +99,12 @@ Based on:
 - Time factor compared to the 10min needed for the test run
 
 ### Run
+Once your dependencies are met, your input and config files are prepared,
+launch SNPLift with:
+
+```
+time ./snplift 02_infos/snplift_config.sh
+```
 
 ## Results
 
