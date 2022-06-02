@@ -18,7 +18,7 @@ NUM_NEIGHBOURS=10
 
 # Check collinearity
 echo "SNPTransfer: Assessing collinearity of the two genomes"
-time ./02_collinearity/01_collinearity.sh "$NEW_GENOME" "$OLD_GENOME"
+time ./05_collinearity/01_collinearity.sh "$NEW_GENOME" "$OLD_GENOME"
 
 # Quantify nucleotide distance for collinear regions
 
