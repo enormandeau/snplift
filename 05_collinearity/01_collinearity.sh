@@ -7,7 +7,7 @@ OLD_GENOME="$2"
 FOLDER="05_collinearity"
 
 # Align genomes with minimap
-time minimap2 -t20 -x asm5 -o "$FOLDER"/correspondence.paf "$NEW_GENOME" "$OLD_GENOME"
+minimap2 -t20 -x asm5 -o "$FOLDER"/correspondence.paf "$NEW_GENOME" "$OLD_GENOME"
 
 # Plot collinearity with minidot
 minidot "$FOLDER"/correspondence.paf > "$FOLDER"/collinearity.eps && epstopdf "$FOLDER"/collinearity.eps

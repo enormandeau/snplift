@@ -1,12 +1,6 @@
 # SNPLift
 
-Lift over SNP postions from a VCF to match a new reference genome
-
-Developed by [Eric Normandeau](https://github.com/enormandeau) in
-[Louis Bernatchez](http://www.bio.ulaval.ca/louisbernatchez/presentation.htm)'s
-laboratory.
-
-Please see the licence information at the end of this file.
+Lift over SNP postions from a VCF to match a new reference genome.
 
 ## Description
 
@@ -19,6 +13,8 @@ proportion of the loci are inevitably lost.
 **WARNING** Ultimately, the only way to guaranty that all the positions on the
 new genome are correct is to re-align the reads and call the genotypes again.
 
+See licence information at the end of this file.
+
 ## Installation
 
 To use **SNPLift**, you will need a local copy of its repository. Different
@@ -28,17 +24,16 @@ version. You can either download an archive of the latest release at the above
 link or get the latest commit (recommended) with the following git command:
 
 ```
-git clone https://github.com/enormandeau/SNPLift
+git clone https://github.com/enormandeau/snplift
 ```
 
 ## Dependencies
 
-To run **SNPLift**, you will also need to have the following programs installed
-on your computer.
+To run **SNPLift**, you will need to have the following programs installed.
 
 - **SNPLift** will only work on GNU Linux or OSX
 - bash 4+
-- git (to clone test dataset)
+- git (to clone the test dataset)
 - bwa
 - samtools
 - minimap2 (to visualize the collinearity of the two genomes)
@@ -46,6 +41,30 @@ on your computer.
 - R 3+ (ubuntu/mint: `sudo apt-get install r-base-core`)
 - [gnu parallel](https://www.gnu.org/software/parallel/)
 - *TODO* etc.
+
+## Running on test dataset
+Before trying SNPLift on your data, we suggest running it on the prepared test
+dataset. This will confirm that you have all the required dependencies.
+
+The test dataset consists in the first chromosome from two *####* genome
+assembly versions and a VCF with SNPs found in the first chromosome of the
+reference genome. The VCF contains the genotypes of *10 samples for 190,443
+SNPs*. *The test run lasts 10 minutes using 20 Xeon processors from 2020. About 7
+minutes is spent aligning the two genomes with minimap2 to visualize the
+collinearity of the two genomes and 1 minute to index the old genome for
+alignment with bwa. The rest of the steps take the remaining two minutes.*
+
+For this test run, based on real data, 99.58% SNPs are transfered.
+
+Get and prepare test dataset with:
+```
+./01_scripts/util/get_test_dataset.sh
+```
+
+Run snplift with:
+```
+time ./snplift 02_infos/snplift_config.sh
+```
 
 ## Preparation
 
@@ -69,27 +88,6 @@ During the analyses, the following steps are performed:
 - Update coordinates
 - Update VCF
 
-## Running on test dataset
-The test dataset consists of two #### genome assembly versions and a VCF with
-SNPs found in the first chromosome of the reference genome. The VCF contains
-the genotypes of 10 samples for 190,443 SNPs. It runs in 10 minutes using 20
-Xeon processors from 2020. About 7 minutes is spent aligning the two genomes
-with minimap2 to visualize the collinearity of the two genomes and 1 minute to
-index the old genome for alignment with bwa. The rest of the steps take the
-remaining two minutes.
-
-For this test run, based on real data, the percentage of transfered SNPs is 99.58%.
-
-Get and prepare test dataset with:
-```
-./01_scripts/util/get_test_dataset.sh
-```
-
-Run snplift with:
-```
-time ./snplift 02_infos/snplift_config.sh
-```
-
 ## Running
 ### Prepare genomes
 ### Validate scaffold names
@@ -104,7 +102,18 @@ Based on:
 
 ## Results
 
+## Limitations
+SNPLift works well when the two genome versions have a low proportion of
+differences. As the nucleotide difference between orthologous sequences
+increases, the proportion of SNPs that can be transfered will go down.
+
+*TODO* Give examples
+
 ## License
+
+Developed by [Eric Normandeau](https://github.com/enormandeau) in
+[Louis Bernatchez](http://www.bio.ulaval.ca/louisbernatchez/presentation.htm)'s
+laboratory.
 
 CC share-alike
 
