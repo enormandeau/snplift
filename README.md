@@ -40,7 +40,6 @@ To run SNPLift, you will need to have the following programs installed.
 - python 3.5+ (you can use miniconda3 to install python)
 - R 3+ (ubuntu/mint: `sudo apt-get install r-base-core`)
 - [gnu parallel](https://www.gnu.org/software/parallel/)
-- *TODO* etc.
 
 ## Running on test dataset
 Before trying SNPLift on your data, we suggest running it on the prepared test
