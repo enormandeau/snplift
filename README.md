@@ -32,14 +32,15 @@ git clone https://github.com/enormandeau/snplift
 To run SNPLift, you will need to have the following programs installed.
 
 - SNPLift will only work on GNU Linux or OSX
+- python 3.5+ (you can use miniconda3 to install python)
+- R 3+ (ubuntu/mint: `sudo apt-get install r-base-core`)
 - bash 4+
+- [gnu parallel](https://www.gnu.org/software/parallel/)
 - git (to clone the test dataset)
 - bwa
 - samtools
 - minimap2 (to visualize the collinearity of the two genomes)
-- python 3.5+ (you can use miniconda3 to install python)
-- R 3+ (ubuntu/mint: `sudo apt-get install r-base-core`)
-- [gnu parallel](https://www.gnu.org/software/parallel/)
+- minidot (to visualize the collinearity of the two genomes)
 
 ## Running on test dataset
 Before trying SNPLift on your data, we suggest running it on the prepared test
