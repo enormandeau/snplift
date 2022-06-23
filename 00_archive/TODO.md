@@ -4,9 +4,11 @@
 
 - Config file
   - Add parameters for the filters
+
 - Validation script
   - Input files can be found
   - Scaffold names in old genome are the same as those in the VCF
+
 - Doc
   - Compare with barque, gawn and stacks workflow for sections
   - Add species name for the test dataset
