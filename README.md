@@ -40,7 +40,7 @@ To run SNPLift, you will need to have the following programs installed.
 - bwa
 - samtools
 - minimap2 (to visualize the collinearity of the two genomes)
-- minidot (to visualize the collinearity of the two genomes)
+- miniasm (for minidot, to visualize the collinearity of the two genomes)
 
 ## Running on test dataset
 Before trying SNPLift on your data, we suggest running it on the prepared test
