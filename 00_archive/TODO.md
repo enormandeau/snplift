@@ -9,6 +9,8 @@
   - Input files can be found
   - Scaffold names in old genome are the same as those in the VCF
 
+- Conda environment `requirements.txt` file
+
 - Doc
   - Compare with barque, gawn and stacks workflow for sections
   - Add species name for the test dataset
