@@ -8,14 +8,21 @@
 - Validation script
   - Input files can be found
   - Scaffold names in old genome are the same as those in the VCF
+  - Scaffold name formats are OK in all input files
 
-- Conda environment `requirements.txt` file
+- Installation
+  - Install with `conda create -n snplift -c bioconda snplift`
+  - Or use a conda environment `requirements.txt` file
+  - Or install depencencies and clone
+
+- Test on new Linux computer / MacOS
 
 - Doc
-  - Compare with barque, gawn and stacks workflow for sections
+  - Improve format using doc from barque, gawn and stacks workflow
   - Add species name for the test dataset
-  - List all the dependencies
+  - Confirm all the dependencies
   - Explicitely describe VCF format (3 first columns)
+    - Describe behaviour (eg: write lines with `#` without treatment)
 
 ## Testing before publication
 - Run a proper test
