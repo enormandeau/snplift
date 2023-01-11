@@ -4,16 +4,23 @@ Lift over SNP postions from a VCF to match a new reference genome.
 
 ## Description
 
-SNPLift takes a VCF with locus positions matching a genome and lifts over
+SNPLift takes a VCF with locus positions from a given genome and lifts over
 these positions so they match a new reference genome. The goal of the procedure
-is to rapidly be able to leverage the new genome without having to re-align all
-the sample reads and then call and filter the loci. In the process, a
-proportion of the loci are inevitably lost.
+is to rapidly leverage the availability of a new genome without having to
+re-align all the sample reads and then call and filter the loci.
+
+In the process, a proportion of the loci are inevitably lost. However, the
+transfered proportion is very high for genomes with low duplication content and
+when both genome versions are similar. Our test run on real data give a 99.58%
+tranfers rate.
 
 **WARNING** Ultimately, the only way to guaranty that all the positions on the
 new genome are correct is to re-align the reads and call the genotypes again.
 
 See licence information at the end of this file.
+
+## Benchmark
+*TODO* And give examples of transfer rates for different genomes
 
 ## Installation
 
@@ -32,11 +39,11 @@ git clone https://github.com/enormandeau/snplift
 To run SNPLift, you will need to have the following programs installed.
 
 - SNPLift will only work on GNU Linux or OSX
-- python 3.5+ (you can use miniconda3 to install python)
+- python 3.5+
 - R 3+ (ubuntu/mint: `sudo apt-get install r-base-core`)
 - bash 4+
 - [gnu parallel](https://www.gnu.org/software/parallel/)
-- git (to clone the test dataset)
+- git (optional, to clone this repository and the test dataset)
 - bwa
 - samtools
 - minimap2 (to visualize the collinearity of the two genomes)
@@ -46,15 +53,15 @@ To run SNPLift, you will need to have the following programs installed.
 Before trying SNPLift on your data, we suggest running it on the prepared test
 dataset. This will confirm that you have all the required dependencies.
 
-The test dataset consists in the first chromosome from two *####* genome
-assembly versions and a VCF with SNPs found in the first chromosome of the
-reference genome. The VCF contains the genotypes of *10 samples for 190,443
-SNPs*. *The test run lasts 10 minutes using 20 Xeon processors from 2020. About 7
-minutes is spent aligning the two genomes with minimap2 to visualize the
+The test dataset consists in the first chromosome from two different genome
+assembles from ###species### and a VCF with SNPs found in the first chromosome
+of the reference genome. The VCF contains the genotypes of 10 samples for
+190,443 SNPs. The test lasts 10 minutes on 20 Xeon processors from 2020. About
+7 minutes are spent aligning the two genomes with minimap2 to visualize the
 collinearity of the two genomes and 1 minute to index the old genome for
-alignment with bwa. The rest of the steps take the remaining two minutes.*
+alignment with bwa. The rest of the steps take the remaining two minutes.
 
-For this test run, based on real data, 99.58% SNPs are transfered.
+For this test run, based on real data, 99.58% of the SNPs are transfered.
 
 Get and prepare test dataset with:
 ```
@@ -70,14 +77,13 @@ time ./snplift 02_infos/snplift_config.sh
 
 - Install dependencies
 - Download a copy of the SNPLift repository (see **Installation** above)
-- *TODO* Prepare genomes
-- *TODO* Validate scaffold names
 
 ## Overview of SNPLift steps
 
 During the analyses, the following steps are performed:
 
 - Visualize collinearity of the two genomes
+  - *TODO* report proportion of bases in collinear sections instead of number of bases
 - Index new genome
 - Get original coordinates
 - Extract flanking sequences around SNPs (100bp on each side)
@@ -91,29 +97,24 @@ During the analyses, the following steps are performed:
 - Update VCF
 
 ## Running
-### Estimation of run time
-Based on:
-- Genome size
-- Number of SNPs
-- Number of samples (prob not necessary)
-- Time factor compared to the 10min needed for the test run
 
 ### Run
-Once your dependencies are met, your input and config files are prepared,
-launch SNPLift with:
+Once SNPlift is installed and the dependencies are met and that your input and
+config files are prepared, launch SNPLift with:
 
 ```
 time ./snplift 02_infos/snplift_config.sh
 ```
 
 ## Results
+*TODO*
 
 ## Limitations
-SNPLift works well when the two genome versions have a low proportion of
-differences. As the nucleotide difference between orthologous sequences
-increases, the proportion of SNPs that can be transfered will go down.
-
-*TODO* Give examples
+SNPLift works well when the two genome versions are more similar differences.
+As the differences between the orthologous sequences increase, the proportion
+of SNPs that can be transfered will go down. Whole or partial genome
+duplication will also have an impact on the capacity to transfer SNPs between
+assemblies.
 
 ## License
 

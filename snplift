@@ -27,7 +27,7 @@ echo -e "\nSNPLift: Extracting flanking sequences around SNPs in old genome"
 time ./01_scripts/02_fasta_extract_flanking_regions.py "$OLD_GENOME" positions.ids "$WINDOW_LENGTH" positions.fasta
 
 ## Map reads with bwa (keep best hit)
-echo -e "\nSNPLift: Mapping flanking sequences on new genome with bwa"
+echo -e "\nSNPLift: Mapping flanking sequences on new genome with bwa\n"
 time ./01_scripts/03_map_reads.sh "$NEW_GENOME" positions.fasta
 
 ## Extract features from alignments
@@ -35,7 +35,7 @@ echo -e "\nSNPLift: Extract features from alignments"
 time ./01_scripts/04_extract_features_from_alignments.py positions.sam positions.features
 
 ## Visualize features
-echo -e "\nSNPLift: Visualize features"
+echo -e "\nSNPLift: Visualize features\n"
 time R -q -e 'source("./01_scripts/05_explore_features.R")'
 
 ## Score markers based on alignments (detail them)
@@ -51,7 +51,7 @@ echo -e "\nSNPLift: Writing new VCF with updated coordinates"
 time ./01_scripts/08_replace_coordinates_in_vcf.py "$OLD_VCF" positions.corr "$NEW_VCF"
 
 ## Run stats
-echo -e "\nSNPLift: Number of SNPs at each step -"
+echo -e "\nSNPLift: Number of SNPs at each step\n"
 ls "$OLD_VCF" -1tr positions.* "$NEW_VCF" | grep -v fasta | grep -v png | parallel -k wc -l
 echo
 echo "SNPLift: Percentage of SNPs transfered:"

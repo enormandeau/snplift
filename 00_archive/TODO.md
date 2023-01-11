@@ -3,7 +3,11 @@
 ## Things to do before publication
 
 - Config file
+  - Option to skip collinearity viz
+  - Option to skip genome indexing
   - Add parameters for the filters
+
+- Remove `time` commands in `snplift`
 
 - Validation script
   - Input files can be found
@@ -25,13 +29,15 @@
     - Describe behaviour (eg: write lines with `#` without treatment)
 
 ## Testing before publication
-- Run a proper test
+
+- Benchmark
   - Realign and call SNPs on new genome
   - Compare with SNPLift
-- Run SNPLift on its result to try to get back the original (test dataset)
-  - See if you still lose some alignments
-  - Check that you recover the original positions
-- Give time estimate based on the genome size, number of SNPs, and number of samples
+  - Give time estimate based on genome size as well as number of SNPs and samples
+  - Give estimate in minutes AND as a factor compared to test run
+  - Run SNPLift on its result to try to get back the original (test dataset)
+    - See if you still lose some alignments
+    - Check that you recover the original positions
 
 ## Maybe
 - Check nucleotide distance of genomes using first chromosome
