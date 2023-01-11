@@ -37,6 +37,7 @@
   - Give estimate in minutes AND as a factor compared to test run
   - Run SNPLift on its result to try to get back the original (test dataset)
     - See if you still lose some alignments
+      - We get 99.21% transfer
     - Check that you recover the original positions
 
 ## Maybe

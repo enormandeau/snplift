@@ -1,6 +1,7 @@
 *.Rhistory
 *.fasta
 *.fasta.gz
+*.log
 *.out
 *.vcf
 *.vcf.gz
@@ -10,5 +11,6 @@
 03_genomes/*
 04_input_vcf/*
 05_collinearity/*
+99_lofiles/*
 positions.*
 snplift_test_dataset
