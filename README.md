@@ -1,4 +1,4 @@
-# SNPLift v0.1.3 Sweet Cantalou
+# SNPLift v0.1.4 Hot Salad
 
 Lift over SNP postions from a VCF to match a new reference genome.
 

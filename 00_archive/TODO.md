@@ -1,7 +1,7 @@
 # Version name ideas
 
 Funny Tofu, Flying Zuccini, Tired Potato, Refreshing Tea
-Scalding Coffee, Hot Salad, Sturdy Beetroot, Extravagant Pepper, Drifting Artichoke
+Scalding Coffee, Sturdy Beetroot, Extravagant Pepper, Drifting Artichoke
 Sparkling Apple, Dual Pear, Electric Bean, Jumping Squash, Whispering Corn
 
 # Things to do before publication
