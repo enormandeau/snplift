@@ -9,8 +9,8 @@ export OLD_VCF="04_input_vcf/old.vcf"
 export NEW_VCF="new.vcf"
 
 # Skiping steps
-export SKIP_COLLINEARITY=0  # Skip alignment of both genomes and visual collinearity comparison [0, 1]
-export SKIP_INDEXING=0      # Skip indexing the genome if it is already indexed with `bwa index` [0, 1]
+export SKIP_COLLINEARITY=1  # Skip alignment of both genomes and visual collinearity comparison [0, 1]
+export SKIP_INDEXING=1      # Skip indexing the genome if it is already indexed with `bwa index` [0, 1]
 
 # Parameters
 export WINDOW_LENGTH=100    # If you modify this value, also modify 06_score_markers.py

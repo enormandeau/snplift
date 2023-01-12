@@ -6,9 +6,6 @@ Sparkling Apple, Mindful Pear, Electric Bean, Jumping Squash, Whispering Corn
 
 # Things to do before publication
 
-- Move all `positions.*` files to `06_...`
-- Update cleanup script
-
 ## Config file
 - Add parameters for the filters
 
