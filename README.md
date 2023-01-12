@@ -1,4 +1,4 @@
-# SNPLift v0.1.3
+# SNPLift v0.1.3 Sweet Cantalou
 
 Lift over SNP postions from a VCF to match a new reference genome.
 
@@ -11,7 +11,7 @@ re-align all the sample reads and then call and filter the loci.
 
 In the process, a proportion of the loci are inevitably lost. However, the
 transfered proportion is very high for genomes with low duplication content and
-when both genome versions are similar. Our test run on real data give a 99.58%
+when both genome versions are similar. Our test run on real data gives a 99.58%
 tranfers rate.
 
 **WARNING** Ultimately, the only way to guaranty that all the positions on the
