@@ -1,8 +1,8 @@
 # Version name ideas
 
-Funny Tofu, Flying Zuccini, Tired Potato, Refreshing Tea
+Funny Tofu, Flying Carrot, Pumped Potato, Refreshing Tea, Shiny Zucchini
 Scalding Coffee, Sturdy Beetroot, Extravagant Pepper, Drifting Artichoke
-Sparkling Apple, Dual Pear, Electric Bean, Jumping Squash, Whispering Corn
+Sparkling Apple, Mindful Pear, Electric Bean, Jumping Squash, Whispering Corn
 
 # Things to do before publication
 
@@ -18,10 +18,10 @@ Sparkling Apple, Dual Pear, Electric Bean, Jumping Squash, Whispering Corn
 - Scaffold name formats are OK in all input files
 
 ## Doc
-- Improve format using doc from barque, gawn and stacks workflow
+- Improve format using doc from barque, GAWN and stacks workflow
 - Add species name for the test dataset
 - Confirm all the dependencies
-- Explicitely describe VCF format (3 first columns)
+- Explicitly describe VCF format (3 first columns)
 - Describe behaviour (eg: write lines with `#` without treatment)
 
 ## Benchmark
@@ -36,7 +36,7 @@ Sparkling Apple, Dual Pear, Electric Bean, Jumping Squash, Whispering Corn
 
 # Maybe
 - Check nucleotide distance of genomes using first chromosome
-  - Correlate to proportion of SNPs transfered
+  - Correlate to proportion of SNPs transferred
 - Install with `conda create -n snplift -c bioconda snplift`
 - Or use a conda environment `requirements.txt` file
-- Or install depencencies and clone
+- Or install dependencies and clone

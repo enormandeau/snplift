@@ -5,4 +5,4 @@
 GENOME="$1"
 POSITIONS="$2"
 
-bwa mem -t 20 "$GENOME" "$POSITIONS" > positions.sam
+bwa mem -t 20 "$GENOME" "$POSITIONS"
