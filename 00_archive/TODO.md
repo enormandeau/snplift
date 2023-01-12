@@ -1,13 +1,15 @@
 # Version name ideas
 
-Sweet Cantlou, Funny Tofu, Flying Zuccini, Tired Potato, Refreshing Tea
+Funny Tofu, Flying Zuccini, Tired Potato, Refreshing Tea
 Scalding Coffee, Hot Salad, Sturdy Beetroot, Extravagant Pepper, Drifting Artichoke
 Sparkling Apple, Dual Pear, Electric Bean, Jumping Squash, Whispering Corn
 
 # Things to do before publication
+
+- Move all `positions.*` files to `06_...`
+- Update cleanup script
+
 ## Config file
-- Option to skip collinearity viz
-- Option to skip genome indexing
 - Add parameters for the filters
 
 ## Validation script

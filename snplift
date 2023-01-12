@@ -13,26 +13,6 @@ LOG_FOLDER="99_logfiles"
 # Source config file
 source "$CONFIG_FILE"
 
-# TODO
-## Import configfile and keep copy in 00_archive/log_files
-#if [ -e "$CONFIG_FILE" -a -s "$CONFIG_FILE" ]
-#then
-#    source "$CONFIG_FILE"
-#    cp "$CONFIG_FILE" "$LOG_FOLDER"/"$TIMESTAMP"_"$CONFIG_FILENAME"
-#    cp "$PRIMER_FILE" "$LOG_FOLDER"/"$TIMESTAMP"_$(basename "$PRIMER_FILE")
-
-#else
-#    echo -e "\nBARQUE: Config file does not exist or is empty."
-#    echo -e "        Please specify a valid config file."
-#    exit 1
-#fi
-
-## Validate that database and samples are present
-#if ! ./01_scripts/00_validate_project.sh
-#then
-#    exit 1
-#fi
-
 # Log all output
 exec > >(tee "$LOG_FOLDER"/"$TIMESTAMP"_barque_run.log) 2>&1
 
@@ -40,14 +20,39 @@ exec > >(tee "$LOG_FOLDER"/"$TIMESTAMP"_barque_run.log) 2>&1
 echo -e "\n$(head -1 README.md | cut -c 3-)"
 
 # Check collinearity
-#echo "SNPLift: Assessing collinearity of the two genomes with minimap2"
-#./05_collinearity/01_collinearity.sh "$NEW_GENOME" "$OLD_GENOME"
+if [ "$SKIP_COLLINEARITY" == "0" ]
+then
+    echo -e "\nSNPLift: Assessing collinearity of the two genomes with minimap2"
+    ./01_scripts/util/collinearity.sh "$NEW_GENOME" "$OLD_GENOME"
+
+elif [ "$SKIP_COLLINEARITY" == "1" ]
+then
+    echo -e "\nSNPLift: Skipping collinearity assessment"
+
+else
+    echo -e "\nParameter error: Invalid value in config file for SKIP_COLLINEARITY"
+    echo "  Must be 0 (zero) or 1 (one)"
+    exit
+fi
+
+# Index new genome if needed
+if [ "$SKIP_INDEXING" == "0" ]
+then
+    echo -e "\nSNPLift: Indexing new genome with bwa index\n"
+    bwa index "$NEW_GENOME"
+
+elif [ "$SKIP_INDEXING" == "1" ]
+then
+    echo -e "\nSNPLift: Skipping genome indexing"
+    echo "> NOTE: Use only if the genome is already indexed with 'bwa index'"
+
+else
+    echo -e "\nParameter error: Invalid value in config file for SKIP_INDEXING"
+    echo "  Must be 0 (zero) or 1 (one)"
+    exit
+fi
 
 # SNPLift
-## Index new genome if needed
-#echo -e "\nSNPLift: Indexing new genome with bwa index\n"
-#bwa index "$NEW_GENOME"
-
 ## Get original coordinates
 echo -e "\nSNPLift: Extracting positions from old VCF"
 ./01_scripts/01_extract_positions.sh "$OLD_VCF" positions.ids
@@ -77,14 +82,14 @@ echo -e "\nSNPLift: Getting coordinates of transferable SNPs"
 ./01_scripts/07_correspondence.py positions.scores "$NUM_NEIGHBOURS" positions.corr
 
 ## Update VCF
-echo -e "\nNPLift: Writing new VCF with updated coordinates"
+echo -e "\nSNPLift: Writing new VCF with updated coordinates"
 ./01_scripts/08_replace_coordinates_in_vcf.py "$OLD_VCF" positions.corr "$NEW_VCF"
 
 ## Run stats
 echo -e "\nSNPLift: Number of SNPs at each step\n"
 ls "$OLD_VCF" -1tr positions.* "$NEW_VCF" | grep -v fasta | grep -v png | parallel -k wc -l
 echo
-echo "SNPLift: Percentage of SNPs transfered:"
+echo "SNPLift: Percentage of SNPs transferred:"
 echo $(echo '100 *' $(wc -l positions.corr | awk '{print $1}') / $(wc -l positions.ids | awk '{print $1}') | bc -ql | cut -c -5)"%"
 
 echo -e "\nSNPLift: Run completed\n"

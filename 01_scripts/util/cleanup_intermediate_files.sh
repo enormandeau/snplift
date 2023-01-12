@@ -1,3 +1,4 @@
 #!/bin/bash
 # Remove intermediate files
-rm positions.* 05_collinearity/correspondance.paf 05_collinearity/collinearity.* 2>/dev/null
+rm positions.* 2>/dev/null
+rm 05_collinearity/* 2>/dev/null
