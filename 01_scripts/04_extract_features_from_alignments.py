@@ -2,7 +2,7 @@
 """Get informative features from sam file
 
 Usage:
-    <program> input_sam output_file
+    <program> input_sam window_length output_file
 """
 
 # Modules
@@ -30,7 +30,8 @@ def parse_cigar_string(cigar):
 # Parsing user input:
 try:
     input_sam = sys.argv[1]
-    output_file = sys.argv[2]
+    window_length = int(sys.argv[2])
+    output_file = sys.argv[3]
 except:
     print(__doc__)
     sys.exit(1)
@@ -63,6 +64,14 @@ with open(output_file, "wt") as outfile:
      
             sequence = l[9]
             complexity = round(len(gzip.compress("".join(sequence[:]).encode())) / len(sequence), 3)
+
+            # Correct position at start of contig
+            if query_pos <= window_length:
+                target_offset = (len(sequence) // 2) - query_pos
+            else:
+                target_offset = len(sequence) // 2
+
+            target_pos += target_offset
 
             num_Ns = sequence.count("N")
             num_diff = int(l[11].split(":")[2])
