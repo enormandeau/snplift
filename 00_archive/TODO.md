@@ -6,9 +6,6 @@ Squishy.Squid Sticky.Jam Sturdy.Beetroot Tangy.Miso
 
 # Things to do before publication
 
-## Config file
-- Bump to v0.2.0 Funny Tofu
-
 ## Make snplift crash if one program crashes
 
 ## Benchmark

@@ -1,4 +1,4 @@
-# SNPLift v0.1.4 Hot Salad
+# SNPLift v0.2.0 Funny Tofu
 
 Lift over SNP postions from a VCF to match a new reference genome.
 
