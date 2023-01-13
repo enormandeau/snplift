@@ -11,5 +11,4 @@ gunzip -c snplift_test_dataset/new_genome.fasta.gz > 03_genomes/new_genome.fasta
 gunzip -c snplift_test_dataset/old_genome.fasta.gz > 03_genomes/old_genome.fasta
 gunzip -c snplift_test_dataset/old.vcf.gz > 04_input_vcf/old.vcf
 
-
-echo -e "\nSNPlift: Ready to launch analysis with:\n\n    ./snplift 02_infos/snplift_config.sh\n"
+echo -e "\nSNPlift: Ready to launch analysis with:\n\n    ./snplift 02_infos/snplift_config.sh"

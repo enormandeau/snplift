@@ -6,7 +6,9 @@ Squishy.Squid Sticky.Jam Sturdy.Beetroot Tangy.Miso
 
 # Things to do before publication
 
-## Make snplift crash if one program crashes
+- In numbers of reported SNPs, correct .sam and .features (they have too many)
+* Make snplift crash if one program crashes
+- In collinearity exploration, add percentage after num bases
 
 ## Benchmark
 - Test on a variety of genomes / vcfs

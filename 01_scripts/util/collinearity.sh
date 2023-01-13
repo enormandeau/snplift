@@ -15,5 +15,12 @@ minidot -m 1000 -i 0.5 -s 10000 -w 1000 -f 11 "$FOLDER"/correspondence.paf > "$F
 
 # Assess what proportion of genome is collinear sections
 echo
-echo "SNPLift: Number of bases in collinear sections:"
-sort -V "$FOLDER"/correspondence.paf | cut -f 3-4 | awk '{print $2-$1}' | awk '$1>100000' | total
+echo "SNPLift: Millions of bases in collinear sections:"
+
+# TODO Add percentage in parentheses after the number
+sort -V "$FOLDER"/correspondence.paf |
+    cut -f 3-4 |
+    awk '{print $2-$1}' |
+    awk '$1>100000' |
+    total |
+    awk '{print $1/1000000}'

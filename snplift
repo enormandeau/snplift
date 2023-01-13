@@ -23,7 +23,7 @@ echo -e "\n$(head -1 README.md | cut -c 3-)"
 # Check collinearity
 if [ "$SKIP_COLLINEARITY" == "0" ]
 then
-    echo -e "\nSNPLift: Assessing collinearity of the two genomes with minimap2"
+    echo -e "\nSNPLift: Assessing collinearity of the genomes\n"
     ./01_scripts/util/collinearity.sh "$NEW_GENOME" "$OLD_GENOME" "$NCPUS"
 
 elif [ "$SKIP_COLLINEARITY" == "1" ]
@@ -39,7 +39,7 @@ fi
 # Index new genome if needed
 if [ "$SKIP_INDEXING" == "0" ]
 then
-    echo -e "\nSNPLift: Indexing new genome with bwa index\n"
+    echo -e "\nSNPLift: Indexing new genome\n"
     bwa index "$NEW_GENOME"
 
 elif [ "$SKIP_INDEXING" == "1" ]
@@ -55,15 +55,15 @@ fi
 
 # SNPLift
 ## Get original coordinates
-echo -e "\nSNPLift: Extracting positions from old VCF"
+echo -e "\nSNPLift: Extracting positions from VCF"
 ./01_scripts/01_extract_positions.sh "$OLD_VCF" "$LIFTOVER_FOLDER"/positions.ids
 
 ## Extract flanking sequences around SNPs (100bp on each side)
-echo -e "\nSNPLift: Extracting flanking sequences around SNPs in old genome"
+echo -e "\nSNPLift: Extracting flanking sequences around SNPs"
 ./01_scripts/02_fasta_extract_flanking_regions.py "$OLD_GENOME" "$LIFTOVER_FOLDER"/positions.ids "$WINDOW_LENGTH" "$LIFTOVER_FOLDER"/positions.fasta
 
 ## Map reads with bwa (keep best hit)
-echo -e "\nSNPLift: Mapping flanking sequences on new genome with bwa\n"
+echo -e "\nSNPLift: Mapping flanking sequences on new genome\n"
 ./01_scripts/03_map_reads.sh "$NEW_GENOME" "$LIFTOVER_FOLDER"/positions.fasta "$NCPUS" > "$LIFTOVER_FOLDER"/positions.sam
 
 ## Extract features from alignments
@@ -87,10 +87,10 @@ echo -e "\nSNPLift: Writing new VCF with updated coordinates"
 ./01_scripts/08_replace_coordinates_in_vcf.py "$OLD_VCF" "$LIFTOVER_FOLDER"/positions.corr "$NEW_VCF"
 
 ## Run stats
-echo -e "\nSNPLift: Number of SNPs at each step\n"
+echo -e "\nSNPLift: Number of SNPs treated at each step\n"
 ls "$OLD_VCF" -1tr "$LIFTOVER_FOLDER"/positions.* "$NEW_VCF" | grep -v fasta | grep -v png | parallel -k wc -l
 echo
-echo "SNPLift: Percentage of SNPs transferred:"
+echo "SNPLift: Percentage of transferred SNPs:"
 echo $(echo '100 *' $(wc -l "$LIFTOVER_FOLDER"/positions.corr | awk '{print $1}') / $(wc -l "$LIFTOVER_FOLDER"/positions.ids | awk '{print $1}') | bc -ql | cut -c -5)"%"
 
 echo -e "\nSNPLift: Run completed\n"
