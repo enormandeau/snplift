@@ -35,8 +35,8 @@ subset = dd[dd$MappingFlag < 2000 &
 
 # Plot variables of interest
 set.seed(123)
-subset.random = subset[sample(nrow(subset), 50000)]
+subset.random = subset[sample(nrow(subset), 10000)]
 
-png("positions.features.png", width=1000, height=1000)
+png("06_liftover/positions.features.png", width=1000, height=1000)
 plot(subset.random, col="#00000011", pch=19)
 dev.off()

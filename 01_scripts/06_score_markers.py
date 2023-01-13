@@ -5,28 +5,28 @@ Usage:
     <program> input_features output_scores
 
 Criteria and quality penalty (as a fraction of 1):
-    Flag > 2000: -1.0
-    Quality < 10: -0.5
-    dd$SuppAlignMinDiff < 4: -0.8
-    dd$NumDiff > 0.05 * len(sequence): -0.3
-    dd$Softclip > 0.25 * len(sequence): -0.2
-    (dd$Match + dd$Softclip) < 0.9 * len(sequence): -0.3
-    (dd$Softclip - 0.05 * len(sequence)) / (dd$NumNs + 1) <= 1.1: -0.5
+    Flag > 2000: 1.0
+    Quality < 10: 0.5
+    dd$SuppAlignMinDiff < 4: 0.8
+    dd$NumDiff > 0.05 * len(sequence): 0.3
+    dd$Softclip > 0.25 * len(sequence): 0.2
+    (dd$Match + dd$Softclip) < 0.9 * len(sequence): 0.3
+    (dd$Softclip - 0.05 * len(sequence)) / (dd$NumNs + 1) <= 1.1: 0.5
 """
 
 # Modules
 import sys
 
-# Add to parameters if needed
-expected_length = 200
-
 # Parse user input
 try:
     input_features = sys.argv[1]
     output_scores = sys.argv[2]
+    window_size = int(sys.argv[3])
 except:
     print(__doc__)
     sys.exit(1)
+
+expected_length = 2 * window_size
 
 # Score away!
 with open(input_features, "rt") as infile:

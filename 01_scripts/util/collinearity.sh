@@ -4,10 +4,11 @@
 # Global variables
 NEW_GENOME="$1"
 OLD_GENOME="$2"
+NCPUS="$3"
 FOLDER="05_collinearity"
 
 # Align genomes with minimap
-minimap2 -t20 -x asm5 -o "$FOLDER"/correspondence.paf "$NEW_GENOME" "$OLD_GENOME"
+minimap2 -t"$NCPUS" -x asm10 -o "$FOLDER"/correspondence.paf "$NEW_GENOME" "$OLD_GENOME"
 
 # Plot collinearity with minidot
 minidot -m 1000 -i 0.5 -s 10000 -w 1000 -f 11 "$FOLDER"/correspondence.paf > "$FOLDER"/collinearity.eps && epstopdf "$FOLDER"/collinearity.eps

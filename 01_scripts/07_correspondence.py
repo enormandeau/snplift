@@ -75,11 +75,12 @@ with open(input_scores, "rt") as infile:
                 # Compute useful neighbourhood metrix
                 scores = [float(x[0]) for x in infos]
                 average = round(sum(scores) / len(scores), 2)
-                num_negative = len([x for x in scores if x <= 0.0])
 
                 if average < 0.2:
                     continue
                 
+                num_negative = len([x for x in scores if x <= 0.0])
+
                 if num_negative > window_size / 2:
                     continue
 

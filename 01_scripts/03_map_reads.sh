@@ -4,5 +4,6 @@
 # Global variables
 GENOME="$1"
 POSITIONS="$2"
+NCPUS="$3"
 
-bwa mem -t 20 "$GENOME" "$POSITIONS"
+bwa mem -t "$NCPUS" "$GENOME" "$POSITIONS"

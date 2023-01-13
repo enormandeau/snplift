@@ -1,35 +1,50 @@
 # Version name ideas
 
-Funny Tofu, Flying Carrot, Pumped Potato, Refreshing Tea, Shiny Zucchini
-Scalding Coffee, Sturdy Beetroot, Extravagant Pepper, Drifting Artichoke
-Sparkling Apple, Mindful Pear, Electric Bean, Jumping Squash, Whispering Corn
+Blushing.Pepper Elastic.Jujube Exuberant.Pear Flying.Carrot Refreshing.Tea
+Running.Popsicle Scalding.Coffee Shiny.Zucchini Spicy.Soup Spiny.Artichoke
+Squishy.Squid Sticky.Jam Sturdy.Beetroot Tangy.Miso
 
 # Things to do before publication
 
 ## Config file
-- Add parameters for the filters
+- Bump to v0.2.0 Funny Tofu
 
-## Validation script
-- Input files can be found
-- Scaffold names in old genome are the same as those in the VCF
-- Scaffold name formats are OK in all input files
+## Make snplift crash if one program crashes
 
-## Doc
+## Benchmark
+- Test on a variety of genomes / vcfs
+  - Same genome with VCFs of different sizes
+  - Collect genome-size, VCF-size, runtime
+  - Build a regression model with gsize and vsize + interaction
+  - Estimate runtime as a function
+    - runtim = ag + bv + cgv + d
+- Suggest dividing by 10 and multiplying by their test runtime
+- Run SNPLift on its result to try to get back the original (test dataset)
+  - Check that you recover the original positions
+- Test on new Linux computer / MacOS
+
+## Revise MS
+- Modify to reflect changes
+- Tell Davoud it is his turn
+
+## Documentation
 - Improve format using doc from barque, GAWN and stacks workflow
 - Add species name for the test dataset
 - Confirm all the dependencies
 - Explicitly describe VCF format (3 first columns)
 - Describe behaviour (eg: write lines with `#` without treatment)
+- Bump to v0.3.0 Careful Mango
 
-## Benchmark
-- Give time estimate based on genome size as well as number of SNPs and samples
-- Give estimate in minutes AND as a factor compared to test run
-- Run SNPLift on its result to try to get back the original (test dataset)
-  - See if you still lose some alignments
-    - We get 99.21% transfer
-  - Check that you recover the original positions
+## Validation script
+- Input files can be found
+- Scaffold names in old genome are the same as those in the VCF
+- Scaffold name formats are OK in all input files
+- Bump to v0.4.0 Jumping Squash
 
-## Test on new Linux computer / MacOS
+## Publish
+- Bump to v1.0.0 Mindful Peach
+- Publish on bioRxiv
+- Submit somewhere
 
 # Maybe
 - Check nucleotide distance of genomes using first chromosome

@@ -24,7 +24,7 @@ echo -e "\n$(head -1 README.md | cut -c 3-)"
 if [ "$SKIP_COLLINEARITY" == "0" ]
 then
     echo -e "\nSNPLift: Assessing collinearity of the two genomes with minimap2"
-    ./01_scripts/util/collinearity.sh "$NEW_GENOME" "$OLD_GENOME"
+    ./01_scripts/util/collinearity.sh "$NEW_GENOME" "$OLD_GENOME" "$NCPUS"
 
 elif [ "$SKIP_COLLINEARITY" == "1" ]
 then
@@ -64,7 +64,7 @@ echo -e "\nSNPLift: Extracting flanking sequences around SNPs in old genome"
 
 ## Map reads with bwa (keep best hit)
 echo -e "\nSNPLift: Mapping flanking sequences on new genome with bwa\n"
-./01_scripts/03_map_reads.sh "$NEW_GENOME" "$LIFTOVER_FOLDER"/positions.fasta > "$LIFTOVER_FOLDER"/positions.sam
+./01_scripts/03_map_reads.sh "$NEW_GENOME" "$LIFTOVER_FOLDER"/positions.fasta "$NCPUS" > "$LIFTOVER_FOLDER"/positions.sam
 
 ## Extract features from alignments
 echo -e "\nSNPLift: Extract features from alignments"
@@ -76,7 +76,7 @@ R -q -e 'source("./01_scripts/05_explore_features.R")' 2>/dev/null
 
 ## Score markers based on alignments (detail them)
 echo -e "\nSNPLift: Score markers based on extracted features"
-./01_scripts/06_score_markers.py "$LIFTOVER_FOLDER"/positions.features "$LIFTOVER_FOLDER"/positions.scores
+./01_scripts/06_score_markers.py "$LIFTOVER_FOLDER"/positions.features "$LIFTOVER_FOLDER"/positions.scores "$WINDOW_LENGTH"
 
 ## Keep good loci and try to recuperate bad alignments if locally collinear
 echo -e "\nSNPLift: Getting coordinates of transferable SNPs"

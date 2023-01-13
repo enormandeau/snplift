@@ -116,6 +116,12 @@ of SNPs that can be transfered will go down. Whole or partial genome
 duplication will also have an impact on the capacity to transfer SNPs between
 assemblies.
 
+For SNPs with position within 100bp (or the value of WINDOW_LENGTH in the
+configuration file), the reported position in the new VCF will be slightly off.
+Measures are taken to correct for this at the beginning of the scaffolds and
+for alignments with some soft cliping but SNPs at the end of scaffolds may be
+off by up to WINDOW_LENGTH nucleotides.
+
 ## License
 
 CC share-alike
