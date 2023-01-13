@@ -10,7 +10,7 @@ library(data.table)
 library(scales)
 
 # Load data
-d = fread("positions.features")
+d = fread("06_liftover/positions.features")
 
 # Subset columns
 dd = d[, c("QueryName", "MappingFlag", "MappingQuality", "Match", "Softclip", "NumNs", "NumDiff", "NumSuppAlign", "SuppAlignMinDiff")]
