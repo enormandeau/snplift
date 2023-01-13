@@ -43,7 +43,7 @@ To run SNPLift, you will need to have the following programs installed.
 - R 3+ (ubuntu/mint: `sudo apt-get install r-base-core`)
 - bash 4+
 - [gnu parallel](https://www.gnu.org/software/parallel/)
-- git (optional, to clone this repository and the test dataset)
+- git (to clone this repository and the test dataset)
 - bwa
 - samtools
 - minimap2 (to visualize the collinearity of the two genomes)
@@ -54,23 +54,18 @@ Before trying SNPLift on your data, we suggest running it on the prepared test
 dataset. This will confirm that you have all the required dependencies.
 
 The test dataset consists in the first chromosome from two different genome
-assembles from ###species### and a VCF with SNPs found in the first chromosome
-of the reference genome. The VCF contains the genotypes of 10 samples for
-190,443 SNPs. The test lasts 10 minutes on 20 Xeon processors from 2020. About
-7 minutes are spent aligning the two genomes with minimap2 to visualize the
-collinearity of the two genomes and 1 minute to index the old genome for
-alignment with bwa. The rest of the steps take the remaining two minutes.
+assembles from *<SPECIES>* and a VCF with SNPs found in the first chromosome of
+the reference genome. The VCF contains the genotypes of 10 samples for 190,443
+SNPs. The test takes about 6m20s on 10 Xeon processors from 2020. About 5m10s are
+spent aligning the two genomes with minimap2 to visualize collinearity of
+the two versions and 30s to index the old genome for alignment with bwa.
+The rest of the steps take the remaining 40s.
 
 For this test run, based on real data, 99.58% of the SNPs are transfered.
 
-Get and prepare test dataset with:
+You can run the full SNPlift test with:
 ```
-./01_scripts/util/get_test_dataset.sh
-```
-
-Run snplift with:
-```
-time ./snplift 02_infos/snplift_config.sh
+./01_scripts/util/run_test.sh
 ```
 
 ## Preparation
