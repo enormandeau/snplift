@@ -16,7 +16,8 @@ Squishy.Squid Sticky.Jam Sturdy.Beetroot Tangy.Miso
   - Collect genome-size, VCF-size, runtime
   - Build a regression model with gsize and vsize + interaction
   - Estimate runtime as a function
-    - runtim = ag + bv + cgv + d
+    - `runtime = ag + bv + cgv + d`
+    - Maybe we can ignore some of these terms
 - Suggest dividing by 10 and multiplying by their test runtime
 - Run SNPLift on its result to try to get back the original (test dataset)
   - Check that you recover the original positions

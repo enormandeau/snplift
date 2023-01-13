@@ -86,9 +86,18 @@ echo -e "\nSNPLift: Getting coordinates of transferable SNPs"
 echo -e "\nSNPLift: Writing new VCF with updated coordinates"
 ./01_scripts/08_replace_coordinates_in_vcf.py "$OLD_VCF" "$LIFTOVER_FOLDER"/positions.corr "$NEW_VCF"
 
-## Run stats
+## Report number of SNPs for each step
 echo -e "\nSNPLift: Number of SNPs treated at each step\n"
-ls "$OLD_VCF" -1tr "$LIFTOVER_FOLDER"/positions.* "$NEW_VCF" | grep -v fasta | grep -v png | parallel -k wc -l
+
+wc -l "$LIFTOVER_FOLDER"/positions.ids
+echo $(grep -v "^@" "$LIFTOVER_FOLDER"/positions.sam | cut -f 1 | uniq | wc -l) "$LIFTOVER_FOLDER"/positions.sam
+echo $(grep -v "^@" "$LIFTOVER_FOLDER"/positions.features | cut -f 1 | uniq | wc -l) "$LIFTOVER_FOLDER"/positions.features
+wc -l "$LIFTOVER_FOLDER"/positions.scores
+wc -l "$LIFTOVER_FOLDER"/positions.corr
+
+#ls "$OLD_VCF" -1tr "$LIFTOVER_FOLDER"/positions.* "$NEW_VCF" | grep -v fasta | grep -v png | parallel -k wc -l
+
+## Report percentage of transfered SNPs
 echo
 echo "SNPLift: Percentage of transferred SNPs:"
 echo $(echo '100 *' $(wc -l "$LIFTOVER_FOLDER"/positions.corr | awk '{print $1}') / $(wc -l "$LIFTOVER_FOLDER"/positions.ids | awk '{print $1}') | bc -ql | cut -c -5)"%"
