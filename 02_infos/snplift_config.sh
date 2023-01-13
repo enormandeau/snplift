@@ -8,9 +8,12 @@ export NEW_GENOME="03_genomes/new_genome.fasta"
 export OLD_VCF="04_input_vcf/old.vcf"
 export NEW_VCF="new.vcf"
 
-# Skiping steps
-export SKIP_COLLINEARITY=1  # Skip alignment of both genomes and visual collinearity comparison [0, 1]
-export SKIP_INDEXING=1      # Skip indexing the genome if it is already indexed with `bwa index` [0, 1]
+# Skiping genome indexing
+export SKIP_INDEXING=0      # Save time if genome already indexed with 'bwa index' [0, 1]
+
+# Checking for collinearity between both genome versions
+export CHECK_COLLINEARITY=0 # Increases runtime by ~5 times. Align genomes and produce a
+                            #  collinearity comparison figure [0, 1]
 
 # Parameters
 export NCPUS=10             # Number of cores to use for mapping steps (miniconda2, bwa mem)

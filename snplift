@@ -21,17 +21,17 @@ exec > >(tee "$LOG_FOLDER"/"$TIMESTAMP"_barque_run.log) 2>&1
 echo -e "\n$(head -1 README.md | cut -c 3-)"
 
 # Check collinearity
-if [ "$SKIP_COLLINEARITY" == "0" ]
+if [ "$CHECK_COLLINEARITY" == "0" ]
+then
+    echo -e "\nSNPLift: Skipping collinearity assessment"
+
+elif [ "$CHECK_COLLINEARITY" == "1" ]
 then
     echo -e "\nSNPLift: Assessing collinearity of the genomes\n"
     ./01_scripts/util/collinearity.sh "$NEW_GENOME" "$OLD_GENOME" "$NCPUS"
 
-elif [ "$SKIP_COLLINEARITY" == "1" ]
-then
-    echo -e "\nSNPLift: Skipping collinearity assessment"
-
 else
-    echo -e "\nParameter error: Invalid value in config file for SKIP_COLLINEARITY"
+    echo -e "\nParameter error: Invalid value in config file for CHECK_COLLINEARITY"
     echo "  Must be 0 (zero) or 1 (one)"
     exit
 fi
@@ -90,8 +90,8 @@ echo -e "\nSNPLift: Writing new VCF with updated coordinates"
 echo -e "\nSNPLift: Number of SNPs treated at each step\n"
 
 wc -l "$LIFTOVER_FOLDER"/positions.ids
-echo $(grep -v "^@" "$LIFTOVER_FOLDER"/positions.sam | cut -f 1 | uniq | wc -l) "$LIFTOVER_FOLDER"/positions.sam
-echo $(grep -v "^@" "$LIFTOVER_FOLDER"/positions.features | cut -f 1 | uniq | wc -l) "$LIFTOVER_FOLDER"/positions.features
+echo "$(grep -v "^@" "$LIFTOVER_FOLDER"/positions.sam | cut -f 1 | uniq | wc -l)" "$LIFTOVER_FOLDER"/positions.sam
+echo "$(grep -v "^@" "$LIFTOVER_FOLDER"/positions.features | cut -f 1 | uniq | wc -l)" "$LIFTOVER_FOLDER"/positions.features
 wc -l "$LIFTOVER_FOLDER"/positions.scores
 wc -l "$LIFTOVER_FOLDER"/positions.corr
 

@@ -13,5 +13,5 @@
 05_collinearity/*
 06_liftover/*
 99_lofiles/*
-positions.*
+collinearity.*
 snplift_test_dataset

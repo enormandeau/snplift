@@ -11,7 +11,11 @@ FOLDER="05_collinearity"
 minimap2 -t"$NCPUS" -x asm10 -o "$FOLDER"/correspondence.paf "$NEW_GENOME" "$OLD_GENOME"
 
 # Plot collinearity with minidot
-minidot -m 1000 -i 0.5 -s 10000 -w 1000 -f 11 "$FOLDER"/correspondence.paf > "$FOLDER"/collinearity.eps && epstopdf "$FOLDER"/collinearity.eps
+minidot -m 1000 -i 0.5 -s 10000 -w 1000 -f 11 \
+    "$FOLDER"/correspondence.paf > collinearity.eps
+
+# Make a pdf version
+epstopdf collinearity.eps
 
 # Assess what proportion of genome is collinear sections
 echo

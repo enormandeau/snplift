@@ -68,7 +68,10 @@ with open(input_scores, "rt") as infile:
             else:
                 # Organize infos for past, now, and future into pandas dataframe
                 infos = [x for x in past + [now] + future]
-                infos_df = pd.DataFrame(infos, columns=["Score", "Flags", "Chr1", "LocusName", "Pos1", "Chr2", "Pos2"])
+                infos_df = pd.DataFrame(
+                    infos, columns=["Score", "Flags", "Chr1", "LocusName",
+                        "Pos1", "Chr2", "Pos2"])
+
                 infos_df["Pos1"] = infos_df["Pos1"].astype("int64")
                 infos_df["Pos2"] = infos_df["Pos2"].astype("int64")
 
