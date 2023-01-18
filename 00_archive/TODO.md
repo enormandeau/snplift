@@ -15,6 +15,7 @@
 - Scaffold name formats are OK in all input files
 - Bump to v0.4.0 Jumping Squash
 
+# Test for v1.0.0
 - Test on new Linux computer / MacOS
 - Bump to v1.0.0 Mindful Peach
 
