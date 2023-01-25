@@ -1,5 +1,8 @@
 # Things to do before publication
 
+## Assess inter-genome distance
+- Use FastANI
+
 ## Documentation
 - Improve format using doc from barque, GAWN and stacks workflow
 - Add species name for the test dataset
