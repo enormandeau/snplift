@@ -15,7 +15,7 @@ LIFTOVER_FOLDER="06_liftover"
 source "$CONFIG_FILE"
 
 # Log all output
-exec > >(tee "$LOG_FOLDER"/"$TIMESTAMP"_barque_run.log) 2>&1
+exec > >(tee "$LOG_FOLDER"/"$TIMESTAMP"_SNPlift.log) 2>&1
 
 # Printing version and name
 echo -e "\n$(head -1 README.md | cut -c 3-)"

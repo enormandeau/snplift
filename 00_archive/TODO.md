@@ -1,5 +1,8 @@
 # Things to do before publication
 
+- Report time and RAM needed
+- Copy config file to log folder
+
 ## Assess inter-genome distance
 - Use FastANI
 
