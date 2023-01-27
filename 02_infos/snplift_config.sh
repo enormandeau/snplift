@@ -9,7 +9,7 @@ export OLD_VCF="04_input_vcf/old.vcf"
 export NEW_VCF="new.vcf"
 
 # Skiping genome indexing
-export SKIP_INDEXING=1      # Save time if genome already indexed with 'bwa index' [0, 1]
+export SKIP_INDEXING=0      # Save time if genome already indexed with 'bwa index' [0, 1]
 
 # Checking for collinearity between both genome versions
 export CHECK_COLLINEARITY=0 # Increases runtime by ~5 times. Align genomes and produce a
