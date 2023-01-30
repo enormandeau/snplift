@@ -1,6 +1,7 @@
 # Things to do before publication
 
 - Parallelize all possible steps
+  * !!! Replace the split command so you don't loose SNPs
 - Report time and RAM needed
 - Copy config file to log folder
 

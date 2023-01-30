@@ -61,7 +61,7 @@ spent aligning the two genomes with minimap2 to visualize collinearity of
 the two versions and 30s to index the old genome for alignment with bwa.
 The rest of the steps take the remaining 40s.
 
-For this test run, based on real data, 99.58% of the SNPs are transfered.
+For this test run, based on real data, 99.57% of the SNPs are transfered.
 
 You can run the full SNPlift test with:
 ```
