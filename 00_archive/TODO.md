@@ -1,5 +1,6 @@
 # Things to do before publication
 
+- Parallelize all possible steps
 - Report time and RAM needed
 - Copy config file to log folder
 
