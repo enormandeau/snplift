@@ -1,4 +1,4 @@
-# SNPLift v0.2.0 Funny Tofu
+# SNPLift v0.3.0 Running Popsicle
 
 Lift over SNP postions from a VCF to match a new reference genome.
 

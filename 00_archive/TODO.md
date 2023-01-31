@@ -1,6 +1,4 @@
 # Things to do before publication
-* Replace the split command so we don't loose SNPs at the file edges
-- Bump to v0.3.0 Running.Popsicle
 
 ## Benchmark
 - Test on a variety of genomes / vcfs
@@ -39,6 +37,7 @@
 - Submit somewhere
 
 ## Future improvements
+* Replace the split command so we don't loose SNPs at the file edges
 - Copy config file to log folder for each run
 - Use FastANI to assess nucleotide distance between the genomes
   - Correlate to proportion of SNPs transferred
