@@ -68,6 +68,10 @@ with open(input_scores, "rt") as infile:
                 # Organize infos for past, now, and future into pandas dataframe
                 infos = [x for x in past + [now] + future]
 
+                # Keep only SNPs in same chromosome
+                chromosome = now[2]
+                infos = [x for x in infos if x[2] == chromosome]
+
                 # Compute useful neighbourhood metrix
                 scores = [float(x[0]) for x in infos]
                 average = round(sum(scores) / len(scores), 2)
