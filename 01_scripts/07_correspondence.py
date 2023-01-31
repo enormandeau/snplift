@@ -82,10 +82,9 @@ with open(input_scores, "rt") as infile:
 
                 # Is Pearson coef for scores close to 1?
                 try:
-                    #pearson = abs(pearsonr(infos_df["Pos1"], infos_df["Pos2"])[0])
-                    pearson = abs(pearsonr(
-                        [int(x[4]) for x in infos],
-                        [int(x[5]) for x in infos])[0])
+                    pos1 = [int(x[4]) for x in infos]
+                    pos2 = [int(x[6]) for x in infos]
+                    pearson = abs(pearsonr(pos1, pos2)[0])
                 except:
                     pearson = 0.0
 
