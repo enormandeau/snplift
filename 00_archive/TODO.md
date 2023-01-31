@@ -1,12 +1,21 @@
 # Things to do before publication
-
-- Parallelize all possible steps
-  * !!! Replace the split command so you don't loose SNPs
-- Report time and RAM needed
+* `07_orrespondance.py` does not use chr info
+  - Too slow for small scaffolds
+* Replace the split command we don't loose SNPs at the file edges
 - Copy config file to log folder
+- Use FastANI to assess inter-genome distance
+- Bump to v0.3.0 Running.Popsicle
 
-## Assess inter-genome distance
-- Use FastANI
+## Benchmark
+- Test on a variety of genomes / vcfs
+  - Same genome with VCFs of different sizes
+  - Collect genome-size, VCF-size, runtime
+  - Build a regression model with gsize and vsize + interaction
+  - Estimate runtime as a function
+    - `runtime = ag + bv + cgv + d`
+    - Maybe we can ignore some of these terms
+- Suggest dividing by 10 and multiplying by their test runtime
+- Report time and RAM needed
 
 ## Documentation
 - Improve format using doc from barque, GAWN and stacks workflow
@@ -27,16 +36,6 @@
 - Test on new Linux computer / MacOS
 - Bump to v1.0.0 Mindful Peach
 
-## Benchmark
-- Test on a variety of genomes / vcfs
-  - Same genome with VCFs of different sizes
-  - Collect genome-size, VCF-size, runtime
-  - Build a regression model with gsize and vsize + interaction
-  - Estimate runtime as a function
-    - `runtime = ag + bv + cgv + d`
-    - Maybe we can ignore some of these terms
-- Suggest dividing by 10 and multiplying by their test runtime
-
 ## Revise MS
 - Modify MS to reflect changes
 - Tell Davoud it is his turn
@@ -55,5 +54,5 @@
 
 ## Version name ideas
 Blushing.Pepper Elastic.Jujube Exuberant.Pear Flying.Carrot Refreshing.Tea
-Running.Popsicle Scalding.Coffee Shiny.Zucchini Spicy.Soup Spiny.Artichoke
+Scalding.Coffee Shiny.Zucchini Spicy.Soup Spiny.Artichoke
 Squishy.Squid Sticky.Jam Sturdy.Beetroot Tangy.Miso

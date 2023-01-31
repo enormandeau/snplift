@@ -54,46 +54,63 @@ else
 fi
 
 # SNPLift
+## Compute SPLIT_BY, the number of lines that each chunk should have
+export SPLIT_BY=$(grep -vc "^#" "$OLD_VCF" | awk -v ncpu="$NCPUS" '{print 1+$1/ncpu}' | cut -d "." -f 1)
+
 ## Get original coordinates
 echo -e "\nSNPLift: Extracting positions from VCF"
 ./01_scripts/01_extract_positions.sh "$OLD_VCF" "$SPLIT_BY"
 
 ## Extract flanking sequences around SNPs (100bp on each side)
 echo -e "\nSNPLift: Extracting flanking sequences around SNPs"
-parallel ./01_scripts/02_fasta_extract_flanking_regions.py "$OLD_GENOME" {} \
+parallel -j "$NCPUS" ./01_scripts/02_fasta_extract_flanking_regions.py "$OLD_GENOME" {} \
     "$WINDOW_LENGTH" {.}.fasta ::: \
     "$LIFTOVER_FOLDER"/positions.*.ids
 
 ## Map reads with bwa (keep best hit)
 echo -e "\nSNPLift: Mapping flanking sequences on new genome\n"
-parallel ./01_scripts/03_map_reads.sh "$NEW_GENOME" {} "$NCPUS" \> {.}.sam ::: \
+parallel -j 1 ./01_scripts/03_map_reads.sh "$NEW_GENOME" {} "$NCPUS" \> {.}.sam ::: \
     "$LIFTOVER_FOLDER"/positions.*.fasta
 
 ## Extract features from alignments
 echo -e "\nSNPLift: Extract features from alignments"
-parallel ./01_scripts/04_extract_features_from_alignments.py {} "$WINDOW_LENGTH" \
+parallel -j "$NCPUS" ./01_scripts/04_extract_features_from_alignments.py {} "$WINDOW_LENGTH" \
     {.}.features ::: "$LIFTOVER_FOLDER"/positions.*.sam
 
-cat "$LIFTOVER_FOLDER"/positions.*.features | head -1 > "$LIFTOVER_FOLDER"/header.temp
-cat "$LIFTOVER_FOLDER"/positions.*.features | grep -v "QueryName" > "$LIFTOVER_FOLDER"/body.temp
-cat "$LIFTOVER_FOLDER"/{header.temp,body.temp} > "$LIFTOVER_FOLDER"/positions.features
-rm "$LIFTOVER_FOLDER"/*.temp
+## Visualize features if requested
 
-## Visualize features
-echo -e "\nSNPLift: Visualize features\n"
-R -q -e 'source("./01_scripts/05_explore_features.R")' #2>/dev/null
+if [ "$SKIP_VISUALIZATION" == "0" ]
+then
+    echo -e "\nSNPLift: Visualize features\n"
+    cat "$LIFTOVER_FOLDER"/positions.*.features | head -1 > "$LIFTOVER_FOLDER"/header.temp
+    cat "$LIFTOVER_FOLDER"/positions.*.features | grep -v "QueryName" > "$LIFTOVER_FOLDER"/body.temp
+    cat "$LIFTOVER_FOLDER"/{header.temp,body.temp} > "$LIFTOVER_FOLDER"/positions.features
+    rm "$LIFTOVER_FOLDER"/*.temp
+
+    R -q -e 'source("./01_scripts/05_explore_features.R")' #2>/dev/null
+
+elif [ "$SKIP_VISUALIZATION" == "1" ]
+then
+    echo -e "\nSNPLift: Skipping visualization"
+
+else
+    echo -e "\nParameter error: Invalid value in config file for SKIP_VISUALIZATION"
+    echo "  Must be 0 (zero) or 1 (one)"
+    exit
+fi
 
 ## Score markers based on alignments (detail them)
 echo -e "\nSNPLift: Score markers based on extracted features"
-parallel ./01_scripts/06_score_markers.py {} {.}.scores "$WINDOW_LENGTH" ::: \
+parallel -j "$NCPUS" ./01_scripts/06_score_markers.py {} {.}.scores "$WINDOW_LENGTH" ::: \
     "$LIFTOVER_FOLDER"/positions.*.features
 
 ## Keep good loci and try to recuperate bad alignments if locally collinear
 echo -e "\nSNPLift: Getting coordinates of transferable SNPs"
-parallel ./01_scripts/07_correspondence.py {} "$NUM_NEIGHBOURS" {.}.corr ::: \
+parallel -j "$NCPUS" ./01_scripts/07_correspondence.py {} "$NUM_NEIGHBOURS" {.}.corr ::: \
     "$LIFTOVER_FOLDER"/positions.*.scores
 
-cat "$LIFTOVER_FOLDER"/positions.*.scores > "$LIFTOVER_FOLDER"/positions.corr
+cat "$LIFTOVER_FOLDER"/positions.*.corr > "$LIFTOVER_FOLDER"/positions.corr
+
 ## Update VCF
 echo -e "\nSNPLift: Writing new VCF with updated coordinates"
 ./01_scripts/08_replace_coordinates_in_vcf.py "$OLD_VCF" "$LIFTOVER_FOLDER"/positions.corr "$NEW_VCF"
@@ -105,8 +122,6 @@ echo -e $(cat "$LIFTOVER_FOLDER"/positions.*.sam | grep -v "^@" | cut -f 1 | uni
 echo -e $(cat "$LIFTOVER_FOLDER"/positions.*.features | grep -v "^@" | cut -f 1 | uniq | wc -l)"\tFeatures"
 echo -e $(cat "$LIFTOVER_FOLDER"/positions.*.scores | wc -l)"\tScores"
 echo -e $(cat "$LIFTOVER_FOLDER"/positions.*.corr | wc -l)"\tTransferable"
-
-#ls "$OLD_VCF" -1tr "$LIFTOVER_FOLDER"/positions.* "$NEW_VCF" | grep -v fasta | grep -v png | parallel -k wc -l
 
 ## Report percentage of transfered SNPs
 echo

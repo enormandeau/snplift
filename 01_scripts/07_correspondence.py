@@ -10,7 +10,6 @@ Where window_size is the number of neighbor SNPs to consider on each side.
 
 # Modules
 from scipy.stats import pearsonr
-import pandas as pd
 import sys
 
 # Parsing user input
@@ -68,12 +67,6 @@ with open(input_scores, "rt") as infile:
             else:
                 # Organize infos for past, now, and future into pandas dataframe
                 infos = [x for x in past + [now] + future]
-                infos_df = pd.DataFrame(
-                    infos, columns=["Score", "Flags", "Chr1", "LocusName",
-                        "Pos1", "Chr2", "Pos2"])
-
-                infos_df["Pos1"] = infos_df["Pos1"].astype("int64")
-                infos_df["Pos2"] = infos_df["Pos2"].astype("int64")
 
                 # Compute useful neighbourhood metrix
                 scores = [float(x[0]) for x in infos]
@@ -89,7 +82,10 @@ with open(input_scores, "rt") as infile:
 
                 # Is Pearson coef for scores close to 1?
                 try:
-                    pearson = abs(pearsonr(infos_df["Pos1"], infos_df["Pos2"])[0])
+                    #pearson = abs(pearsonr(infos_df["Pos1"], infos_df["Pos2"])[0])
+                    pearson = abs(pearsonr(
+                        [int(x[4]) for x in infos],
+                        [int(x[5]) for x in infos])[0])
                 except:
                     pearson = 0.0
 
