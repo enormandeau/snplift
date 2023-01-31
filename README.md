@@ -1,4 +1,4 @@
-# SNPLift v0.3.0 Running Popsicle
+# SNPLift v0.3.0
 
 Lift over SNP postions from a VCF to match a new reference genome.
 
