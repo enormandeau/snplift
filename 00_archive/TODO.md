@@ -1,9 +1,5 @@
 # Things to do before publication
-* `07_orrespondance.py` does not use chr info
-  - Too slow for small scaffolds
-* Replace the split command we don't loose SNPs at the file edges
-- Copy config file to log folder
-- Use FastANI to assess inter-genome distance
+* Replace the split command so we don't loose SNPs at the file edges
 - Bump to v0.3.0 Running.Popsicle
 
 ## Benchmark
@@ -42,15 +38,12 @@
 - Publish on bioRxiv
 - Submit somewhere
 
-## Later
-- Run SNPLift on its result to try to get back the original (test dataset)
-  - Check that you recover the original positions
-- In collinearity exploration, add percentage after num bases
-- Check nucleotide distance of genomes using first chromosome
+## Future improvements
+- Copy config file to log folder for each run
+- Use FastANI to assess nucleotide distance between the genomes
   - Correlate to proportion of SNPs transferred
-- Install with `conda create -n snplift -c bioconda snplift`
-- Or use a conda environment `requirements.txt` file
-- Or install dependencies and clone
+- In collinearity exploration, add percentage after num bases
+- Install deps in a conda environment `requirements.txt` file
 
 ## Version name ideas
 Blushing.Pepper Elastic.Jujube Exuberant.Pear Flying.Carrot Refreshing.Tea
