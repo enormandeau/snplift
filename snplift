@@ -19,6 +19,7 @@ exec > >(tee "$LOG_FOLDER"/"$TIMESTAMP"_SNPlift.log) 2>&1
 
 # Printing version and name
 echo -e "\n$(head -1 README.md | cut -c 3-)"
+echo -e "\nSNPLift: Using $NCPUS CPUs"
 
 # Check collinearity
 if [ "$CHECK_COLLINEARITY" == "0" ]
