@@ -112,18 +112,19 @@ cat "$LIFTOVER_FOLDER"/positions.*.corr > "$LIFTOVER_FOLDER"/positions.corr
 ## Update VCF
 echo -e "\nSNPLift: Writing new VCF with updated coordinates"
 ./01_scripts/08_replace_coordinates_in_vcf.py "$OLD_VCF" "$LIFTOVER_FOLDER"/positions.corr "$NEW_VCF"
+rm positions.corr
 
 ## Report number of SNPs for each step
 echo -e "\nSNPLift: Number of SNPs treated at each step\n"
-echo -e $(cat "$LIFTOVER_FOLDER"/positions.*.ids | sort -u | wc -l)"\tPositions"
-echo -e $(cat "$LIFTOVER_FOLDER"/positions.*.sam | grep -v "^@" | cut -f 1 | sort -u | wc -l)"\tAlignments"
-echo -e $(cat "$LIFTOVER_FOLDER"/positions.*.features | grep -v "^@" | cut -f 1 | sort -u | wc -l)"\tFeatures"
-echo -e $(cat "$LIFTOVER_FOLDER"/positions.*.scores | sort -u | wc -l)"\tScores"
-echo -e $(cat "$LIFTOVER_FOLDER"/positions.*.corr | sort -u | wc -l)"\tTransferable"
+echo -e $(cat "$LIFTOVER_FOLDER"/positions.*.ids | ./01_scripts/util/count_unique_lines.py)"\tPositions"
+#echo -e $(cat "$LIFTOVER_FOLDER"/positions.*.sam | grep -v "^@" | cut -f 1 | ./01_scripts/util/count_unique_lines.py)"\tAlignments"
+echo -e $(cat "$LIFTOVER_FOLDER"/positions.*.features | grep -v "^@" | cut -f 1 | ./01_scripts/util/count_unique_lines.py)"\tFeatures"
+echo -e $(cat "$LIFTOVER_FOLDER"/positions.*.scores | ./01_scripts/util/count_unique_lines.py)"\tScores"
+echo -e $(cat "$LIFTOVER_FOLDER"/positions.*.corr | ./01_scripts/util/count_unique_lines.py)"\tTransferable"
 
 ## Report percentage of transfered SNPs
 echo
 echo "SNPLift: Percentage of transferred SNPs:"
-echo $(echo '100 *' $(cat "$LIFTOVER_FOLDER"/positions.*.corr | wc -l | awk '{print $1}') / $(cat "$LIFTOVER_FOLDER"/positions.*.ids | sort -u | wc -l | awk '{print $1}') | bc -ql | cut -c -5)"%"
+echo $(echo '100 *' $(cat "$LIFTOVER_FOLDER"/positions.*.corr | ./01_scripts/util/count_unique_lines.py) / $(cat "$LIFTOVER_FOLDER"/positions.*.ids | ./01_scripts/util/count_unique_lines.py) | bc -ql | cut -c -7)"%"
 
 echo -e "\nSNPLift: Run completed\n"
