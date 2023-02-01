@@ -1,7 +1,7 @@
 # Things to do before publication
 
 ## Benchmark
-* Replace the split command so we don't loose SNPs at the file edges
+- Check if new `sort -u` commands in reports takes too long
 * Copy config file to log folder for each run
 - Test on a variety of genomes / vcfs
   - Same genome with VCFs of different sizes

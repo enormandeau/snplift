@@ -3,14 +3,8 @@
 
 # Global variables
 VCF="$1"
-SPLIT_BY="$2"
+NUM_LINES="$2"
+NCPUS="$3"
 
 # Extract
-grep -v "^#" "$VCF" | cut -f -2 | split -l "$SPLIT_BY" -a 2 -d - 06_liftover/positions.
-
-# Rename
-ls -1 06_liftover/positions.* | grep -P "\.\d{2,}" |
-    while read i
-    do
-        mv "$i" "$i".ids
-    done
+./01_scripts/util/split_positions.py "$VCF" "$NUM_LINES" "$NCPUS" "$NUM_NEIGHBOURS"
