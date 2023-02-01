@@ -1,13 +1,11 @@
 # Things to do before publication
 
 ## Benchmark
+* Solve unstable number of transfered SNPs with NCPUS
 * Copy config file to log folder for each run
+* Bump version number and add `benchmarks` to the name
 - Test on a variety of genomes / vcfs
-  - Same genome with VCFs of different sizes
-  - Build genome index before and track time
-  - Collect genome-size, VCF-size, runtime
-  - Build a regression model with gsize and vsize + interaction
-- Suggest dividing by 10 and multiplying by their test runtime
+- Same genome with VCFs of different sizes
 - Report time, RAM, and disk space
 
 ## Revise MS
