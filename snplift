@@ -2,17 +2,23 @@
 # Run the full pipeline
 
 # Global variables
-TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 #SCRIPT=$0
 #SCRIPT_NAME="$(basename "$SCRIPT")"
-CONFIG_FILE=$1
 #CONFIG_FILENAME=$(basename "$CONFIG_FILE")
+CONFIG_FILE=$1
+NCPUS_CLI=$2
 LOG_FOLDER="99_logfiles"
-#RESULT_FOLDER="12_results"
 LIFTOVER_FOLDER="06_liftover"
+TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 
 # Source config file
 source "$CONFIG_FILE"
+
+# Check if we override NCPUS
+if [[ -n "$NCPUS_CLI" ]]
+then
+    export NCPUS=$NCPUS_CLI
+fi
 
 # Log all output
 exec > >(tee "$LOG_FOLDER"/"$TIMESTAMP"_SNPlift.log) 2>&1
@@ -20,6 +26,7 @@ exec > >(tee "$LOG_FOLDER"/"$TIMESTAMP"_SNPlift.log) 2>&1
 # Printing version and name
 echo -e "\n$(head -1 README.md | cut -c 3-)"
 echo -e "\nSNPLift: Using $NCPUS CPUs"
+echo "Start: $(date +%Y%m%d_%H%M%S)"
 
 # Check collinearity
 if [ "$CHECK_COLLINEARITY" == "0" ]
@@ -129,3 +136,4 @@ echo "SNPLift: Percentage of transferred SNPs:"
 echo $(echo '100 *' $(cat "$LIFTOVER_FOLDER"/positions.*.corr | ./01_scripts/util/count_unique_lines.py) / $(cat "$LIFTOVER_FOLDER"/positions.*.ids | ./01_scripts/util/count_unique_lines.py) | bc -ql | cut -c -7)"%"
 
 echo -e "\nSNPLift: Run completed\n"
+echo "End: $(date +%Y%m%d_%H%M%S)"

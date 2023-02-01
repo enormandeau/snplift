@@ -3,6 +3,7 @@
 *.fasta.gz
 *.log
 *.out
+*.tsv
 *.vcf
 *.vcf.gz
 *data
