@@ -47,14 +47,16 @@ with open(input_vcf) as infile:
         output_num = line_num // lines_per_file
         handles[output_num].write(out_line)
 
-        # Add first `num_neighbours` lines to previous file
-        output_num_prev = (line_num - num_neighbours) // lines_per_file
-        if output_num_prev >= 0 and output_num_prev == output_num - 1:
-            handles[output_num_prev].write(out_line)
+        ## Add first `num_neighbours` lines to previous file
+        #output_num_prev = (line_num - num_neighbours) // lines_per_file
 
-        # Add last `num_neighbours` lines to next file
-        output_num_next = (line_num + num_neighbours) // lines_per_file
-        if output_num_next < ncpus and output_num_next == output_num + 1:
-            handles[output_num_next].write(out_line)
+        #if output_num_prev >= 0 and output_num_prev == output_num - 1:
+        #    handles[output_num_prev].write(out_line)
+
+        ## Add last `num_neighbours` lines to next file
+        #output_num_next = (line_num + num_neighbours) // lines_per_file
+
+        #if output_num_next < ncpus and output_num_next == output_num + 1:
+        #    handles[output_num_next].write(out_line)
 
         line_num += 1
