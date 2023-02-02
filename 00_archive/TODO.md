@@ -2,7 +2,8 @@
 
 ## Benchmark
 * Solve unstable number of transfered SNPs with NCPUS
-* Bump version number and add `benchmarks` to the name
+* Bump version number and add `benchmark` to the name
+- Test multiple genomes at NCPUS=20
 - Test on a variety of genomes / vcfs sizes
 - Report time, RAM, and disk space
 
