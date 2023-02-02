@@ -2,17 +2,19 @@
 # Run the full pipeline
 
 # Global variables
-#SCRIPT=$0
-#SCRIPT_NAME="$(basename "$SCRIPT")"
-#CONFIG_FILENAME=$(basename "$CONFIG_FILE")
-CONFIG_FILE=$1
+CONFIG=$1
 NCPUS_CLI=$2
+
 LOG_FOLDER="99_logfiles"
 LIFTOVER_FOLDER="06_liftover"
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 
+CONFIG_FILENAME=$(basename "$CONFIG")
+
+cp "$CONFIG" "$LOG_FOLDER"/"$TIMESTAMP"_"$CONFIG_FILENAME"
+
 # Source config file
-source "$CONFIG_FILE"
+source "$CONFIG"
 
 # Check if we override NCPUS
 if [[ -n "$NCPUS_CLI" ]]

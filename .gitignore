@@ -13,6 +13,6 @@
 04_input_vcf/*
 05_collinearity/*
 06_liftover/*
-99_lofiles/*
+99_logfiles/*
 collinearity.*
 snplift_test_dataset

@@ -2,10 +2,8 @@
 
 ## Benchmark
 * Solve unstable number of transfered SNPs with NCPUS
-* Copy config file to log folder for each run
 * Bump version number and add `benchmarks` to the name
-- Test on a variety of genomes / vcfs
-- Same genome with VCFs of different sizes
+- Test on a variety of genomes / vcfs sizes
 - Report time, RAM, and disk space
 
 ## Revise MS
