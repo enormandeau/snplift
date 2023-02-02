@@ -12,6 +12,47 @@ Where window_size is the number of neighbor SNPs to consider on each side.
 from scipy.stats import pearsonr
 import sys
 
+# Functions
+def keep_snp(past, now, future):
+
+    # Score of current locus
+    if float(now[0]) > 0.5:
+        return True
+
+    else:
+        # Organize infos for past, now, and future into pandas dataframe
+        infos = [x for x in past + [now] + future]
+
+        # Keep only SNPs in same chromosome
+        chromosome = now[2]
+        infos = [x for x in infos if x[2] == chromosome]
+
+        if len(infos) < window_size:
+            return False
+
+        # Compute useful neighbourhood metrix
+        scores = [float(x[0]) for x in infos]
+        average = round(sum(scores) / len(scores), 2)
+
+        if average < 0.4:
+            return False
+
+        num_negative = len([x for x in scores if x <= 0.0])
+
+        if num_negative > window_size / 2:
+            return False
+
+        # Is Pearson coef for scores close to 1?
+        try:
+            pos1 = [int(x[4]) for x in infos]
+            pos2 = [int(x[6]) for x in infos]
+            pearson = abs(pearsonr(pos1, pos2)[0])
+        except:
+            pearson = 0.0
+
+        if pearson >= 0.99:
+            return True
+
 # Parsing user input
 try:
     input_scores = sys.argv[1]
@@ -35,8 +76,6 @@ with open(input_scores, "rt") as infile:
                 outfile.write(line)
                 continue
 
-            #Detail of columns (index and value):
-            # 0      1          2              3          4         5            6
             #Score, Penalties, QueryScaffold, QueryName, QueryPos, TargetChrom, TargetPos
             l = line.strip().split("\t")
 
@@ -46,7 +85,8 @@ with open(input_scores, "rt") as infile:
 
                 # Fill future list
                 while len(future) < window_size:
-                    future.append(infile.readline().strip().split("\t"))
+                    l = infile.readline().strip().split("\t")
+                    future.append(l)
 
             # Slide past, now, and future one step forward
             else:
@@ -58,43 +98,18 @@ with open(input_scores, "rt") as infile:
                     past.pop(0)
 
             # Evaluate SNPs
-            keep = False
+            if keep_snp(past, now, future):
+                outfile.write("\t".join(now) + "\n")
 
-            # Score of current locus
-            if float(now[0]) > 0.5:
-                keep = True
+        # Treat last SNPs of the file
+        while future:
+            past.append(now)
+            now = future.pop(0)
 
-            else:
-                # Organize infos for past, now, and future into pandas dataframe
-                infos = [x for x in past + [now] + future]
+            if len(past) > window_size:
+                past.pop(0)
 
-                # Keep only SNPs in same chromosome
-                chromosome = now[2]
-                infos = [x for x in infos if x[2] == chromosome]
+            # Evaluate SNPs
+            if keep_snp(past, now, future):
+                outfile.write("\t".join(l) + "\n")
 
-                # Compute useful neighbourhood metrix
-                scores = [float(x[0]) for x in infos]
-                average = round(sum(scores) / len(scores), 2)
-
-                if average < 0.2:
-                    continue
-                
-                num_negative = len([x for x in scores if x <= 0.0])
-
-                if num_negative > window_size / 2:
-                    continue
-
-                # Is Pearson coef for scores close to 1?
-                try:
-                    pos1 = [int(x[4]) for x in infos]
-                    pos2 = [int(x[6]) for x in infos]
-                    pearson = abs(pearsonr(pos1, pos2)[0])
-                except:
-                    pearson = 0.0
-
-                if pearson >= 0.99:
-                    keep = True
-
-            # Locus is good and should be kept
-            if keep:
-                outfile.write(line)
