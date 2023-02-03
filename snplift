@@ -114,7 +114,7 @@ parallel -j "$NCPUS" ./01_scripts/06_score_markers.py {} {.}.scores "$WINDOW_LEN
 
 ## Keep good loci and try to recuperate bad alignments if locally collinear
 echo -e "\nSNPLift: Getting coordinates of transferable SNPs"
-parallel -j "$NCPUS" ./01_scripts/07_correspondence.py {} "$NUM_NEIGHBOURS" {.}.corr ::: \
+parallel -j "$NCPUS" ./01_scripts/07_correspondence.py {} "$NUM_NEIGHBOURS" {.}.corr "$NCPUS" ::: \
     "$LIFTOVER_FOLDER"/positions.*.scores
 
 cat "$LIFTOVER_FOLDER"/positions.*.corr > "$LIFTOVER_FOLDER"/positions.corr
@@ -122,7 +122,7 @@ cat "$LIFTOVER_FOLDER"/positions.*.corr > "$LIFTOVER_FOLDER"/positions.corr
 ## Update VCF
 echo -e "\nSNPLift: Writing new VCF with updated coordinates"
 ./01_scripts/08_replace_coordinates_in_vcf.py "$OLD_VCF" "$LIFTOVER_FOLDER"/positions.corr "$NEW_VCF"
-rm positions.corr
+rm "$LIFTOVER_FOLDER"/positions.corr
 
 ## Report number of SNPs for each step
 echo -e "\nSNPLift: Number of SNPs treated at each step\n"

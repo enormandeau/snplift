@@ -1,4 +1,4 @@
-# SNPLift v0.3.0
+# SNPLift v0.4.0
 
 Lift over SNP postions from a VCF to match a new reference genome.
 

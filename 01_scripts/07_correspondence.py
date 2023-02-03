@@ -58,6 +58,7 @@ try:
     input_scores = sys.argv[1]
     window_size = int(sys.argv[2])
     output_correspondence = sys.argv[3]
+    num_cpus = int(sys.argv[4])
 except:
     print(__doc__)
     sys.exit(1)
@@ -66,6 +67,8 @@ except:
 past = []
 now = None
 future = []
+
+file_num = int(input_scores.strip().split("/")[1].split(".")[1])
 
 with open(input_scores, "rt") as infile:
     with open(output_correspondence, "wt") as outfile:
@@ -81,12 +84,27 @@ with open(input_scores, "rt") as infile:
 
             # Get first info line
             if not now:
-                now = l
 
-                # Fill future list
-                while len(future) < window_size:
-                    l = infile.readline().strip().split("\t")
-                    future.append(l)
+                if file_num == 0:
+                    now = l
+
+                    # Fill future list
+                    while len(future) < window_size:
+                        l = infile.readline().strip().split("\t")
+                        future.append(l)
+
+                else:
+                    past.append(l)
+
+                    while len(past) < window_size:
+                        l = infile.readline().strip().split("\t")
+                        past.append(l)
+
+                    now = infile.readline().strip().split("\t")
+
+                    while len(future) < window_size:
+                        l = infile.readline().strip().split("\t")
+                        future.append(l)
 
             # Slide past, now, and future one step forward
             else:
@@ -102,14 +120,15 @@ with open(input_scores, "rt") as infile:
                 outfile.write("\t".join(now) + "\n")
 
         # Treat last SNPs of the file
-        while future:
-            past.append(now)
-            now = future.pop(0)
+        if file_num == num_cpus - 1:
+            while future:
+                past.append(now)
+                now = future.pop(0)
 
-            if len(past) > window_size:
-                past.pop(0)
+                if len(past) > window_size:
+                    past.pop(0)
 
-            # Evaluate SNPs
-            if keep_snp(past, now, future):
-                outfile.write("\t".join(l) + "\n")
+                # Evaluate SNPs
+                if keep_snp(past, now, future):
+                    outfile.write("\t".join(l) + "\n")
 
