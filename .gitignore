@@ -5,6 +5,7 @@
 *.out
 *.tsv
 *.vcf
+*.vcf.*
 *.vcf.gz
 *data
 *~
@@ -12,6 +13,7 @@
 03_genomes/*
 04_input_vcf/*
 05_collinearity/*
+06_liftover*
 06_liftover/*
 99_logfiles/*
 collinearity.*
