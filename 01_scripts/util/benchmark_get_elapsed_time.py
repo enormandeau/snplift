@@ -19,6 +19,10 @@ for line in sys.stdin:
     end = [int(x) for x in [end[:2], end[2:4], end[4:]]]
     end = 3600 * end[0] + 60 * end[1] + end[2]
 
-    l.append(str(end - start))
+    duration = end - start
+    if duration < 0:
+        duration += 86400
+
+    l.append(str(duration))
 
     print("\t".join(l))
