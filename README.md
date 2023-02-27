@@ -72,6 +72,8 @@ You can run the full SNPlift test with:
 
 - Install dependencies
 - Download a copy of the SNPLift repository (see **Installation** above)
+- Make sure that the chromosome names used in the VCF match EXACTLY those found
+  in the `old_genome.fasta` file before any space character.
 
 ## Overview of SNPLift steps
 
