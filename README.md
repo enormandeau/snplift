@@ -63,7 +63,12 @@ The rest of the steps take the remaining 40s.
 
 For this test run, based on real data, 99.57% of the SNPs are transfered.
 
-You can run the full SNPlift test with:
+First, you need to edit the config file to turn genome indexing on
+```
+export SKIP_INDEXING=0      # Save time if genome already indexed with 'bwa index' [0, 1]
+```
+
+You can then run the full SNPlift test with:
 ```
 ./01_scripts/util/run_test.sh
 ```
