@@ -1,8 +1,6 @@
 # Things to do before publication
 
 ## Benchmark
-- Test multiple genomes at NCPUS=10
-- Test on a variety of genomes / vcfs sizes
 - Report time, RAM, and disk space
 
 ## Revise MS
