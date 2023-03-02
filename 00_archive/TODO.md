@@ -1,11 +1,6 @@
 # Things to do before publication
 
-## Benchmark
-- Report time, RAM, and disk space
-
 ## Revise MS
-- Modify MS to reflect changes
-- Tell Davoud it is his turn
 - Publish on bioRxiv
 - Submit somewhere
 
@@ -15,14 +10,14 @@
 - Confirm all the dependencies
 - Explicitly describe VCF format (3 first columns)
 - Describe behaviour (eg: write lines with `#` without treatment)
-- Bump to v0.4.0
+- Bump to v0.5.0
 
 ## Validation script
 - Input files can be found
 - Scaffold names in old genome are the same as those in the VCF
 - Scaffold name formats are OK in all input files
 - Make snplift crash explicitely if one program crashes
-- Bump to v0.5.0
+- Bump to v0.6.0
 
 # Test for v1.0.0
 - Test on new Linux computer / MacOS
