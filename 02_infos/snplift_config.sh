@@ -20,6 +20,9 @@ export CHECK_COLLINEARITY=0 # Increases runtime by ~5 times. Align genomes and p
 
 # Parameters
 export NCPUS=10             # Number of cores to use (around 10 and maximum 20 is recommended)
+                            #   For less than 100K SNPs, 1 to 4 cores is a good choice
+                            #   For less than 1M SNPs, 10 cores is a good choice
+                            #   Above this, 20 cores is going to be slightly faster
 export WINDOW_LENGTH=100    # If you modify this value, also modify 06_score_markers.py
 export NUM_NEIGHBOURS=10    # Number of neighbour SNPs to consider when trying to recuperate
                             #   more dubious SNPs using local correlations of positions
