@@ -2,18 +2,19 @@
 
 ## Revise MS
 - Publish on bioRxiv
-- Submit somewhere
+- Submit to Bioinformatics - Application Notes
 
 ## Documentation
 - Improve format using doc from barque, GAWN and stacks workflow
 - Add species name for the test dataset
-- Confirm all the dependencies
-- Explicitly describe VCF format (3 first columns)
+- Confirm all the dependencies are listed, including optional stuff
+- Explicitly describe VCF format (3 first columns) and link to spec
 - Describe behaviour (eg: write lines with `#` without treatment)
 - Bump to v0.5.0
 
 ## Validation script
 - Input files can be found
+- Dependencies are met
 - Scaffold names in old genome are the same as those in the VCF
 - Scaffold name formats are OK in all input files
 - Make snplift crash explicitely if one program crashes
@@ -24,7 +25,6 @@
 - Bump to v1.0.0
 
 ## Future improvements
-- Use FastANI to assess nucleotide distance between the genomes
-  - Correlate to proportion of SNPs transferred
+- Add optional FastANI run to assess nucleotide distance between the genomes
 - In collinearity exploration, add percentage after num bases
 - Install deps in a conda environment `requirements.txt` file
