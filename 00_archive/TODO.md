@@ -1,5 +1,8 @@
 # Things to do before publication
 
+## Not only VCFs!
+- SNPLift will work on ANY file that has chrom,pos as the first 2 columns
+
 ## Revise MS
 - Publish on bioRxiv
 - Submit to Bioinformatics - Application Notes
