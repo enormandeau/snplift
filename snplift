@@ -68,9 +68,9 @@ fi
 rm "$LIFTOVER_FOLDER"/* 2>/dev/null
 
 ## Get original coordinates
-echo -e "\nSNPLift: Extracting positions from VCF"
-export NUM_LINES=$(grep -vc "^#" "$OLD_VCF")
-./01_scripts/01_extract_positions.sh "$OLD_VCF" "$NUM_LINES" "$NCPUS" "$NUM_NEIGHBOURS"
+echo -e "\nSNPLift: Extracting positions from input file"
+export NUM_LINES=$(grep -vc "^#" "$INPUT_FILE")
+./01_scripts/01_extract_positions.sh "$INPUT_FILE" "$NUM_LINES" "$NCPUS" "$NUM_NEIGHBOURS"
 
 ## Extract flanking sequences around SNPs (100bp on each side)
 echo -e "\nSNPLift: Extracting flanking sequences around SNPs"
@@ -122,9 +122,9 @@ parallel -j "$NCPUS" ./01_scripts/07_correspondence.py {} "$NUM_NEIGHBOURS" {.}.
 
 cat "$LIFTOVER_FOLDER"/positions.*.corr > "$LIFTOVER_FOLDER"/positions.corr
 
-## Update VCF
-echo -e "\nSNPLift: Writing new VCF with updated coordinates"
-./01_scripts/08_replace_coordinates_in_vcf.py "$OLD_VCF" "$LIFTOVER_FOLDER"/positions.corr "$NEW_VCF"
+## Update coordinates
+echo -e "\nSNPLift: Writing output file with updated coordinates"
+./01_scripts/08_replace_coordinates_in_vcf.py "$INPUT_FILE" "$LIFTOVER_FOLDER"/positions.corr "$OUTPUT_FILE"
 rm "$LIFTOVER_FOLDER"/positions.corr
 
 ## Report number of SNPs for each step

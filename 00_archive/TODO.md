@@ -1,13 +1,9 @@
 # Things to do before publication
 
-## Test on other input file formats
-- Bogus format with coordinates
-- Bed files with only 2 columns
-
 ## Validation script
 - Input files can be found
 - Dependencies are met
-- Scaffold names in old genome are the same as those in the VCF
+- Scaffold names in old genome are the same as those in the input_file
 - Scaffold name formats are OK in all input files
 - Make SNPLift crash explicitly if one program crashes
 - Bump to v1.0.0
