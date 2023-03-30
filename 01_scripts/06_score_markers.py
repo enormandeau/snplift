@@ -3,15 +3,6 @@
 
 Usage:
     <program> input_features output_scores
-
-Criteria and quality penalty (as a fraction of 1):
-    Flag > 2000: 1.0
-    Quality < 10: 0.5
-    dd$SuppAlignMinDiff < 4: 0.8
-    dd$NumDiff > 0.05 * len(sequence): 0.3
-    dd$Softclip > 0.25 * len(sequence): 0.2
-    (dd$Match + dd$Softclip) < 0.9 * len(sequence): 0.3
-    (dd$Softclip - 0.05 * len(sequence)) / (dd$NumNs + 1) <= 1.1: 0.5
 """
 
 # Modules
@@ -49,16 +40,17 @@ with open(input_features, "rt") as infile:
             penalties = []
             query_scaffold = QueryName.split(";")[0]
 
+            # Alignment too short
             if len(Sequence) < (expected_length / 2):
                 penalties.append("L")
                 score -= 1.0
 
+            # Supplementary alignments
             if int(MappingFlag) > 2000:
                 # Remove these altogether
-                #penalties.append("F")
-                #score -= 1.1 
                 continue
 
+            # Mapping quality
             if int(MappingQuality) < 10:
                 penalties.append("Q")
 
@@ -67,22 +59,27 @@ with open(input_features, "rt") as infile:
                 else:
                     score -= 0.6
 
+            # Number of differences over best supplementary alignment
             if int(SuppAlignMinDiff) <= 5:
                 penalties.append("+")
                 score -= (0.5 + (0.4 - int(SuppAlignMinDiff) / 10))
 
+            # More than 5% difference to reference genome
             if int(NumDiff) > 0.05 * len(Sequence):
                 penalties.append("D")
                 score -= 0.3
 
+            # Maximum 25% softclip
             if int(Softclip) > 0.25 * len(Sequence):
                 penalties.append("s")
                 score -= 0.2
 
+            # Match plus softclip are not at least 90% of sequence
             if (int(Match) + int(Softclip)) < 0.9 * len(Sequence):
                 penalties.append("P")
                 score -= 0.3
 
+            # (Number of softclip minus 5% of softtclip) / (number of differences + 1) > 1.1
             if ((int(Softclip) - 0.05 * len(Sequence)) / (int(NumDiff) + 1)) > 1.1:
                 penalties.append("S")
                 score -= 0.5
