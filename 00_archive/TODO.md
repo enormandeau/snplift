@@ -1,31 +1,23 @@
 # Things to do before publication
 
-## Not only VCFs!
-- SNPLift will work on ANY file that has chrom,pos as the first 2 columns
-
-## Revise MS
-- Publish on bioRxiv
-- Submit to Bioinformatics - Application Notes
-
-## Documentation
-- Improve format using doc from barque, GAWN and stacks workflow
-- Add species name for the test dataset
-- Confirm all the dependencies are listed, including optional stuff
-- Explicitly describe VCF format (3 first columns) and link to spec
-- Describe behaviour (eg: write lines with `#` without treatment)
-- Bump to v0.5.0
+## Test on other input file formats
+- Bogus format with coordinates
+- Bed files with only 2 columns
 
 ## Validation script
 - Input files can be found
 - Dependencies are met
 - Scaffold names in old genome are the same as those in the VCF
 - Scaffold name formats are OK in all input files
-- Make snplift crash explicitely if one program crashes
-- Bump to v0.6.0
-
-# Test for v1.0.0
-- Test on new Linux computer / MacOS
+- Make SNPLift crash explicitly if one program crashes
 - Bump to v1.0.0
+
+## Put benchmark data and scripts online
+
+## Revise MS
+- Add references
+- Publish on bioRxiv
+- Submit to Bioinformatics - Application Notes
 
 ## Future improvements
 - Add optional FastANI run to assess nucleotide distance between the genomes
