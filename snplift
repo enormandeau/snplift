@@ -64,6 +64,9 @@ else
 fi
 
 # SNPLift
+## Cleanup LIFTOVER_FOLDER
+rm "$LIFTOVER_FOLDER"/* 2>/dev/null
+
 ## Get original coordinates
 echo -e "\nSNPLift: Extracting positions from VCF"
 export NUM_LINES=$(grep -vc "^#" "$OLD_VCF")
