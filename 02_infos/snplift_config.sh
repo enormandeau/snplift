@@ -12,11 +12,12 @@ export NEW_VCF="new.vcf"
 export SKIP_INDEXING=1      # Save time if genome already indexed with 'bwa index' [0, 1]
 
 # Skip exploring features
-export SKIP_VISUALIZATION=1 # Avoid creating a plot to explore features
+export SKIP_VISUALIZATION=1 # Avoid creating a plot to explore features. These are used
+                            #   for debugging
 
 # Checking for collinearity between both genome versions
 export CHECK_COLLINEARITY=0 # Increases runtime by ~5 times. Align genomes and produce a
-                            #  collinearity comparison figure [0, 1]
+                            #   collinearity comparison figure [0, 1]
 
 # Parameters
 export NCPUS=10             # Number of cores to use (around 10 and maximum 20 is recommended)
