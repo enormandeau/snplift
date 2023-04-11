@@ -2,8 +2,11 @@
 *.bed
 *.fasta
 *.fasta.gz
+*.gz
 *.log
 *.out
+*.tar
+*.tgz
 *.tsv
 *.vcf
 *.vcf.*
