@@ -117,4 +117,3 @@ with open(output_fasta, "w") as outfile:
                         seq[left: right].upper())
 
                 region.write_to_file(outfile)
-                outfile.flush()
