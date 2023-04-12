@@ -27,7 +27,15 @@ def keep_snp(past, now, future):
         chromosome = now[2]
         infos = [x for x in infos if x[2] == chromosome]
 
-        if len(infos) < window_size:
+        if len(infos) < 2 * window_size:
+            return False
+
+        # Skip if closest neighbours are too far (span more than 5Kbp by SNP in window_size)
+        # Don't use info of too sparse markers
+        left_pos = infos[0][4]
+        right_pos = infos[1][4]
+
+        if (int(right_pos) - int(left_pos)) > (2 * window_size * 5000):
             return False
 
         # Compute useful neighbourhood metrix
