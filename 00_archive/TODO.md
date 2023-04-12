@@ -1,15 +1,12 @@
 # Things to do before publication
 
 ## Needs fixing
-* Improve script to extract sequences
-  - Skip scaffolds without any SNPs
 - Report all position correspondances with score (code and value)
-- NNNNs in fasta sequences. Ignore them? Be more lenient for soft clipping when NNNNs
-- Need more than 2 columns, bed files won't work
 - Multiple SNPs at the same position (keep only best one or flush both if same score)
 - If hit reverse strand, modify alleles (A/G -> T/C)
 - Produce new SNP id in column 3
-- Try harder to report an accurate new position
+- Try harder to extract accurate SNP positions from sam file
+- Doc: Need more than 2 columns, bed files won't work
 
 ## Validation script (Crash explicitly)
 - Input files can be found
