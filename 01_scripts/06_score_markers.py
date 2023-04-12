@@ -26,7 +26,6 @@ with open(input_features, "rt") as infile:
             l = line.strip().split("\t")
 
             if line.startswith("QueryName"):
-                #header = l[:]
                 header =  ["QueryScaffold", "QueryName", "QueryPos", "TargetChrom", "TargetPos"]
                 header.insert(0, "Penalties")
                 header.insert(0, "Score")
@@ -41,7 +40,7 @@ with open(input_features, "rt") as infile:
             query_scaffold = QueryName.split(";")[0]
 
             # Alignment too short
-            if len(Sequence) < (expected_length / 2):
+            if len(Sequence) < (expected_length / 1.5):
                 penalties.append("L")
                 score -= 1.0
 
@@ -55,9 +54,9 @@ with open(input_features, "rt") as infile:
                 penalties.append("Q")
 
                 if int(MappingQuality) < 5:
-                    score -= 1.0
+                    score -= 0.8
                 else:
-                    score -= 0.6
+                    score -= 0.4
 
             # Number of differences over best supplementary alignment
             if int(SuppAlignMinDiff) <= 5:
@@ -66,25 +65,23 @@ with open(input_features, "rt") as infile:
 
             # More than 5% difference to reference genome
             if int(NumDiff) > 0.05 * len(Sequence):
-                penalties.append("D")
-                score -= 0.3
+                penalties.append("d")
+                score -= 0.2
 
-            # TODO Redundancy in treating Softclip?
-            # Maximum 25% softclip
+                # More than 10% difference to reference genome
+                if int(NumDiff) > 0.10 * len(Sequence):
+                    penalties.append("D")
+                    score -= 0.2
+
+            # Maximum 10% softclip that are not Ns
             if (int(Softclip) - int(NumNs)) > 0.10 * len(Sequence):
                 penalties.append("s")
                 score -= 0.2
 
-            # Match plus softclip are not at least 90% of sequence
+            # Match plus softclip and Ns are not at least 90% of sequence
             if (int(Match) + int(Softclip) + int(NumNs)) < 0.9 * len(Sequence):
                 penalties.append("P")
                 score -= 0.3
-
-            # (Number of softclip minus 5% of sequence length) / (number of differences + 1) > 1.1
-            if ((int(Softclip) - 0.05 * len(Sequence)) / (int(NumDiff) + 1)) > 1.1:
-                penalties.append("S")
-                score -= 0.5
-
 
             if not penalties:
                 penalties.append(".")
