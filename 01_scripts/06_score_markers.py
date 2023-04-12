@@ -69,17 +69,18 @@ with open(input_features, "rt") as infile:
                 penalties.append("D")
                 score -= 0.3
 
+            # TODO Redundancy in treating Softclip?
             # Maximum 25% softclip
-            if int(Softclip) > 0.25 * len(Sequence):
+            if (int(Softclip) - int(NumNs)) > 0.10 * len(Sequence):
                 penalties.append("s")
                 score -= 0.2
 
             # Match plus softclip are not at least 90% of sequence
-            if (int(Match) + int(Softclip)) < 0.9 * len(Sequence):
+            if (int(Match) + int(Softclip) + int(NumNs)) < 0.9 * len(Sequence):
                 penalties.append("P")
                 score -= 0.3
 
-            # (Number of softclip minus 5% of softtclip) / (number of differences + 1) > 1.1
+            # (Number of softclip minus 5% of sequence length) / (number of differences + 1) > 1.1
             if ((int(Softclip) - 0.05 * len(Sequence)) / (int(NumDiff) + 1)) > 1.1:
                 penalties.append("S")
                 score -= 0.5

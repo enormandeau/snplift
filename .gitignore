@@ -3,8 +3,11 @@
 *.fasta
 *.fasta.gz
 *.gz
+*.jpeg
+*.jpg
 *.log
 *.out
+*.png
 *.tar
 *.tgz
 *.tsv
