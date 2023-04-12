@@ -138,5 +138,5 @@ with open(input_scores, "rt") as infile:
 
                 # Evaluate SNPs
                 if keep_snp(past, now, future):
-                    outfile.write("\t".join(l) + "\n")
+                    outfile.write("\t".join(now) + "\n")
 
