@@ -1,12 +1,12 @@
 # Things to do before publication
 
 ## Needs fixing
-- Report all position correspondances with score (code and value)
-- Multiple SNPs at the same position (keep only best one or flush both if same score)
-- If hit reverse strand, modify alleles (A/G -> T/C)
-- Produce new SNP id in column 3
+- Report all position correspondances with score code and value
+- Keep only one SNP per position
+- For VCFs
+  - If hit reverse strand, modify alleles (A/G -> T/C)
+  - Produce new SNP id in column 3
 - Try harder to extract accurate SNP positions from sam file
-- Doc: Need more than 2 columns, bed files won't work
 
 ## Validation script (Crash explicitly)
 - Input files can be found

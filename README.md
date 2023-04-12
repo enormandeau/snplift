@@ -19,7 +19,8 @@ positions can be used. Lines beginning with a hash sign (`#`) are simply
 transferred to the output file without modification and any column beyond the
 first two are also left unchanged. As such, SNPLift will work with any marker
 type or even bed file, as long as the two first columns contain chromosome and
-position information.
+position information and that there are other columns with informations to
+transfer.
 
 **WARNING** Ultimately, the only way to guaranty that all the positions on the
 new genome are correct is to re-align the reads and call the genotypes again.
