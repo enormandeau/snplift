@@ -1,6 +1,8 @@
 # Things to do before publication
 
 ## Needs fixing
+* Improve script to extract sequences
+  - Skip scaffolds without any SNPs
 - Report all position correspondances with score (code and value)
 - NNNNs in fasta sequences. Ignore them? Be more lenient for soft clipping when NNNNs
 - Need more than 2 columns, bed files won't work
