@@ -2,12 +2,15 @@
 
 ## Needs fixing
 - Confirm all position from .scores files are in .corr (ie: not missing 1-2 at the interface)
-- Report all position correspondances with score code and value
 - Keep only one SNP per position
 - For VCFs
   - If hit reverse strand, modify alleles (A/G -> T/C)
   - Produce new SNP id in column 3
 - Try harder to extract accurate SNP positions from sam file
+  - At ends of chromosomes (put info in the sequence name?)
+    - Already have something for this? Only for chromosome starts?
+  - When there are Ns
+  - Other non-perfect matches
 
 ## Validation script (Crash explicitly)
 - Input files can be found
