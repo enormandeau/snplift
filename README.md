@@ -10,7 +10,7 @@ and then call and filter the loci.
 
 In the process, a proportion of the loci are inevitably lost. However, the
 transferred proportion is very high for genomes with low duplication content and
-when both genome versions are similar. Our test run on real data gives a 99.82%
+when both genome versions are similar. Our test run on real data gives a 99.87%
 transfers rate.
 
 **NOTE**: Although SNPLift was designed primarily for VCFs containing SNP data,
@@ -85,7 +85,7 @@ assemblies from *Medicago truncatula* and a VCF with SNPs found in the first
 chromosome of the reference genome. The VCF contains the genotypes of 10
 samples for 190,443 SNPs. The test takes about 1m20s on 10 Xeon processors from
 2020. About 1m is used to index the old genome for alignment with bwa. The rest
-of the steps take about 18s. For this test run, based on real data, 99.82% of
+of the steps take about 18s. For this test run, based on real data, 99.87% of
 the SNPs are transferred.
 
 You can run the full SNPLift test with:
