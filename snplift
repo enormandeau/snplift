@@ -120,12 +120,11 @@ echo -e "\nSNPLift: Getting coordinates of transferable SNPs"
 parallel -j "$NCPUS" ./01_scripts/07_correspondence.py {} "$NUM_NEIGHBOURS" {.}.corr "$NCPUS" ::: \
     "$LIFTOVER_FOLDER"/positions.*.scores
 
-cat "$LIFTOVER_FOLDER"/positions.*.corr > "$LIFTOVER_FOLDER"/positions.corr
+cat "$LIFTOVER_FOLDER"/positions.*.corr > positions_correspondence.tsv
 
 ## Update coordinates
 echo -e "\nSNPLift: Writing output file with updated coordinates"
-./01_scripts/08_replace_coordinates_in_vcf.py "$INPUT_FILE" "$LIFTOVER_FOLDER"/positions.corr "$OUTPUT_FILE"
-rm "$LIFTOVER_FOLDER"/positions.corr
+./01_scripts/08_replace_coordinates_in_vcf.py "$INPUT_FILE" positions_correspondence.tsv "$OUTPUT_FILE"
 
 ## Report number of SNPs for each step
 echo -e "\nSNPLift: Number of SNPs treated at each step\n"

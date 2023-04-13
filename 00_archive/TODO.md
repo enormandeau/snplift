@@ -1,6 +1,7 @@
 # Things to do before publication
 
 ## Needs fixing
+- Confirm all position from .scores files are in .corr (ie: not missing 1-2 at the interface)
 - Report all position correspondances with score code and value
 - Keep only one SNP per position
 - For VCFs
@@ -21,6 +22,9 @@
 - Submit to Bioinformatics - Application Notes
 
 ## Future improvements
+- Could we cheat the program by adding FAKE SNPs on each side of real ones to confirm
+  more of those that get discarded? Once there, should we strive to build a one-to-one
+  correspondence for all the positions?
 - Make faster by splitting after mapping?
 - Add optional FastANI run to assess nucleotide distance between the genomes
 - In collinearity exploration, add percentage after num bases
