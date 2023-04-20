@@ -40,7 +40,7 @@ with open(input_features, "rt") as infile:
             query_scaffold = QueryName.split(";")[0]
 
             # Alignment too short
-            if len(Sequence) < (expected_length / 1.5):
+            if len(Sequence) < (expected_length / 2):
                 penalties.append("L")
                 score -= 1.0
 
@@ -65,23 +65,39 @@ with open(input_features, "rt") as infile:
 
             # More than 5% difference to reference genome
             if int(NumDiff) > 0.05 * len(Sequence):
-                penalties.append("d")
-                score -= 0.2
 
                 # More than 10% difference to reference genome
                 if int(NumDiff) > 0.10 * len(Sequence):
                     penalties.append("D")
+                    score -= 0.5
+
+                else:
+                    penalties.append("d")
                     score -= 0.2
 
             # Maximum 10% softclip that are not Ns
             if (int(Softclip) - int(NumNs)) > 0.10 * len(Sequence):
-                penalties.append("s")
-                score -= 0.2
+
+                # Maximum 20% softclip that are not Ns
+                if (int(Softclip) - int(NumNs)) > 0.10 * len(Sequence):
+                    penalties.append("S")
+                    score -= 0.5
+
+                else:
+                    penalties.append("s")
+                    score -= 0.2
 
             # Match plus softclip and Ns are not at least 90% of sequence
             if (int(Match) + int(Softclip) + int(NumNs)) < 0.9 * len(Sequence):
-                penalties.append("P")
-                score -= 0.3
+
+                # Match plus softclip and Ns are not at least 80% of sequence
+                if (int(Match) + int(Softclip) + int(NumNs)) < 0.8 * len(Sequence):
+                    penalties.append("p")
+                    score -= 0.3
+
+                else:
+                    penalties.append("P")
+                    score -= 0.5
 
             if not penalties:
                 penalties.append(".")
