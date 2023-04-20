@@ -10,7 +10,7 @@ and then call and filter the loci.
 
 In the process, a proportion of the loci are inevitably lost. However, the
 transferred proportion is very high for genomes with low duplication content and
-when both genome versions are similar. Our test run on real data gives a 99.87%
+when both genome versions are similar. Our test run on real data gives a 99.82%
 transfers rate.
 
 **NOTE**: Although SNPLift was designed primarily for VCFs containing SNP data,
@@ -22,8 +22,10 @@ type or even bed file, as long as the two first columns contain chromosome and
 position information and that there are other columns with informations to
 transfer.
 
-**WARNING** Ultimately, the only way to guaranty that all the positions on the
-new genome are correct is to re-align the reads and call the genotypes again.
+**WARNING**: In regions that differ between the two assemblies, a small
+proportion of SNPs will end up with an approximate position. Ultimately, the
+only way to guaranty that all the positions on the new genome are correct is to
+re-align the reads and call the genotypes again.
 
 See licence information at the end of this file.
 
@@ -85,8 +87,7 @@ assemblies from *Medicago truncatula* and a VCF with SNPs found in the first
 chromosome of the reference genome. The VCF contains the genotypes of 10
 samples for 190,443 SNPs. The test takes about 1m20s on 10 Xeon processors from
 2020. About 1m is used to index the old genome for alignment with bwa. The rest
-of the steps take about 18s. For this test run, based on real data, 99.87% of
-the SNPs are transferred.
+of the steps take about 18s.
 
 You can run the full SNPLift test with:
 
@@ -140,8 +141,13 @@ The output of SNPLift is a file (eg: VCF) in which the positions for which a
 good alignment was found are transferred to the coordinates of a new reference
 genome.
 
-Optionally, if `CHECK_COLLINEARITY` is set to `1` a collinearity figure in .eps
-and .pdf formats is produced.
+Optionaly, if `CORRECT_VCF` is set to `1`, column 3 of the VCF containing locus
+IDs will be recomputed from columns 1 and 2, alleles for loci that map in
+the reverse orientation in the new genome will be reverse complemented, and
+only one locus will be retain if multiple loci map in the same position.
+
+Optionally, if `CHECK_COLLINEARITY` is set to `1`, a collinearity figure in
+.eps and .pdf formats is produced.
 
 Optionally, if `SKIP_VISUALIZATION` is set to `0`, a figure showing some of the
 features used for filtering the alignments is produced. This is used mainly for

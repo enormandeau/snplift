@@ -9,15 +9,20 @@ export INPUT_FILE="04_input_vcf/old.vcf"
 export OUTPUT_FILE="new.vcf"
 
 # Skipping genome indexing
-export SKIP_INDEXING=1      # Save time if genome already indexed with 'bwa index' [0, 1]
+export SKIP_INDEXING=1      # Save time if genome already indexed with 'bwa index' [0, 1].
 
 # Skip exploring features
 export SKIP_VISUALIZATION=1 # Avoid creating a plot to explore features. These are used
-                            #   for debugging
+                            #   for debugging [0, 1].
 
 # Checking for collinearity between both genome versions
 export CHECK_COLLINEARITY=0 # Increases runtime by 5+ times. Align genomes and produce a
-                            #   collinearity comparison figure [0, 1]
+                            #   collinearity comparison figure [0, 1].
+
+# Do final corrections to VCF file
+export CORRECT_VCF=1        # If output file is a VCF, recompute ID column 3 from columns 1 and 2,
+                            # reverse complement alleles of loci that map in reverse in the new
+                            # genome, and permit only one locus per position.
 
 # Parameters
 export NCPUS=10             # Number of cores to use (around 10 and maximum 20 is recommended)

@@ -87,7 +87,7 @@ with open(input_scores, "rt") as infile:
                 outfile.write(line)
                 continue
 
-            #Score, Penalties, QueryScaffold, QueryName, QueryPos, TargetChrom, TargetPos
+            #Score, Penalties, QueryScaffold, QueryName, QueryPos, TargetChrom, TargetPos, Reversed
             l = line.strip().split("\t")
 
             # Get first info line

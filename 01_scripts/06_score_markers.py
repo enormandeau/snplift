@@ -26,7 +26,7 @@ with open(input_features, "rt") as infile:
             l = line.strip().split("\t")
 
             if line.startswith("QueryName"):
-                header =  ["QueryScaffold", "QueryName", "QueryPos", "TargetChrom", "TargetPos"]
+                header =  ["QueryScaffold", "QueryName", "QueryPos", "TargetChrom", "TargetPos", "Reversed"]
                 header.insert(0, "Penalties")
                 header.insert(0, "Score")
                 outfile.write("\t".join(header) + "\n")
@@ -38,6 +38,8 @@ with open(input_features, "rt") as infile:
             score = 1.0
             penalties = []
             query_scaffold = QueryName.split(";")[0]
+            if MappingFlag == "16":
+                MappingFlag = "1"
 
             # Alignment too short
             if len(Sequence) < (expected_length / 2):
@@ -103,4 +105,4 @@ with open(input_features, "rt") as infile:
                 penalties.append(".")
 
             outfile.write("\t".join([str(round(score, 2)), "".join(penalties)] +
-                [query_scaffold, QueryName, QueryPos, TargetChrom, TargetPos]) + "\n")
+                [query_scaffold, QueryName, QueryPos, TargetChrom, TargetPos, MappingFlag]) + "\n")

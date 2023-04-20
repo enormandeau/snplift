@@ -1,16 +1,20 @@
 # Things to do before publication
 
 ## Needs fixing
-- Confirm all position from .scores files are in .corr (ie: not missing 1-2 at the interface)
-- Keep only one SNP per position
-- For VCFs
+* Corrected VCF
+  - Keep only one SNP per position
   - If hit reverse strand, modify alleles (A/G -> T/C)
   - Produce new SNP id in column 3
-- Try harder to extract accurate SNP positions from sam file
+- Bump version
+
+## Position accuracy
+- Extract more accurate SNP positions
   - At ends of chromosomes (put info in the sequence name?)
     - Already have something for this? Only for chromosome starts?
   - When there are Ns
   - Other non-perfect matches
+    - Use only center portion around SNP and find best position
+      - Alternatively, do this for on the left then on the right of the SNP
 
 ## Validation script (Crash explicitly)
 - Input files can be found
