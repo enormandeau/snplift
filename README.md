@@ -1,4 +1,4 @@
-# SNPLift v0.5.0
+# SNPLift v0.6.0
 
 ## Lift over SNP positions to match a new reference genome.
 
@@ -86,7 +86,7 @@ The test dataset consists in the first chromosome from two different genome
 assemblies from *Medicago truncatula* and a VCF with SNPs found in the first
 chromosome of the reference genome. The VCF contains the genotypes of 10
 samples for 190,443 SNPs. The test takes about 1m20s on 10 Xeon processors from
-2020. About 1m is used to index the old genome for alignment with bwa. The rest
+2016. About 1m is used to index the old genome for alignment with bwa. The rest
 of the steps take about 18s.
 
 You can run the full SNPLift test with:

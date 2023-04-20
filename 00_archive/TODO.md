@@ -1,12 +1,5 @@
 # Things to do before publication
 
-## Needs fixing
-* Corrected VCF
-  - Keep only one SNP per position
-  - If hit reverse strand, modify alleles (A/G -> T/C)
-  - Produce new SNP id in column 3
-- Bump version
-
 ## Position accuracy
 - Extract more accurate SNP positions
   - At ends of chromosomes (put info in the sequence name?)
