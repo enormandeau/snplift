@@ -26,6 +26,5 @@
   more of those that get discarded? Once there, should we strive to build a one-to-one
   correspondence for all the positions?
 - Make faster by splitting after mapping?
-- Add optional FastANI run to assess nucleotide distance between the genomes
 - In collinearity exploration, add percentage after num bases
 - Install deps in a conda environment `requirements.txt` file
