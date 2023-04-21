@@ -71,7 +71,7 @@ with open(input_features, "rt") as infile:
                 # More than 10% difference to reference genome
                 if int(NumDiff) > 0.10 * len(Sequence):
                     penalties.append("D")
-                    score -= 0.5
+                    score -= 0.4
 
                 else:
                     penalties.append("d")
@@ -83,7 +83,7 @@ with open(input_features, "rt") as infile:
                 # Maximum 20% softclip that are not Ns
                 if (int(Softclip) - int(NumNs)) > 0.10 * len(Sequence):
                     penalties.append("S")
-                    score -= 0.5
+                    score -= 0.4
 
                 else:
                     penalties.append("s")
@@ -95,11 +95,11 @@ with open(input_features, "rt") as infile:
                 # Match plus softclip and Ns are not at least 80% of sequence
                 if (int(Match) + int(Softclip) + int(NumNs)) < 0.8 * len(Sequence):
                     penalties.append("p")
-                    score -= 0.3
+                    score -= 0.2
 
                 else:
                     penalties.append("P")
-                    score -= 0.5
+                    score -= 0.4
 
             if not penalties:
                 penalties.append(".")

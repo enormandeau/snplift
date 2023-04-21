@@ -10,7 +10,7 @@ and then call and filter the loci.
 
 In the process, a proportion of the loci are inevitably lost. However, the
 transferred proportion is very high for genomes with low duplication content and
-when both genome versions are similar. Our test run on real data gives a 99.83%
+when both genome versions are similar. Our test run on real data gives a 99.87%
 transfers rate.
 
 **NOTE**: Although SNPLift was designed primarily for VCFs containing SNP data,
