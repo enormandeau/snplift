@@ -2,7 +2,8 @@
 """Replace coordinates in VCF with those from the second genome
 
 Usage:
-    <program> input_vcf input_correspondence output_vcf
+    <program> input_vcf input_correspondence unique_pos correct_id \
+        id_column correct_alleles allele_columns output_vcf
 """
 
 # Modules
@@ -28,14 +29,21 @@ def reverse_complement(seq):
         except:
             complement.append(n)
 
-    return "".join(complement)[::-1]
+    # Put multiple comma-separated alleles in the same order as before
+    complement = [x for x in "".join(complement).split(",")][::-1]
+
+    return ",".join(complement)[::-1]
 
 # Parse user input
 try:
     input_vcf = sys.argv[1]
     input_correspondence = sys.argv[2]
-    correct_vcf = sys.argv[3]
-    output_vcf = sys.argv[4]
+    unique_pos = sys.argv[3]
+    correct_id = sys.argv[4]
+    id_column = sys.argv[5]
+    correct_alleles = sys.argv[6]
+    allele_columns = sys.argv[7]
+    output_vcf = sys.argv[8]
 except:
     print(__doc__)
     sys.exit(1)
@@ -74,23 +82,28 @@ with myopen(input_vcf, "rt") as infile:
             l[0] = new_chrom
             l[1] = new_pos
 
-            # TODO Reverse complement alleles
-            if reverse:
-                l[3] = reverse_complement(l[3])
-                l[4] = reverse_complement(l[4])
+            # Reverse complement alleles
+            if correct_alleles and int(reverse):
+                for column in [int(x)-1 for x in allele_columns.strip().split(",")]:
+                    l[column] = reverse_complement(l[column])
 
             new_vcf.append(
                     ((l[0], int(l[1])), l)
                     )
 
+        # Correct VCF
         viewed_positions = set()
 
+        # Sort positions
         for l in sorted(new_vcf):
             new_line = l[1]
 
-            if correct_vcf:
-                new_line[2] = ":".join(new_line[:2])
+            # Correct locus IDs
+            if correct_id:
+                new_line[int(id_column)-1] = ":".join(new_line[:2])
 
+            # Skip already treated positions
+            if unique_pos:
                 if new_line[2] in viewed_positions:
                     continue
 

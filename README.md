@@ -1,4 +1,4 @@
-# SNPLift v0.6.0
+# SNPLift v0.6.1
 
 ## Lift over SNP positions to match a new reference genome.
 
@@ -10,7 +10,7 @@ and then call and filter the loci.
 
 In the process, a proportion of the loci are inevitably lost. However, the
 transferred proportion is very high for genomes with low duplication content and
-when both genome versions are similar. Our test run on real data gives a 99.82%
+when both genome versions are similar. Our test run on real data gives a 99.83%
 transfers rate.
 
 **NOTE**: Although SNPLift was designed primarily for VCFs containing SNP data,

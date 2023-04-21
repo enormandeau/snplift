@@ -19,11 +19,6 @@ export SKIP_VISUALIZATION=1 # Avoid creating a plot to explore features. These a
 export CHECK_COLLINEARITY=0 # Increases runtime by 5+ times. Align genomes and produce a
                             #   collinearity comparison figure [0, 1].
 
-# Do final corrections to VCF file
-export CORRECT_VCF=1        # If output file is a VCF, recompute ID column 3 from columns 1 and 2,
-                            # reverse complement alleles of loci that map in reverse in the new
-                            # genome, and permit only one locus per position.
-
 # Parameters
 export NCPUS=10             # Number of cores to use (around 10 and maximum 20 is recommended)
                             #   For less than 100K SNPs, 1 to 4 cores is a good choice
@@ -36,3 +31,10 @@ export WINDOW_LENGTH=300    # Sequence size kept on both sides of each SNP. For 
 
 export NUM_NEIGHBOURS=20    # Number of neighbour SNPs to consider when trying to salvage
                             #   more dubious SNPs using local correlations of positions
+
+# Do final corrections to VCF file. You may need
+export UNIQUE_POS=1         # Keep only the first locus encountered for each position
+export CORRECT_ID=1         # Recompute the ID column from columns 1 and 2
+export ID_COLUMN=3          # ID column number
+export CORRECT_ALLELES=1    # Reverse complement alleles when new genome region is inversed
+export ALLELE_COLUMNS=4,5   # Columns of alleles to reverse complement

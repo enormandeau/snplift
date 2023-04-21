@@ -125,7 +125,7 @@ cat "$LIFTOVER_FOLDER"/positions.*.corr | grep -v "^Score" >> transfered_positio
 
 ## Update coordinates
 echo -e "\nSNPLift: Writing output file with updated coordinates"
-./01_scripts/08_replace_coordinates_in_vcf.py "$INPUT_FILE" transfered_positions.tsv "$CORRECT_VCF" "$OUTPUT_FILE"
+./01_scripts/08_replace_coordinates_in_vcf.py "$INPUT_FILE" transfered_positions.tsv "$UNIQUE_POS" "$CORRECT_ID" "$ID_COLUMN" "$CORRECT_ALLELES" "$ALLELE_COLUMNS" "$OUTPUT_FILE"
 
 ## Report number of SNPs for each step
 echo -e "\nSNPLift: Number of SNPs treated at each step\n"
