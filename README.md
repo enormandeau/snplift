@@ -38,8 +38,8 @@ If you use SNPLift, please cite the following paper:
 ## Benchmark
 
 When transferring millions of positions, once the genome is indexed, SNPLift
-will typically transfer between 1 and 2 million positions per minute. For
-example, 50M *Zea mays* SNPs were transferred in 30m20s. For datasets with less
+will typically transfer between 0.5 and 1 million positions per minute. For
+example, 50M *Zea mays* SNPs were transferred in 53m06s. For datasets with less
 than 1M positions, using 1 to 10 CPUs is recommended. Above that, run time will
 decrease up to 40 CPUs, but the overall efficiency is also reduced. Overall,
 using 10 CPUs is always a good choice and values above 20 CPUs will be quite
