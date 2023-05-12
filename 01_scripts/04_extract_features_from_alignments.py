@@ -65,13 +65,13 @@ with open(output_file, "wt") as outfile:
             sequence = l[9]
             complexity = round(len(gzip.compress("".join(sequence[:]).encode())) / len(sequence), 3)
 
-            # Correct position at start of contig
-            if query_pos <= window_length:
-                target_offset = (len(sequence) // 2) - query_pos
-            else:
-                target_offset = len(sequence) // 2
+            ## Correct position at start of contig
+            #if query_pos <= window_length:
+            #    target_offset = (len(sequence) // 2) - query_pos
+            #else:
+            #    target_offset = len(sequence) // 2
 
-            target_pos += target_offset
+            target_pos += window_length
 
             num_Ns = sequence.count("N")
             num_diff = int(l[11].split(":")[2])
