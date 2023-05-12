@@ -2,30 +2,31 @@
 
 ## Lift over SNP positions to match a new reference genome.
 
-SNPLift takes a tab-delimited file, for example a VCF file, with locus
-positions from a given genome and lifts over these positions so they match a
-new reference genome. The goal of the procedure is to rapidly leverage the
-availability of a new genome without having to re-align all the sample reads
-and then call and filter the loci.
+SNPLift takes a tab-delimited file, for example a VCF, with locus positions
+from a given genome and lifts over these positions so they match a new
+reference genome. The goal is to rapidly leverage the availability of new
+genomes without having to re-align all the sample reads and then call and
+filter the loci again.
 
-In the process, a proportion of the loci are inevitably lost. However, the
-transferred proportion is very high for genomes with low duplication content and
-when both genome versions are similar. Our test run on real data gives a 99.87%
-transfers rate.
+In the process, a small proportion of the loci are inevitably lost. However,
+the transferred proportion is very high for genomes with low duplication
+content and when both genome versions are fairly similar. For example, our test
+run on real data gives a 99.87% transfers rate.
 
 **NOTE**: Although SNPLift was designed primarily for VCFs containing SNP data,
 any input file in which the two first columns contain chromosome names and
 positions can be used. Lines beginning with a hash sign (`#`) are simply
 transferred to the output file without modification and any column beyond the
-first two are also left unchanged. As such, SNPLift will work with any marker
-type or even bed file, as long as the two first columns contain chromosome and
-position information and that there are other columns with informations to
-transfer.
+first two are also left unchanged (there is an option to update SNP IDs in the
+config file). As such, SNPLift will work with any marker type or even bed
+files, as long as the two first columns contain chromosome and position
+information and that there are other columns with informations to transfer.
 
 **WARNING**: In regions that differ between the two assemblies, a small
-proportion of SNPs will end up with an approximate position. Ultimately, the
-only way to guaranty that all the positions on the new genome are correct is to
-re-align the reads and call the genotypes again.
+proportion of SNPs will end up with an approximate position. Although, great
+care is taken in SNPLift to report accurate positions, ultimately the only way
+to guaranty that all the positions on the new genome are correct is to re-align
+the reads and call the genotypes again.
 
 See licence information at the end of this file.
 
@@ -33,7 +34,7 @@ See licence information at the end of this file.
 
 If you use SNPLift, please cite the following paper:
 
-*TODO* Add bioRxiv link and update to v1.0.0
+(*TODO* Add bioRxiv link and update to v1.0.0)
 
 ## Benchmark
 

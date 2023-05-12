@@ -131,8 +131,8 @@ echo -e "\nSNPLift: Writing output file with updated coordinates"
 echo -e "\nSNPLift: Number of SNPs treated at each step\n"
 echo -e $(cat "$LIFTOVER_FOLDER"/positions.*.ids | ./01_scripts/util/count_unique_lines.py)"\tPositions"
 #echo -e $(cat "$LIFTOVER_FOLDER"/positions.*.sam | grep -v "^@" | cut -f 1 | ./01_scripts/util/count_unique_lines.py)"\tAlignments"
-echo -e $(cat "$LIFTOVER_FOLDER"/positions.*.features | grep -v "^@" | cut -f 1 | ./01_scripts/util/count_unique_lines.py)"\tFeatures"
-echo -e $(cat "$LIFTOVER_FOLDER"/positions.*.scores | ./01_scripts/util/count_unique_lines.py)"\tScores"
+#echo -e $(cat "$LIFTOVER_FOLDER"/positions.*.features | grep -v "^@" | cut -f 1 | ./01_scripts/util/count_unique_lines.py)"\tFeatures"
+echo -e $(cat "$LIFTOVER_FOLDER"/positions.*.scores | grep -v "^Score" | ./01_scripts/util/count_unique_lines.py)"\tScores"
 echo -e $(cat "$LIFTOVER_FOLDER"/positions.*.corr | ./01_scripts/util/count_unique_lines.py)"\tTransferable"
 
 ## Report percentage of transfered SNPs

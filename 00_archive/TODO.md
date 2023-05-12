@@ -9,6 +9,11 @@
     - Use only center portion around SNP and find best position
       - Alternatively, do this for on the left then on the right of the SNP
 
+## Polishing step?
+- Trying to remove implosible positions
+  - Expectation of medium/large-scale synteny
+  - Sudden jumps in positions are suspicious
+
 ## Validation script (Crash explicitly)
 - Input files can be found
 - Dependencies are met
