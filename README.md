@@ -11,7 +11,7 @@ filter the loci again.
 In the process, a small proportion of the loci are inevitably lost. However,
 the transferred proportion is very high for genomes with low duplication
 content and when both genome versions are fairly similar. For example, our test
-run on real data gives a 99.87% transfers rate.
+run on real data gives a 99.63% transfers rate.
 
 **NOTE**: Although SNPLift was designed primarily for VCFs containing SNP data,
 any input file in which the two first columns contain chromosome names and
@@ -22,10 +22,9 @@ config file). As such, SNPLift will work with any marker type or even bed
 files, as long as the two first columns contain chromosome and position
 information and that there are other columns with informations to transfer.
 
-**WARNING**: In regions that differ between the two assemblies, a small
-proportion of SNPs will end up with an approximate position. Although, great
-care is taken in SNPLift to report accurate positions, ultimately the only way
-to guaranty that all the positions on the new genome are correct is to re-align
+**WARNING**: In regions that differ between the two assemblies, a proportion of
+SNPs will end up with an approximate position. Ultimately the only way to
+guaranty that all the positions on the new genome are correct is to re-align
 the reads and call the genotypes again.
 
 See licence information at the end of this file.
@@ -43,8 +42,8 @@ will typically transfer between 0.5 and 1 million positions per minute. For
 example, 50M *Zea mays* SNPs were transferred in 53m06s. For datasets with less
 than 1M positions, using 1 to 10 CPUs is recommended. Above that, run time will
 decrease up to 40 CPUs, but the overall efficiency is also reduced. Overall,
-using 10 CPUs is always a good choice and values above 20 CPUs will be quite
-wasteful, even on large datasets. See article in the **Citation** section
+using 10 CPUs is always a good choice and values above 20 CPUs will be more
+wasteful of ressources, even on large datasets. See article in the **Citation** section
 above for more benchmark details.
 
 ## Installation
@@ -106,12 +105,12 @@ You can run the full SNPLift test with:
 
 ## Overview of SNPLift steps
 
-During the analyses, the following steps are performed:
+During the analyses, the following steps are performed in this order:
 
-- *Optional*: Visualize collinearity of the two genomes
+- *Optional*: Visualize collinearity of the two genomes (slow, using minimap)
 - Index new genome (can be skipped if already indexed)
 - Get original coordinates
-- Extract flanking sequences around SNPs from the old genome (100bp on each side)
+- Extract flanking sequences around SNPs from the old genome
 - Map reads with bwa to new genome
 - Extract features from alignments
 - *Optional* (for debugging purposed): Visualize alignment features
@@ -120,17 +119,16 @@ During the analyses, the following steps are performed:
 - Update coordinates
 - Update input file (eg: VCF)
 
-When using multiple CPUs, some of these steps are run on parallel on portions
-of the dataset.
+When using multiple CPUs, some of these steps are run on parallel.
 
 ## Running
 
 Once SNPLift is installed and the dependencies are met, you need to do the
 following:
 
-1. Prepare your input files input files
+1. Prepare your input files
 1. Modify the config file
-1. Launch SNPLift:
+1. Launch SNPLift with:
 
 ```
 time ./snplift 02_infos/snplift_config.sh
@@ -142,11 +140,6 @@ The output of SNPLift is a file (eg: VCF) in which the positions for which a
 good alignment was found are transferred to the coordinates of a new reference
 genome.
 
-Optionaly, if `CORRECT_VCF` is set to `1`, column 3 of the VCF containing locus
-IDs will be recomputed from columns 1 and 2, alleles for loci that map in
-the reverse orientation in the new genome will be reverse complemented, and
-only one locus will be retain if multiple loci map in the same position.
-
 Optionally, if `CHECK_COLLINEARITY` is set to `1`, a collinearity figure in
 .eps and .pdf formats is produced.
 
@@ -154,18 +147,20 @@ Optionally, if `SKIP_VISUALIZATION` is set to `0`, a figure showing some of the
 features used for filtering the alignments is produced. This is used mainly for
 debugging purposes.
 
+Some additinal parameter in the config file permit to do final corrections to
+VCF files.
+
 ## Limitations
+
 SNPLift works well when the two genome versions are more similar differences.
 As the differences between the orthologous sequences increase, the proportion
 of SNPs that can be transferred will go down. Whole or partial genome
 duplication will also have an impact on the capacity to transfer SNPs between
 assemblies.
 
-For SNPs with position within 100bp of scaffold ends (or the value of
+For SNPs with position within 300bp of scaffold ends (or the value of
 WINDOW_LENGTH in the configuration file), the reported position in the new file
-(eg: VCF) will be slightly off.  Measures are taken to correct for this at the
-beginning of the scaffolds and for alignments with some soft clipping but SNPs
-at the end of scaffolds may be off by up to WINDOW_LENGTH nucleotides.
+(eg: VCF) will be slightly off.
 
 ## License
 
