@@ -41,3 +41,5 @@ export CORRECT_ID=1         # Recompute the ID column from columns 1 and 2 [0, 1
 export ID_COLUMN=3          # ID column number [int]. Only used for `CORRECT_ID=1`.
 export CORRECT_ALLELES=1    # Reverse complement alleles when new genome region is inversed [0, 1].
 export ALLELE_COLUMNS=4,5   # Columns of alleles to reverse complement. Only used for `CORRECT_ALLELES=1`
+export SORT_OUTPUT=1        # Sort VCF or output file according to the two first columns
+                            #   WARNING: For big VCFs, this will require a lot of RAM

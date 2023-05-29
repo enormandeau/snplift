@@ -3,7 +3,7 @@
 
 Usage:
     <program> input_vcf input_correspondence unique_pos correct_id \
-        id_column correct_alleles allele_columns output_vcf
+        id_column correct_alleles allele_columns sort_output output_vcf
 """
 
 # Modules
@@ -43,7 +43,8 @@ try:
     id_column = sys.argv[5]
     correct_alleles = sys.argv[6]
     allele_columns = sys.argv[7]
-    output_vcf = sys.argv[8]
+    sort_output = sys.argv[8]
+    output_vcf = sys.argv[9]
 except:
     print(__doc__)
     sys.exit(1)
@@ -62,6 +63,7 @@ with open(input_correspondence, "rt") as infile:
 
 # Change VCF
 new_vcf = []
+viewed_positions = set()
 
 with myopen(input_vcf, "rt") as infile:
     with myopen(output_vcf, "wt") as outfile:
@@ -87,27 +89,28 @@ with myopen(input_vcf, "rt") as infile:
                 for column in [int(x)-1 for x in allele_columns.strip().split(",")]:
                     l[column] = reverse_complement(l[column])
 
-            new_vcf.append(
-                    ((l[0], int(l[1])), l)
-                    )
-
-        # Correct VCF
-        viewed_positions = set()
-
-        # Sort positions
-        for l in sorted(new_vcf):
-            new_line = l[1]
-
             # Correct locus IDs
             if correct_id:
-                new_line[int(id_column)-1] = ":".join(new_line[:2])
+                l[int(id_column)-1] = ":".join(l[:2])
 
             # Skip already treated positions
             if unique_pos:
-                if new_line[2] in viewed_positions:
+                if l[2] in viewed_positions:
                     continue
 
                 else:
-                    viewed_positions.add(new_line[2])
+                    viewed_positions.add(l[2])
 
-            outfile.write("\t".join(new_line) + "\n")
+            # Sorting
+            if sort_output:
+                new_vcf.append(
+                        ((l[0], int(l[1])), l)
+                        )
+            else:
+                outfile.write("\t".join(l) + "\n")
+
+        # Sort positions
+        if sort_output:
+            for l in sorted(new_vcf):
+                new_line = l[1]
+                outfile.write("\t".join(new_line) + "\n")
