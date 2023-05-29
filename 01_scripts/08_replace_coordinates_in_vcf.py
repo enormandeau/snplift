@@ -39,11 +39,11 @@ try:
     input_vcf = sys.argv[1]
     input_correspondence = sys.argv[2]
     unique_pos = sys.argv[3]
-    correct_id = sys.argv[4]
+    correct_id = int(sys.argv[4])
     id_column = sys.argv[5]
-    correct_alleles = sys.argv[6]
+    correct_alleles = int(sys.argv[6])
     allele_columns = sys.argv[7]
-    sort_output = sys.argv[8]
+    sort_output = int(sys.argv[8])
     output_vcf = sys.argv[9]
 except:
     print(__doc__)
@@ -95,11 +95,11 @@ with myopen(input_vcf, "rt") as infile:
 
             # Skip already treated positions
             if unique_pos:
-                if l[2] in viewed_positions:
+                if (l[0], l[1]) in viewed_positions:
                     continue
 
                 else:
-                    viewed_positions.add(l[2])
+                    viewed_positions.add((l[0], l[1]))
 
             # Sorting
             if sort_output:

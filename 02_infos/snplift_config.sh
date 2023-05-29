@@ -21,7 +21,7 @@ export SKIP_VISUALIZATION=1 # Avoid creating a plot to explore features. These a
                             #   for debugging [0, 1].
 
 # Number of CPUs
-export NCPUS=10             # Number of cores to use (around 10 and maximum 20 is recommended)
+export NCPUS=20             # Number of cores to use (around 10 and maximum 20 is recommended)
                             #   For less than 100K SNPs, 1 to 4 cores is a good choice.
                             #   For less than 1M SNPs, 10 cores is a good choice.
                             #   Above this, 20 cores is going to be slightly faster.
@@ -33,13 +33,16 @@ export WINDOW_LENGTH=300    # Sise of sequences kept on both sides of each SNP. 
 
 # Number of neighbours to use
 export NUM_NEIGHBOURS=20    # Number of neighbour SNPs to consider when trying to salvage
-                            #   more dubious SNPs using local correlations of positions
+                            #   more dubious SNPs using local correlations of positions.
 
 # Do final corrections to VCF file
-export UNIQUE_POS=1         # Keep only the first locus encountered for each position [0, 1].
 export CORRECT_ID=1         # Recompute the ID column from columns 1 and 2 [0, 1].
 export ID_COLUMN=3          # ID column number [int]. Only used for `CORRECT_ID=1`.
 export CORRECT_ALLELES=1    # Reverse complement alleles when new genome region is inversed [0, 1].
-export ALLELE_COLUMNS=4,5   # Columns of alleles to reverse complement. Only used for `CORRECT_ALLELES=1`
-export SORT_OUTPUT=1        # Sort VCF or output file according to the two first columns
-                            #   WARNING: For big VCFs, this will require a lot of RAM
+export ALLELE_COLUMNS=4,5   # Columns of alleles to reverse complement. Only used for `CORRECT_ALLELES=1`.
+
+# Memory hungry options
+export UNIQUE_POS=1         # Keep only the first locus encountered for each position [0, 1]. Memory hungry.
+export SORT_OUTPUT=1        # Sort VCF or output file according to the two first columns.
+                            #   WARNING: For big VCFs, this will require a lot of RAM, around 3X the size
+                            #   of the output file.
