@@ -21,7 +21,6 @@ epstopdf collinearity.eps
 echo
 echo "SNPLift: Millions of bases in collinear sections:"
 
-# TODO Add percentage in parentheses after the number
 sort -V "$FOLDER"/correspondence.paf |
     cut -f 3-4 |
     awk '{print $2-$1}' |
