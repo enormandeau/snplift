@@ -7,30 +7,11 @@
 - Scaffold name formats are OK in all input files
 - Bump to v1.0.0
 
-## Revise MS
-* Add references (give to Maxime)
-- Publish on bioRxiv
-- Submit to Bioinformatics - Application Notes
-
 # Future improvements
+- Use only center portion around SNP and find best marker position (sliding window)
+- Make faster by splitting after mapping?
+- In collinearity exploration, add percentage after num bases
+- Install deps from a `requirements.txt` file
 - Could we cheat the program by adding FAKE SNPs on each side of real ones to confirm
   more of those that get discarded? Once there, should we strive to build a one-to-one
   correspondence for all the positions?
-- Make faster by splitting after mapping?
-- In collinearity exploration, add percentage after num bases
-- Install deps in a conda environment `requirements.txt` file
-
-## Polishing step?
-- Trying to remove implosible positions
-  - Expectation of medium/large-scale synteny
-  - Sudden jumps in positions are suspicious
-
-## Position accuracy
-- Extract more accurate SNP positions
-  - At ends of chromosomes (put info in the sequence name?)
-    - Already have something for this? Only for chromosome starts?
-  - When there are Ns
-  - Other non-perfect matches
-    - Use only center portion around SNP and find best position
-      - Alternatively, do this for on the left then on the right of the SNP
-
