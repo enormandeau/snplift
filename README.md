@@ -22,10 +22,11 @@ config file). As such, SNPLift will work with any marker type or even bed
 files, as long as the two first columns contain chromosome and position
 information and that there are other columns with informations to transfer.
 
-**WARNING**: In regions that differ between the two assemblies, a proportion of
-SNPs will end up with an approximate position. Ultimately the only way to
-guaranty that all the positions on the new genome are correct is to re-align
-the reads and call the genotypes again.
+**WARNING**: For local regions that differ between the two assemblies, a small
+proportion of the SNPs (from 0.5 to 1% in our tests) will end up with an
+approximate position. Further work will be done to improve this, but ultimately
+the only way to guaranty that all the positions on the new genome are correct
+is to re-align the reads and call the genotypes again.
 
 See licence information at the end of this file.
 
