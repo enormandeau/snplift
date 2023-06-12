@@ -142,11 +142,11 @@ The output of SNPLift is a file (eg: VCF) in which the positions for which a
 good alignment was found are transferred to the coordinates of a new reference
 genome.
 
-Optionally, if `CHECK_COLLINEARITY` is set to `1`, a collinearity figure in
-.eps and .pdf formats is produced.
+Optionally, if `CHECK_COLLINEARITY` is set to `1`, a dot plot collinearity
+figure in .eps and .pdf formats is produced.
 
 Optionally, if `SKIP_VISUALIZATION` is set to `0`, a figure showing some of the
-features used for filtering the alignments is produced. This is used mainly for
+features used for filtering the alignments is produced. This is used for
 debugging purposes.
 
 Some additinal parameter in the config file permit to do final corrections to
@@ -156,13 +156,15 @@ VCF files.
 
 SNPLift works well when the two genome versions are more similar differences.
 As the differences between the orthologous sequences increase, the proportion
-of SNPs that can be transferred will go down. Whole or partial genome
-duplication will also have an impact on the capacity to transfer SNPs between
-assemblies.
+of SNPs that can be transferred decreases. Whole or partial genome duplication
+will also have an impact on the capacity to transfer SNPs between assemblies.
 
 For SNPs with position within 300bp of scaffold ends (or the value of
 WINDOW_LENGTH in the configuration file), the reported position in the new file
-(eg: VCF) will be slightly off.
+(eg: VCF) can be slightly off.
+
+In our tests, about 1% of the transfered positions were not exact (see
+reference in the Citation section).
 
 ## License
 
