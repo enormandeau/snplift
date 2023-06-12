@@ -1,4 +1,4 @@
-# SNPLift v0.6.2
+# SNPLift v1.0.0
 
 ## Lift over SNP positions to match a new reference genome.
 
@@ -34,18 +34,19 @@ See licence information at the end of this file.
 
 If you use SNPLift, please cite the following paper:
 
-(*TODO* Add bioRxiv link and update to v1.0.0)
+(not yet available)
 
 ## Benchmark
 
 When transferring millions of positions, once the genome is indexed, SNPLift
 will typically transfer between 0.5 and 1 million positions per minute. For
-example, 50M *Zea mays* SNPs were transferred in 53m06s. For datasets with less
-than 1M positions, using 1 to 10 CPUs is recommended. Above that, run time will
-decrease up to 40 CPUs, but the overall efficiency is also reduced. Overall,
-using 10 CPUs is always a good choice and values above 20 CPUs will be more
-wasteful of ressources, even on large datasets. See article in the **Citation** section
-above for more benchmark details.
+example, 50M *Zea mays* SNPs were transferred in 53m53s, or about 0.98 million
+SNPs transfered per minute. For datasets with less than 1M positions, using 1
+to 10 CPUs is recommended. Above that, run time will decrease up to 40 CPUs,
+but the overall efficiency is also reduced. Overall, using 10 CPUs is always a
+good choice and values above 20 CPUs will be more wasteful of ressources, even
+on large datasets. See article in the **Citation** section above for more
+benchmark details.
 
 ## Installation
 
