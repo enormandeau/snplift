@@ -36,6 +36,12 @@ If you use SNPLift, please cite the following paper:
 
 (not yet available)
 
+### Dryad data
+
+Normandeau, Eric (2023), SNP datasets and genomes used to benchmark the SNPLift
+program, Dryad, Dataset,
+(https://doi.org/10.5061/dryad.h9w0vt4nx)[https://doi.org/10.5061/dryad.h9w0vt4nx]
+
 ## Benchmark
 
 When transferring millions of positions, once the genome is indexed, SNPLift
