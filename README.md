@@ -40,7 +40,7 @@ If you use SNPLift, please cite the following paper:
 
 Normandeau, Eric (2023), SNP datasets and genomes used to benchmark the SNPLift
 program, Dryad, Dataset,
-(https://doi.org/10.5061/dryad.h9w0vt4nx)[https://doi.org/10.5061/dryad.h9w0vt4nx]
+[https://doi.org/10.5061/dryad.h9w0vt4nx](https://doi.org/10.5061/dryad.h9w0vt4nx)
 
 ## Benchmark
 
