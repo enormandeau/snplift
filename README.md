@@ -46,12 +46,9 @@ to 10 CPUs is recommended. Above that, run time will decrease up to 40 CPUs,
 but the overall efficiency is also reduced. Overall, using 10 CPUs is always a
 good choice and values above 20 CPUs will be more wasteful of ressources, even
 on large datasets. See article in the **Citation** section above for more
-benchmark details. See **Dryad data** section below for link to benchmark
-dataset.
+benchmark details.
 
-### Dryad data
-
-SNP datasets and genomes used to benchmark the SNPLift program:
+SNP datasets and genomes used to benchmark SNPLift program can be found on Dryad:
 [https://doi.org/10.5061/dryad.h9w0vt4nx](https://doi.org/10.5061/dryad.h9w0vt4nx)
 
 ## Installation
