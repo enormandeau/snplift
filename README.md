@@ -34,7 +34,7 @@ See licence information at the end of this file.
 
 If you use SNPLift, please cite the following paper:
 
-(not yet available)
+[https://www.biorxiv.org/content/10.1101/2023.06.13.544861v1](https://www.biorxiv.org/content/10.1101/2023.06.13.544861v1)
 
 ## Benchmark
 
