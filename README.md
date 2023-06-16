@@ -1,4 +1,4 @@
-# SNPLift v1.0.1
+# SNPLift v1.0.2
 
 ## Lift over SNP positions to match a new reference genome.
 
@@ -11,7 +11,7 @@ filter the loci again.
 In the process, a small proportion of the loci are inevitably lost. However,
 the transferred proportion is very high for genomes with low duplication
 content and when both genome versions are fairly similar. For example, our test
-run on real data gives a 99.63% transfers rate.
+run on real data gives a 99.87% transfers rate.
 
 **NOTE**: Although SNPLift was designed primarily for VCFs containing SNP data,
 any input file in which the two first columns contain chromosome names and
@@ -95,9 +95,8 @@ dataset. This will confirm that you have all the required dependencies.
 The test dataset consists in the first chromosome from two different genome
 assemblies from *Medicago truncatula* and a VCF with SNPs found in the first
 chromosome of the reference genome. The VCF contains the genotypes of 10
-samples for 190,443 SNPs. The test takes about 1m20s on 10 Xeon processors from
-2016. About 1m is used to index the old genome for alignment with bwa. The rest
-of the steps take about 18s.
+samples for 190,443 SNPs. The test, which includes downloading the data and
+indexing the genome, takes about 53s on 10 Xeon processors from 2016.
 
 You can run the full SNPLift test with:
 
