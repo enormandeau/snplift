@@ -1,4 +1,4 @@
-# SNPLift v1.0.0
+# SNPLift v1.0.1
 
 ## Lift over SNP positions to match a new reference genome.
 
@@ -71,16 +71,21 @@ facilitate installation, an effort has made to use only easy-to-install
 programs, as well as avoid non standard libraries for Python and R code.
 Only scipy is required for Python.
 
+### Required
+
 - SNPLift will only work on GNU Linux or OSX
 - python 3.5+ and scipy
 - R 3+ (ubuntu/mint: `sudo apt-get install r-base-core`)
 - bash 4+
 - [gnu parallel](https://www.gnu.org/software/parallel/)
-- git (to clone this repository and the test dataset)
 - bwa
 - samtools
-- minimap2 (optional, to visualize the collinearity of the two genomes)
-- miniasm (optional, using minidot to visualize the collinearity of the two genomes)
+
+### Optional
+
+- git (to clone this repository and the test dataset)
+- minimap2 (to visualize the collinearity of the two genomes)
+- miniasm (using minidot to visualize the collinearity of the two genomes)
 
 ## Running on test dataset
 

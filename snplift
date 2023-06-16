@@ -3,18 +3,39 @@
 
 # Global variables
 CONFIG=$1
-NCPUS_CLI=$2
+NCPUS_CLI=$2 # Way to override NCPUS from config file for benchmark purpose
 
 LOG_FOLDER="99_logfiles"
 LIFTOVER_FOLDER="06_liftover"
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
-
 CONFIG_FILENAME=$(basename "$CONFIG")
 
-cp "$CONFIG" "$LOG_FOLDER"/"$TIMESTAMP"_"$CONFIG_FILENAME"
+# Printing version and name
+echo -e "\n$(head -1 README.md | cut -c 3-)"
+echo -e "\nSNPLift: Using $NCPUS CPUs"
+echo "Start: $(date +%Y%m%d_%H%M%S)"
 
 # Source config file
+echo -e "\nSNPLift: Validating input files and dependencies"
+if ! [ -e "$CONFIG" ]
+then
+    echo -e "\n"SNPLift ERROR: Config file \("$CONFIG"\) not found
+    exit 1
+
+else
+    echo "- Config file found"
+fi
+
 source "$CONFIG"
+
+# Validate input files and dependencies
+if ! ./01_scripts/00_validate_project.sh "$CONFIG"
+then
+    exit 1
+fi
+
+# Create log file and copy of used config file
+cp "$CONFIG" "$LOG_FOLDER"/"$TIMESTAMP"_"$CONFIG_FILENAME"
 
 # Check if we override NCPUS
 if [[ -n "$NCPUS_CLI" ]]
@@ -24,11 +45,6 @@ fi
 
 # Log all output
 exec > >(tee "$LOG_FOLDER"/"$TIMESTAMP"_SNPlift.log) 2>&1
-
-# Printing version and name
-echo -e "\n$(head -1 README.md | cut -c 3-)"
-echo -e "\nSNPLift: Using $NCPUS CPUs"
-echo "Start: $(date +%Y%m%d_%H%M%S)"
 
 # Check collinearity
 if [ "$CHECK_COLLINEARITY" == "0" ]

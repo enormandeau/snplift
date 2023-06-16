@@ -24,5 +24,7 @@
 06_liftover/*
 99_logfiles/*
 collinearity.*
+seq_names_old_genome.txt
+seq_names_input.txt
 snplift_test_dataset
 transfered_positions*
