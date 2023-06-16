@@ -88,6 +88,8 @@ Only scipy is required for Python.
 - miniasm (using minidot to visualize the collinearity of the two genomes)
 
 ## Running on test dataset
+**NOTE:** `git` is required for the test run since it is used to get the test
+data.
 
 Before trying SNPLift on your data, we suggest running it on the prepared test
 dataset. This will confirm that you have all the required dependencies.
