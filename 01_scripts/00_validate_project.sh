@@ -112,7 +112,7 @@ case $? in
 esac
 
 # validate scipy is available
-command python -c "import scipy" >/dev/null 2>&1 ||
+command python3 -c "import scipy" >/dev/null 2>&1 ||
     {
         echo -e "\nSNPLift ERROR: scipy (Python module) is not installed"
         echo
