@@ -1,4 +1,4 @@
-# SNPLift v1.0.3
+# SNPLift v1.0.4
 
 ## Lift over SNP positions to match a new reference genome.
 
