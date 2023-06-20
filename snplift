@@ -12,7 +12,6 @@ CONFIG_FILENAME=$(basename "$CONFIG")
 
 # Printing version and name
 echo -e "\n$(head -1 README.md | cut -c 3-)"
-echo -e "\nSNPLift: Using $NCPUS CPUs"
 echo "Start: $(date +%Y%m%d_%H%M%S)"
 
 # Source config file
@@ -33,6 +32,7 @@ if ! ./01_scripts/00_validate_project.sh "$CONFIG"
 then
     exit 1
 fi
+echo -e "\nSNPLift: Using $NCPUS CPUs"
 
 # Create log file and copy of used config file
 cp "$CONFIG" "$LOG_FOLDER"/"$TIMESTAMP"_"$CONFIG_FILENAME"
