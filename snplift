@@ -16,7 +16,7 @@ echo -e "\nSNPLift: Using $NCPUS CPUs"
 echo "Start: $(date +%Y%m%d_%H%M%S)"
 
 # Source config file
-echo -e "\nSNPLift: Validating input files and dependencies"
+echo -e "\nSNPLift: Validating input files and dependencies\n"
 if ! [ -e "$CONFIG" ]
 then
     echo -e "\n"SNPLift ERROR: Config file \("$CONFIG"\) not found
