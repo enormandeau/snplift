@@ -85,6 +85,7 @@ Only scipy is required for Python.
 
 - git (to clone this repository and the test dataset)
 - minimap2 (to visualize the collinearity of the two genomes)
+- epstopdf (to visualize the collinearity of the two genomes)
 - miniasm (using minidot to visualize the collinearity of the two genomes)
 
 ## Running on test dataset
