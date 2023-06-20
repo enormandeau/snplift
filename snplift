@@ -153,7 +153,7 @@ echo -e $(cat "$LIFTOVER_FOLDER"/positions.*.corr | ./01_scripts/util/count_uniq
 
 ## Report percentage of transfered SNPs
 echo
-echo "SNPLift: Percentage of transferred SNPs:"
+echo -e "SNPLift: Percentage of transferred SNPs:\n"
 echo $(echo '100 *' $(cat "$LIFTOVER_FOLDER"/positions.*.corr | ./01_scripts/util/count_unique_lines.py) / $(cat "$LIFTOVER_FOLDER"/positions.*.ids | ./01_scripts/util/count_unique_lines.py) | bc -ql | cut -c -7)"%"
 
 echo -e "\nSNPLift: Run completed\n"
