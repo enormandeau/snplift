@@ -26,7 +26,10 @@ information and that there are other columns with informations to transfer.
 proportion of the SNPs (from 0.5 to 1% in our tests) will end up with an
 approximate position. Further work will be done to improve this, but ultimately
 the only way to guaranty that all the positions on the new genome are correct
-is to re-align the reads and call the genotypes again.
+is to re-align the reads and call the genotypes again. Note that positions
+within one window length of the end of contigs will also get an erroneous
+new position. As such, transfering positions to a lot of small contigs could
+lead to a high proportion of errors in positions on the new reference.
 
 See licence information at the end of this file.
 
