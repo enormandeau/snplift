@@ -38,7 +38,7 @@ export NUM_NEIGHBOURS=20    # Number of neighbour SNPs to consider when trying t
 # Do final corrections to VCF file
 export CORRECT_ID=1         # Recompute the ID column from columns 1 and 2 [0, 1].
 export ID_COLUMN=3          # ID column number [int]. Only used for `CORRECT_ID=1`.
-export CORRECT_ALLELES=1    # Reverse complement alleles when new genome region is inversed [0, 1].
+export CORRECT_ALLELES=1    # Reverse complement alleles when new genome region is inverted [0, 1].
 export ALLELE_COLUMNS=4,5   # Columns of alleles to reverse complement. Only used for `CORRECT_ALLELES=1`.
 
 # Memory hungry options
