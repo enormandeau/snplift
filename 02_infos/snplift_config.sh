@@ -5,8 +5,8 @@ export OLD_GENOME="03_genomes/old_genome.fasta"
 export NEW_GENOME="03_genomes/new_genome.fasta"
 
 # Output files
-export INPUT_FILE="04_input_vcf/outliers_pcadapt_Chr13_window.txt"
-export OUTPUT_FILE="outliers_pcadapt_Chr13_window_transfered_positions.txt"
+export INPUT_FILE="old.vcf"
+export OUTPUT_FILE="new.vcf"
 
 # Skipping genome indexing
 export SKIP_INDEXING=1      # Use 0 if genome is not indexed. Use 1 to save time if genome already
