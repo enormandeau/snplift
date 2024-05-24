@@ -149,12 +149,12 @@ echo -e $(cat "$LIFTOVER_FOLDER"/positions.*.ids | ./01_scripts/util/count_uniqu
 #echo -e $(cat "$LIFTOVER_FOLDER"/positions.*.sam | grep -v "^@" | cut -f 1 | ./01_scripts/util/count_unique_lines.py)"\tAlignments"
 #echo -e $(cat "$LIFTOVER_FOLDER"/positions.*.features | grep -v "^@" | cut -f 1 | ./01_scripts/util/count_unique_lines.py)"\tFeatures"
 echo -e $(cat "$LIFTOVER_FOLDER"/positions.*.scores | grep -v "^Score" | ./01_scripts/util/count_unique_lines.py)"\tScores"
-echo -e $(cat "$LIFTOVER_FOLDER"/positions.*.corr | ./01_scripts/util/count_unique_lines.py)"\tTransferable"
+echo -e $(echo $(cat "$LIFTOVER_FOLDER"/positions.*.corr | ./01_scripts/util/count_unique_lines.py) '-1' | bc -ql)"\tTransferable"
 
 ## Report percentage of transfered SNPs
 echo
 echo -e "SNPLift: Percentage of transferred SNPs:\n"
-echo $(echo '100 *' $(cat "$LIFTOVER_FOLDER"/positions.*.corr | ./01_scripts/util/count_unique_lines.py) / $(cat "$LIFTOVER_FOLDER"/positions.*.ids | ./01_scripts/util/count_unique_lines.py) | bc -ql | cut -c -7)"%"
+echo $(echo '100 * (' $(cat "$LIFTOVER_FOLDER"/positions.*.corr | ./01_scripts/util/count_unique_lines.py) '-1)' / $(cat "$LIFTOVER_FOLDER"/positions.*.ids | ./01_scripts/util/count_unique_lines.py) | bc -ql | cut -c -7)"%"
 
 echo -e "\nSNPLift: Run completed\n"
 echo "End: $(date +%Y%m%d_%H%M%S)"
