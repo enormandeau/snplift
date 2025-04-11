@@ -96,6 +96,8 @@ parallel -j "$NCPUS" ./01_scripts/02_fasta_extract_flanking_regions.py "$OLD_GEN
 
 if [[ $? -ne 0 ]]
 then
+    echo
+    echo "ERROR: Could not extract some SNP regions"
     sleep 0.2
     exit
 fi
@@ -104,6 +106,14 @@ fi
 echo -e "\nSNPLift: Mapping flanking sequences on new genome\n"
 parallel -j 1 ./01_scripts/03_map_reads.sh "$NEW_GENOME" {} "$NCPUS" \> {.}.sam ::: \
     "$LIFTOVER_FOLDER"/positions.*.fasta
+
+if [[ $? -ne 0 ]]
+then
+    echo
+    echo "ERROR: Could not map reads. Was the genome indexed?"
+    sleep 0.2
+    exit
+fi
 
 ## Extract features from alignments
 echo -e "\nSNPLift: Extract features from alignments"
