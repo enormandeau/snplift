@@ -94,6 +94,12 @@ parallel -j "$NCPUS" ./01_scripts/02_fasta_extract_flanking_regions.py "$OLD_GEN
     "$WINDOW_LENGTH" {.}.fasta ::: \
     "$LIFTOVER_FOLDER"/positions.*.ids
 
+if [[ $? -ne 0 ]]
+then
+    sleep 0.2
+    exit
+fi
+
 ## Map reads with bwa (keep best hit)
 echo -e "\nSNPLift: Mapping flanking sequences on new genome\n"
 parallel -j 1 ./01_scripts/03_map_reads.sh "$NEW_GENOME" {} "$NCPUS" \> {.}.sam ::: \

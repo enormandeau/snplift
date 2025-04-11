@@ -89,6 +89,7 @@ with open(wanted_file) as wfile:
 
 # Extract regions
 sequences = fasta_iterator(input_genome)
+ERROR = False
 
 with open(output_fasta, "w") as outfile:
     for scaffold in sequences:
@@ -99,7 +100,11 @@ with open(output_fasta, "w") as outfile:
 
             for position in wanted_regions[scaffold_id]:
                 pos = int(position)
-                assert pos <= len(seq), "Error: SNP outside the scaffold"
+
+                if not pos <= len(seq):
+                    print(f"ERROR: SNP outside sequence: {scaffold_id} {pos} / {len(seq)} --> Wrong reference genome?")
+                    ERROR=True
+                    continue
 
                 left = pos - flanking_size - 1
                 right = pos + flanking_size
@@ -117,3 +122,5 @@ with open(output_fasta, "w") as outfile:
                         seq[left: right].upper())
 
                 region.write_to_file(outfile)
+    if ERROR:
+        sys.exit(1)
