@@ -21,7 +21,7 @@ export SKIP_VISUALIZATION=1 # Avoid creating a plot to explore features. These a
                             #   for debugging [0, 1].
 
 # Number of CPUs
-export NCPUS=1             # Number of cores to use (around 10 and maximum 20 is recommended)
+export NCPUS=1              # Number of cores to use (around 10 and maximum 20 is recommended)
                             #   For less than 100K SNPs, 1 to 4 cores is a good choice.
                             #   For less than 1M SNPs, 10 cores is a good choice.
                             #   Above this, 20 cores is going to be slightly faster.
