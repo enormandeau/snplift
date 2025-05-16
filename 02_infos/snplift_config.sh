@@ -5,7 +5,7 @@ export OLD_GENOME="03_genomes/old_genome.fasta"
 export NEW_GENOME="03_genomes/new_genome.fasta"
 
 # Output files
-export INPUT_FILE="old.vcf"
+export INPUT_FILE="04_input_vcf/old.vcf"
 export OUTPUT_FILE="new.vcf"
 
 # Skipping genome indexing
