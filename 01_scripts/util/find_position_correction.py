@@ -17,7 +17,7 @@ class Fasta(object):
     """
 
     def __init__(self, name, sequence):
-        self.name = name
+        self.name = name.split(" ")[0]
         self.sequence = sequence
 
     def write_to_file(self, handle):
@@ -64,8 +64,6 @@ def get_correction(cigar):
     """Given a cigar string, return the position correction for this alignment
     for the central nucleotide position
     """
-    #print()
-    #print(cigar)
     insertion_length = 0
     deletion_length = 0
 
@@ -81,8 +79,6 @@ def get_correction(cigar):
             deletion_length += l
         elif k == "I":
             insertion_length += l
-
-        #print(c, length_so_far, insertion_length, deletion_length)
 
         if length_so_far > half_length:
             break
@@ -115,9 +111,7 @@ with open(corr_file, "rt") as infile:
 
         corr[chrom1][pos1] = [chrom2, pos2, cigar]
 
-#for chrom in corr:
-#    for pos in corr[chrom]:
-#        print(chrom, pos, corr[chrom][pos])
+print("Done with corr file")
 
 # Read vcf_file
 vcf = defaultdict(lambda: defaultdict(list))
@@ -134,12 +128,11 @@ with open(vcf_file, "rt") as infile:
 
         vcf[chrom][pos] = alleles
 
-#for chrom in vcf:
-#    for pos in vcf[chrom]:
-#        print(chrom, pos, vcf[chrom][pos])
+print("Done with VCF file")
 
 # Load genome_file in memory
 sequences = {x.name: x.sequence for x in fasta_iterator(genome_file)}
+print("Done with genome file")
 
 # Explore position correction
 for chrom1 in corr:
@@ -151,8 +144,7 @@ for chrom1 in corr:
         if len(a[0]) == len(a[1]) and len(a[0]) == 1:
             alleles = vcf[chrom2][pos2]
 
-            if cigar != "201M":
-                correction = get_correction(cigar)
-                nuc = sequences[chrom2][pos2-1+correction]
-                region = sequences[chrom2][(pos2-1+correction-20):(pos2-1+correction+20)]
-                print(chrom1, pos1, chrom2, pos2, cigar, alleles, nuc, nuc in alleles, region)
+            correction = get_correction(cigar)
+            nuc = sequences[chrom2][pos2-1+correction].upper()
+            region = sequences[chrom2][(pos2-1+correction-20):(pos2-1+correction+20)].upper()
+            print(chrom1, pos1, chrom2, pos2, cigar, alleles, nuc, nuc in alleles, region)
