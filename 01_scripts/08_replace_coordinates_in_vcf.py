@@ -59,7 +59,7 @@ with open(input_correspondence, "rt") as infile:
             continue
 
         l = line.strip().split()
-        corr[l[2]][l[4]] = (l[5], l[6], l[-1])
+        corr[l[2]][l[4]] = (l[5], l[6], l[7])
 
 # Change VCF
 new_vcf = []
