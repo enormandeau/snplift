@@ -7,6 +7,7 @@ Usage:
 
 # Modules
 from collections import defaultdict
+from re import findall
 import string
 import gzip
 import sys
@@ -26,6 +27,31 @@ def parse_cigar_string(cigar):
             counts[c] += num
     
     return (counts["D"], counts["H"], counts["I"], counts["M"], counts["S"])
+
+def get_correction(cigar):
+    """Given a cigar string, return the position correction for this alignment
+    for the central nucleotide position
+    """
+    insertion_length = 0
+    deletion_length = 0
+
+    chunks = findall('[0-9]+[A-Z]', cigar)
+    total_length = sum([int(x[:-1]) for x in chunks if x[-1] != "D"])
+    half_length = (total_length - 1) / 2
+    length_so_far = 0
+
+    for c in chunks:
+        l, k = int(c[:-1]), c[-1]
+        length_so_far += l
+        if k == "D":
+            deletion_length += l
+        elif k == "I":
+            insertion_length += l
+
+        if length_so_far > half_length:
+            break
+
+    return 0 - insertion_length + deletion_length
 
 # Parsing user input:
 try:
@@ -80,6 +106,9 @@ with open(output_file, "wt") as outfile:
             has_xa = "XA:" in line
             num_xa = 0 if not has_xa else l[15].count(";")
             xa_min_diff = 35 if not has_xa else min([int(x.split(",")[-1]) for x in l[15].strip(";").split(";")])
+
+            # Correct target_pos based on cigar string
+            target_pos += get_correction(cigar)
 
             # Export results 
             outline = [query_name, query_pos, flag, target_chrom, target_pos,

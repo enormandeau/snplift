@@ -26,7 +26,7 @@ with open(input_features, "rt") as infile:
             l = line.strip().split("\t")
 
             if line.startswith("QueryName"):
-                header =  ["QueryScaffold", "QueryName", "QueryPos", "TargetChrom", "TargetPos", "Reversed"]
+                header =  ["QueryScaffold", "QueryName", "QueryPos", "TargetChrom", "TargetPos", "Reversed", "Cigar"]
                 header.insert(0, "Penalties")
                 header.insert(0, "Score")
                 outfile.write("\t".join(header) + "\n")
@@ -105,4 +105,4 @@ with open(input_features, "rt") as infile:
                 penalties.append(".")
 
             outfile.write("\t".join([str(round(score, 2)), "".join(penalties)] +
-                [query_scaffold, QueryName, QueryPos, TargetChrom, TargetPos, MappingFlag]) + "\n")
+                [query_scaffold, QueryName, QueryPos, TargetChrom, TargetPos, MappingFlag, Cigar]) + "\n")
