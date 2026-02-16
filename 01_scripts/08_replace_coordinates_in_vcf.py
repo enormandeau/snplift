@@ -38,7 +38,7 @@ def reverse_complement(seq):
 try:
     input_vcf = sys.argv[1]
     input_correspondence = sys.argv[2]
-    unique_pos = sys.argv[3]
+    unique_pos = int(sys.argv[3])
     correct_id = int(sys.argv[4])
     id_column = sys.argv[5]
     correct_alleles = int(sys.argv[6])
