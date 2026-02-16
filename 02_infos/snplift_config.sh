@@ -42,7 +42,7 @@ export CORRECT_ALLELES=0    # Reverse complement alleles when new genome region 
 export ALLELE_COLUMNS=4,5   # Columns of alleles to reverse complement. Only used for `CORRECT_ALLELES=1`.
 
 # Memory hungry options
-export UNIQUE_POS=1         # Keep only the first locus encountered for each position [0, 1]. Memory hungry.
+export UNIQUE_POS=0         # Keep only the first locus encountered for each position [0, 1]. Memory hungry.
 export SORT_OUTPUT=1        # Sort VCF or output file according to the two first columns.
                             # WARNING: For big VCFs, this requires a lot of RAM, around 3X the size
                             # of the output file.
