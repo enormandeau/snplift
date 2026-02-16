@@ -5,6 +5,7 @@
   positions at start of chromosomes.
 - Use only center portion around SNP and find best marker position (sliding window)
 
+## Possibily maybe
 - Make faster by splitting after mapping
 - Install deps from a `requirements.txt` file
 - In collinearity exploration, add percentage after number of collinear bases
