@@ -87,7 +87,8 @@ with open(output_file, "wt") as outfile:
 
             cigar = l[5]
             D, H, I, M, S = parse_cigar_string(cigar)
-     
+            sum_cigar = sum([D, H, I, M, S])
+
             sequence = l[9]
             complexity = round(len(gzip.compress("".join(sequence[:]).encode())) / len(sequence), 3)
 
@@ -98,6 +99,9 @@ with open(output_file, "wt") as outfile:
             #    target_offset = len(sequence) // 2
 
             target_pos += window_length
+
+            if target_pos == window_length + 1:
+                target_pos = sum_cigar - window_length
 
             num_Ns = sequence.count("N")
             num_diff = int(l[11].split(":")[2])

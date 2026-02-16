@@ -1,10 +1,5 @@
 # Ideas for future improvements
 
-## Position improvements
-- Consider using soft and hard masking info at start of alignments to correct
-  positions at start of chromosomes.
-- Use only center portion around SNP and find best marker position (sliding window)
-
 ## Possibily maybe
 - Make faster by splitting after mapping
 - Install deps from a `requirements.txt` file
