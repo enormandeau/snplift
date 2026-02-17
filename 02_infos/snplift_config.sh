@@ -12,10 +12,6 @@ export OUTPUT_FILE="new.vcf"
 export SKIP_INDEXING=1      # Use 0 if genome is not indexed. Use 1 to save time if genome already
                             # indexed with 'bwa index' [0, 1].
 
-# Checking for collinearity between both genome versions
-export CHECK_COLLINEARITY=0 # Increases runtime by 5+ times. Align genomes and produce a
-                            #   collinearity comparison figure [0, 1].
-
 # Skip exploring features
 export SKIP_VISUALIZATION=1 # Avoid creating a plot to explore features. These are used
                             #   for debugging [0, 1].
