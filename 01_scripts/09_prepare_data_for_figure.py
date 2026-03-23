@@ -109,9 +109,7 @@ for o in ordered2:
 with open(output_file, "wt") as outfile:
     for p in positions:
         chr1, pos1, chr2, pos2 = p
-        print(p)
         pos1 += corr1[chr1]
         pos2 += corr2[chr2]
         p = [chr1, str(pos1), chr2, str(pos2)]
-        print(p)
         outfile.write("\t".join(p) + "\n")
