@@ -12,7 +12,7 @@ data = read.table(input_file)
 # Create plot
 png(width=1150, height=1150)
 
-plot(data[,2] ~ data[,4],
+plot(data[,2], data[,4],
      pch=19,
      col="darkred",
      cex=0.4,
