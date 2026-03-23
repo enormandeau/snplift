@@ -156,5 +156,9 @@ echo
 echo -e "SNPLift: Percentage of transferred SNPs:\n"
 echo $(echo '100 * (' $(cat "$LIFTOVER_FOLDER"/positions.*.corr | ./01_scripts/util/count_unique_lines.py) '-1)' / $(cat "$LIFTOVER_FOLDER"/positions.*.ids | ./01_scripts/util/count_unique_lines.py) | bc -ql | cut -c -7)"%"
 
+## Create SNP correspondence plot
+./01_scripts/09_prepare_data_for_figure.py transfered_positions.tsv data_for_figure.tsv
+./01_scripts/10_plot_transfered_positions.R data_for_figure.tsv
+
 echo -e "\nSNPLift: Run completed\n"
 echo "End: $(date +%Y%m%d_%H%M%S)"
