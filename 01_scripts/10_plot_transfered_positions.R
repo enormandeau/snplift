@@ -10,7 +10,7 @@ output_file = paste0(input_file, ".png")
 data = read.table(input_file)
 
 # Create plot
-png(width=1150, height=1150)
+png("transfered_positions.png", width=1150, height=1150)
 
 plot(data[,2], data[,4],
      pch=19,
