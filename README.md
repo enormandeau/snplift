@@ -165,6 +165,41 @@ debugging purposes.
 Some additinal parameter in the config file permit to do final corrections to
 VCF files.
 
+## Filters
+
+When scoring markers, SNPLift uses a set of penalties to decide if each
+alignment should be kept. The default score for good alignments is 1.0. Each
+penalties, represented by the symbol between parentheses) then substracts the
+following values from the score:
+
+- Aligned portion shorter than half the sequence (L): -1.0
+- Mapping quality lower than 5 (Q): -0.8
+- Mapping quality lower than 10 (Q): -0.4
+- More than 4 supplementary alignments (+): -(0.5 + (0.4 - SuppAlignMinDist) / 10)
+
+- More than 10% difference to reference genome (D): -0.4
+or
+- More than 5% difference to reference genome (D): -0.2
+
+- More than 20% of softclipping in alignment (S): -0.4
+or
+- More than 10% of softclipping in alignment (S): -0.2
+
+- Match represents less than 80% of sequence (P): -0.4
+or
+- Match represents less than 90% of sequence (P): -0.2
+
+After these penalties are applied, positions of SNPs with scores above 0.5 are
+transfered directly. For the others, informations from a number of neighbour
+SNPs defined in the config file are used to determine if the SNP should be
+transfered. Specifically, if these neighbour SNPs are scattered across more
+than 10 kbp, the SNPs is not kept. In the same way, if the average score of
+these neighbour SNPs is above 0.4, the SNP is discarted. Then, if the pearson
+correlation of the SNP positions in one genome versus their position in the
+other genome is above 0.99, the SNP is retained. In other words, if the
+neighbour SNPs are of high enough quality and the whole region has very high
+syntheny in both genomes, this SNP is kept and its position transfered.
+
 ## Limitations
 
 SNPLift works well when the two genome versions are more similar differences.
@@ -172,11 +207,7 @@ As the differences between the orthologous sequences increase, the proportion
 of SNPs that can be transferred decreases. Whole or partial genome duplication
 will also have an impact on the capacity to transfer SNPs between assemblies.
 
-For SNPs with position within 300bp of scaffold ends (or the value of
-WINDOW_LENGTH in the configuration file), the reported position in the new file
-(eg: VCF) can be slightly off.
-
-In our tests, about 1% of the transfered positions were not exact (see
+In our tests, less than 1% of the transfered positions were not exact (see
 reference in the Citation section).
 
 ## License
