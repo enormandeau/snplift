@@ -45,11 +45,6 @@ def keep_snp(past, now, future):
         if average < 0.4:
             return False
 
-        num_negative = len([x for x in scores if x <= 0.0])
-
-        if num_negative > window_size / 2:
-            return False
-
         # Is Pearson coef for scores close to 1?
         try:
             pos1 = [int(x[4]) for x in infos]
