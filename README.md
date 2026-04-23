@@ -165,9 +165,9 @@ debugging purposes.
 Some additinal parameter in the config file permit to do final corrections to
 VCF files.
 
-## Filters
+## Filtration steps
 
-When scoring markers, SNPLift uses a set of penalties to decide if each
+When evaluating markers, SNPLift uses a set of penalties to decide if each
 alignment should be kept. The default score for good alignments is 1.0. Each
 penalties, represented by the symbol between parentheses) then substracts the
 following values from the score:
@@ -177,16 +177,16 @@ following values from the score:
 - Mapping quality lower than 10 (Q): -0.4
 - More than 4 supplementary alignments (+): -(0.5 + (0.4 - SuppAlignMinDist) / 10)
 
+At most one of these:
 - More than 10% difference to reference genome (D): -0.4
-or
 - More than 5% difference to reference genome (D): -0.2
 
+At most one of these:
 - More than 20% of softclipping in alignment (S): -0.4
-or
 - More than 10% of softclipping in alignment (S): -0.2
 
+At most one of these:
 - Match represents less than 80% of sequence (P): -0.4
-or
 - Match represents less than 90% of sequence (P): -0.2
 
 After these penalties are applied, positions of SNPs with scores above 0.5 are
