@@ -179,15 +179,15 @@ following values from the score:
 
 At most one of these:
 - More than 10% difference to reference genome (D): -0.4
-- More than 5% difference to reference genome (D): -0.2
+- More than 5% difference to reference genome (d): -0.2
 
 At most one of these:
 - More than 20% of softclipping in alignment (S): -0.4
-- More than 10% of softclipping in alignment (S): -0.2
+- More than 10% of softclipping in alignment (s): -0.2
 
 At most one of these:
 - Match represents less than 80% of sequence (P): -0.4
-- Match represents less than 90% of sequence (P): -0.2
+- Match represents less than 90% of sequence (p): -0.2
 
 After these penalties are applied, positions of SNPs with scores above 0.5 are
 transfered directly. For the others, informations from a number of neighbour
