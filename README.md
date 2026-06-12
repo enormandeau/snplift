@@ -175,9 +175,8 @@ following values from the score:
 - Aligned portion shorter than half the sequence (L): -1.0
 - Mapping quality lower than 5 (Q): -0.8
 - Mapping quality lower than 10 (Q): -0.4
-- More than 4 supplementary alignments (+): -(0.5 + (0.4 - SuppAlignMinDist) / 10)
 
-If 5 or less differences between primary and best supplementary alignment
+If 5 or less differences between the primary and best supplementary alignments
 - Penalty based on this equation: -(0.5 + (0.4 - nDiff/10))
 - Max penalty, if nDiff=0 : -0.9
 - Min penalty, if nDiff=5 : -0.4
