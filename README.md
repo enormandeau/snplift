@@ -172,14 +172,18 @@ alignment should be kept. The default score for good alignments is 1.0. Each
 penalties, represented by the symbol between parentheses) then substracts the
 following values from the score:
 
-- Aligned portion shorter than half the sequence (L): -1.0
-- Mapping quality lower than 5 (Q): -0.8
-- Mapping quality lower than 10 (Q): -0.4
+- Aligned portion shorter than half the sequence: do not transfer this position
 
-If 5 or less differences between the primary and best supplementary alignments
-- Penalty based on this equation: -(0.5 + (0.4 - nDiff/10))
-- Max penalty, if nDiff=0 : -0.9
-- Min penalty, if nDiff=5 : -0.4
+At most one of these:
+- Mapping quality equal to zero: do not transfer this position
+- Mapping quality lower than 10 (Q): -0.8
+- Mapping quality lower than 20 (Q): -0.4
+
+If 5 or less differences (nDiff) between primary and best supplementary alignments
+- If zero difference with best supplementary alignment: do not transfer this position
+- Otherwise, penalty equal to: -(0.5 + (0.4 - nDiff/10))
+- Max penalty, if nDiff=1: -0.8
+- Min penalty, if nDiff=5: -0.4
 
 At most one of these:
 - More than 10% difference to reference genome (D): -0.4

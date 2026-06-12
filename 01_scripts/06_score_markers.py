@@ -43,8 +43,8 @@ with open(input_features, "rt") as infile:
 
             # Alignment too short
             if len(Sequence) < (expected_length / 2):
-                penalties.append("L")
-                score -= 1.0
+                # Remove these altogether
+                continue
 
             # Supplementary alignments
             if int(MappingFlag) > 2000:
@@ -52,16 +52,22 @@ with open(input_features, "rt") as infile:
                 continue
 
             # Mapping quality
-            if int(MappingQuality) < 10:
+            if int(MappingQuality) < 20:
                 penalties.append("Q")
 
-                if int(MappingQuality) < 5:
+                if int(MappingQuality) == 0:
+                    # Remove these altogether
+                    continue
+                elif int(MappingQuality) < 10:
                     score -= 0.8
                 else:
                     score -= 0.4
 
             # Number of differences over best supplementary alignment
-            if int(SuppAlignMinDiff) <= 5:
+            if int(SuppAlignMinDiff) == 0:
+                # Remove these altogether
+                continue
+            elif int(SuppAlignMinDiff) <= 5:
                 penalties.append("+")
                 score -= (0.5 + (0.4 - int(SuppAlignMinDiff) / 10))
 
