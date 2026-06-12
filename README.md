@@ -177,6 +177,11 @@ following values from the score:
 - Mapping quality lower than 10 (Q): -0.4
 - More than 4 supplementary alignments (+): -(0.5 + (0.4 - SuppAlignMinDist) / 10)
 
+If 5 or less differences between primary and best supplementary alignment
+- Penalty based on this equation: -(0.5 + (0.4 - nDiff/10))
+- Max penalty, if nDiff=0 : -0.9
+- Min penalty, if nDiff= 5 : -0.4
+
 At most one of these:
 - More than 10% difference to reference genome (D): -0.4
 - More than 5% difference to reference genome (d): -0.2
